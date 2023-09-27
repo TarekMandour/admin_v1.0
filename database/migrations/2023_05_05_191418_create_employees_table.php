@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('password');
             $table->enum('is_active', [0, 1, 2])->default(1)->comment("0 => not active, 1 => active, 2 => suspended");
             $table->tinyInteger('role_id');
-            $table->enum('type', ['dash', 'provider']);
+            $table->enum('type', ['dash', 'subdash']);
             $table->text('token')->nullable();
             $table->softDeletes();
             $table->timestamps();

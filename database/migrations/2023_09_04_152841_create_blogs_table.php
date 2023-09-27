@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('blogs', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->string('title_en');
             $table->string('link')->nullable();
             $table->text('description')->nullable();
+            $table->text('description_en')->nullable();
             $table->enum('type',['news','image','video'])->default('news');
             $table->enum('status',['active','inactive'])->default('inactive');
-            $table->unsignedBigInteger('service_id')->nullable();
-            $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->softDeletes();
