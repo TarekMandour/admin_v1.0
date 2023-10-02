@@ -7,9 +7,9 @@
 		<meta name="description" content="{{$settings->append_description}}" />
 		<meta name="keywords" content="{{$settings->append_keywords}}" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		
+
         @include('admin.layout.head')
-        
+
 	</head>
 	<!--end::Head-->
 	<!--begin::Body-->
@@ -23,7 +23,7 @@
 				@include('admin.layout.header')
 				<!--begin::Wrapper-->
 				<div class="app-wrapper flex-column flex-row-fluid" id="kt_app_wrapper">
-					
+
 					@include('admin.layout.sidebar')
 
 					<!--begin::Main-->
@@ -31,7 +31,7 @@
 						<!--begin::Content wrapper-->
 						<div class="d-flex flex-column flex-column-fluid">
 							<!--begin::Content-->
-							
+
 							<div id="kt_app_content" class="app-content flex-column-fluid">
 
 								@yield('content')
@@ -42,19 +42,19 @@
 						<!--end::Content wrapper-->
 
 						@include('admin.layout.footer')
-						
+
 					</div>
 					<!--end:::Main-->
 
 					@include('admin.layout.aside')
-					
+
 				</div>
 				<!--end::Wrapper-->
 			</div>
 			<!--end::Page-->
 		</div>
 		<!--end::App-->
-        
+
 		@include('admin.layout.footer-script')
 	</body>
 	<!--end::Body-->

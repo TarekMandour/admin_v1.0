@@ -29,7 +29,7 @@
             </div>
             <!--end::Sidebar mobile toggle-->
             <!--begin::Logo-->
-            <a href="{{url('/dashboard')}}" class="app-sidebar-logo">
+            <a href="{{url('/admin')}}" class="app-sidebar-logo">
                 <img alt="Logo" src="{{$settings->getFirstMediaUrl('logo')}}" class="h-50px theme-light-show" />
                 <img alt="Logo" src="{{$settings->getFirstMediaUrl('logoDark')}}" class="h-50px theme-dark-show" />
             </a>

@@ -8,7 +8,7 @@
         <meta name="robots" content="index, follow"/>
         <meta name="description" content="{{$settings->append_description}}">
          <meta name="keywords" content="{{$settings->append_keywords}}">
-        <!--=============== css  ===============-->	
+        <!--=============== css  ===============-->
         <link type="text/css" rel="stylesheet" href="{{asset('front/assets/css/reset.css')}}">
         <link type="text/css" rel="stylesheet" href="{{asset('front/assets/css/plugins.css')}}">
         <link type="text/css" rel="stylesheet" href="{{asset('front/assets/css/shop.css')}}">
@@ -39,13 +39,13 @@
                 <a href="{{url('/')}}" class="logo-holder"><img src="{{$settings->getFirstMediaUrl('logoDark','logoDarkthumb')}}" alt="{{$settings->append_name}}"></a>
                 <!-- logo end-->
 
-                
+
                 @if (!Auth::guard('web')->check())
                 <div class="show-reg-form modal-open avatar-img" data-srcav="{{asset('front/assets/images/avatar/3.jpg')}}"><i class="fal fa-user"></i>{{trans('lang.menu.login')}}  </div>
                 @else
                 <div class="show-reg-form avatar-img" data-srcav="{{asset('front/assets/images/avatar/3.jpg')}}"><a href="{{url('/my-account')}}" style="color: #ffffff;"><i class="fal fa-user"></i> {{trans('lang.menu.myaccount')}} </a> </div>
-                @endif                 
-                
+                @endif
+
                 <div class="lang-wrap">
                     <div class="show-lang"><span><i class="fal fa-globe-europe"></i></span></div>
                     <ul class="lang-tooltip no-list-style">
@@ -53,14 +53,14 @@
                         <li><a href="{{url('/lang-change?lang=en')}}" @if (App::getLocale() == 'en') class="current-lan" @endif>{{trans('lang.menu.english')}}</a></li>
                     </ul>
                 </div>
-                <!-- nav-button-wrap--> 
+                <!-- nav-button-wrap-->
                 <div class="nav-button-wrap color-bg">
                     <div class="nav-button">
                         <span></span><span></span><span></span>
                     </div>
                 </div>
                 <!-- nav-button-wrap end-->
-                <!--  navigation --> 
+                <!--  navigation -->
                 <div class="nav-holder main-menu">
                     <nav>
                         <ul class="no-list-style">
@@ -82,9 +82,9 @@
                             <li>
                                 <a href="javascript:;">  {{trans('lang.menu.project')}} <i class="fa fa-caret-down"></i></a>
                                 <ul>
-                                    @foreach (\App\Models\Project::all() as $project_item)
-                                        <li><a href="{{$project_item->link}}">{{$project_item->append_title}}</a></li>  
-                                    @endforeach                                 
+{{--                                    @foreach (\App\Models\Project::all() as $project_item)--}}
+{{--                                        <li><a href="{{$project_item->link}}">{{$project_item->append_title}}</a></li>  --}}
+{{--                                    @endforeach                                 --}}
                                 </ul>
                             </li>
                             <li>

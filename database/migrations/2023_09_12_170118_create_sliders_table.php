@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('title')->nullable();
             $table->integer('sort')->default(0);
-            $table->unsignedBigInteger('service_id')->nullable();
-            $table->foreign('service_id')->references('id')->on('services')->onDelete('cascade');
-            $table->enum('type', ['slider', 'service'])->default('slider');
+            $table->unsignedBigInteger('category_id')->nullable();
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->enum('type', ['slider', 'category'])->default('slider');
             $table->timestamps();
         });
     }

@@ -4,7 +4,7 @@
 @endsection
 
 @section('style')
-    
+
 @endsection
 
 @section('breadcrumb')
@@ -205,7 +205,7 @@
                                             </label>
                                         </div>
                                         <div class="col-md-9">
-                                            <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('assets/media/svg/avatars/blank.svg')">
+                                            <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url({{asset('assets/media/svg/avatars/blank.svg')}})">
                                                 @if ($data->getMedia('logo')->count())
                                                 <div class="image-input-wrapper w-125px h-125px" style="background-image: url({{$data->getFirstMediaUrl('logo')}})"></div>
                                                 @else
@@ -223,7 +223,7 @@
                                                     <i class="bi bi-x fs-2"></i>
                                                 </span>
                                             </div>
-            
+
                                         </div>
                                     </div>
                                     <div class="row fv-row mb-7">
@@ -251,7 +251,7 @@
                                                     <i class="bi bi-x fs-2"></i>
                                                 </span>
                                             </div>
-            
+
                                         </div>
                                     </div>
 
@@ -280,7 +280,7 @@
                                                     <i class="bi bi-x fs-2"></i>
                                                 </span>
                                             </div>
-            
+
                                         </div>
                                     </div>
 
@@ -309,7 +309,7 @@
                                                     <i class="bi bi-x fs-2"></i>
                                                 </span>
                                             </div>
-            
+
                                         </div>
                                     </div>
 
@@ -497,7 +497,7 @@
                                             <textarea name="description_en" class="form-control form-control-solid">{{$data->description_en}}</textarea>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="row py-5">
                                         <div class="col-md-9 offset-md-3">
                                             <div class="d-flex">
@@ -538,7 +538,7 @@ defer
                 zoom: 13.3,
                 center: myLatlng,
             });
-  
+
             // Create the initial InfoWindow.
             let infoWindow = new google.maps.InfoWindow({
                 content: "حدد المكان على الخريطة",

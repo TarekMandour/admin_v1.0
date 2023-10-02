@@ -37,7 +37,7 @@
 
    </div>
    <div class="header-sec-link">
-       <a href="#sec1" class="custom-scroll-link"><i class="fal fa-angle-double-down"></i></a> 
+       <a href="#sec1" class="custom-scroll-link"><i class="fal fa-angle-double-down"></i></a>
    </div>
 </section>
 
@@ -49,7 +49,7 @@
    <div class="container">
        <div class="fl-wrap">
            <h2 style="font-weight: 500;color: #1e1e1e;">
-               {!! $info->append_description !!}
+{{--               {!! $info->append_description !!}--}}
            </h2>
        </div>
        <a href="{{url('/about')}}" class="promo-link big_prom color2-bg"><i class="fal fa-link"></i><span>{{trans('lang.see_more')}}</span></a>
@@ -120,46 +120,46 @@
            <span class="section-separator"></span>
        </div>
        <div class="grid-item-holder gallery-items fl-wrap">
-            @foreach ($services as $service_item)
-                <!--  gallery-item-->
-               <div class="gallery-item events">
-                     <!-- listing-item  -->
-                     <div class="listing-item">
-                        <article class="geodir-category-listing fl-wrap">
-                           <div class="geodir-category-content fl-wrap title-sin_item">
-                                 <div class="geodir-category-content-title fl-wrap">
-                                    <div class="geodir-category-content-title-item">
-                                       <h3 class="title-sin_map"><a href="{{url('/service-details')}}/{{$service_item->id}}">{{$service_item->append_name}}</a></h3>
-                                       <div class="geodir-category-location fl-wrap"><a href="{{url('/service-details')}}/{{$service_item->id}}" ><i class="fas fa-clock"></i> {{trans('lang.start_of')}} {{Carbon\Carbon::parse($service_item->individual_at)->format('Y-m-d : g:i') }}</a></div>
-                                    </div>
-                                 </div>
-                                 <div class="geodir-category-text fl-wrap">
-                                    <div class="facilities-list fl-wrap">
-                                       @foreach ($service_item->trees as $tree_item)
-                                       <div class="facilities-list-title">{{$tree_item->tree->append_title}}</div>
-                                       @endforeach
-                                    </div>
-                                 </div>
-                                 <div class="geodir-category-footer fl-wrap">
-                                    <a class="listing-item-category-wrap">
-                                       <div class="listing-item-category green-bg"><i class="fal fa-tree"></i></div>
-                                       <span>{{trans('lang.target')}} : {{$service_item->target}}</span>
-                                    </a>
-                                    <div class="geodir-opt-list">
-                                       <ul class="no-list-style">
-                                             <li><a href="#1" class="single-map-item" data-newlatitude="{{$service_item->lat}}" data-newlongitude="{{$service_item->lng}}"><i class="fal fa-map-marker-alt"></i><span class="geodir-opt-tooltip">{{trans('lang.location')}}</span> </a></li>
-                                       </ul>
-                                    </div>
-                                 </div>
-                           </div>
-                        </article>
-                     </div>
-                     <!-- listing-item end -->                              
-               </div>
-               <!-- gallery-item  end-->
-            @endforeach
-           
-                                                                                                                      
+{{--            @foreach ($services as $service_item)--}}
+{{--                <!--  gallery-item-->--}}
+{{--               <div class="gallery-item events">--}}
+{{--                     <!-- listing-item  -->--}}
+{{--                     <div class="listing-item">--}}
+{{--                        <article class="geodir-category-listing fl-wrap">--}}
+{{--                           <div class="geodir-category-content fl-wrap title-sin_item">--}}
+{{--                                 <div class="geodir-category-content-title fl-wrap">--}}
+{{--                                    <div class="geodir-category-content-title-item">--}}
+{{--                                       <h3 class="title-sin_map"><a href="{{url('/service-details')}}/{{$service_item->id}}">{{$service_item->append_name}}</a></h3>--}}
+{{--                                       <div class="geodir-category-location fl-wrap"><a href="{{url('/service-details')}}/{{$service_item->id}}" ><i class="fas fa-clock"></i> {{trans('lang.start_of')}} {{Carbon\Carbon::parse($service_item->individual_at)->format('Y-m-d : g:i') }}</a></div>--}}
+{{--                                    </div>--}}
+{{--                                 </div>--}}
+{{--                                 <div class="geodir-category-text fl-wrap">--}}
+{{--                                    <div class="facilities-list fl-wrap">--}}
+{{--                                       @foreach ($service_item->trees as $tree_item)--}}
+{{--                                       <div class="facilities-list-title">{{$tree_item->tree->append_title}}</div>--}}
+{{--                                       @endforeach--}}
+{{--                                    </div>--}}
+{{--                                 </div>--}}
+{{--                                 <div class="geodir-category-footer fl-wrap">--}}
+{{--                                    <a class="listing-item-category-wrap">--}}
+{{--                                       <div class="listing-item-category green-bg"><i class="fal fa-tree"></i></div>--}}
+{{--                                       <span>{{trans('lang.target')}} : {{$service_item->target}}</span>--}}
+{{--                                    </a>--}}
+{{--                                    <div class="geodir-opt-list">--}}
+{{--                                       <ul class="no-list-style">--}}
+{{--                                             <li><a href="#1" class="single-map-item" data-newlatitude="{{$service_item->lat}}" data-newlongitude="{{$service_item->lng}}"><i class="fal fa-map-marker-alt"></i><span class="geodir-opt-tooltip">{{trans('lang.location')}}</span> </a></li>--}}
+{{--                                       </ul>--}}
+{{--                                    </div>--}}
+{{--                                 </div>--}}
+{{--                           </div>--}}
+{{--                        </article>--}}
+{{--                     </div>--}}
+{{--                     <!-- listing-item end -->--}}
+{{--               </div>--}}
+{{--               <!-- gallery-item  end-->--}}
+{{--            @endforeach--}}
+
+
        </div>
        <a href="{{url('/services')}}" class="btn  dec_btn  color2-bg">{{trans('lang.see_more')}} <i class="fal fa-arrow-alt-left"></i></a>
    </div>
@@ -193,13 +193,13 @@
                                             <div class="geodir-js-favorite_btn"><i class="fal fa-link"></i><span> {{trans('lang.news')}}</span></div>
                                             @endif
                                             <a href="{{$blog_item->link}}" class="image-popup geodir-category-img-wrap fl-wrap">
-                                            <img src="{{$blog_item->getFirstMediaUrl('photo','thumb')}}" alt="{{$blog_item->append_title}}"> 
+                                            <img src="{{$blog_item->getFirstMediaUrl('photo','thumb')}}" alt="{{$blog_item->append_title}}">
                                             </a>
                                             <a href="{{$blog_item->link}}" class="image-popup">
                                                 <div class="geodir_status_date gsd_open alert-danger"><i class="fal fa-play"></i> {{trans('lang.watch')}}</div>
                                              </a>
                                             <div class="geodir-category-opt">
-                                                
+
                                                 <div class="listing_carditem_footer fl-wrap">
                                                     <div class="geodir-category-opt_title">
                                                         <h4><a href="{{$blog_item->link}}" class="image-popup">{{$blog_item->append_title}}</a></h4>
@@ -217,7 +217,7 @@
                                             <div class="geodir-js-favorite_btn"><i class="fal fa-link"></i><span> {{trans('lang.news')}}</span></div>
                                             @endif
                                             <a href="{{url('/blog-details')}}/{{$blog_item->id}}" class="geodir-category-img-wrap fl-wrap">
-                                            <img src="{{$blog_item->getFirstMediaUrl('photo','thumb')}}" alt="{{$blog_item->append_title}}"> 
+                                            <img src="{{$blog_item->getFirstMediaUrl('photo','thumb')}}" alt="{{$blog_item->append_title}}">
                                             </a>
                                             <div class="geodir-category-opt">
                                                 <div class="listing_carditem_footer fl-wrap">
@@ -230,17 +230,17 @@
                                         @endif
                                     </article>
                                 </div>
-                                <!-- listing-item end -->                                                   
+                                <!-- listing-item end -->
                             </div>
                         </div>
-                        <!--  swiper-slide end  --> 
+                        <!--  swiper-slide end  -->
                         @endif
                     @endforeach
-                                     
+
                 </div>
         <div class="tc-pagination_wrap">
             <div class="tc-pagination2"></div>
-        </div>                                    
+        </div>
             </div>
             <div class="listing-carousel-button listing-carousel-button-next2"><i class="fas fa-caret-right"></i></div>
             <div class="listing-carousel-button listing-carousel-button-prev2"><i class="fas fa-caret-left"></i></div>
@@ -252,6 +252,6 @@
 
 @section('script')
 <script>
-    
+
 </script>
 @endsection

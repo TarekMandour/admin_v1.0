@@ -4,38 +4,31 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Rap2hpoutre\FastExcel\FastExcel;
 use App\Models\User;
-use App\Models\Info;
-use App\Models\Partner;
 use App\Models\Blog;
-use App\Models\Service;
 use App\Models\Contact;
-use App\Models\Tree;
-use App\Models\Order;
 use App\Models\Slider;
-use App\Models\OrderTree;
-use App\Models\OrderUser;
 use Carbon\Carbon;
 use Validator;
 use Auth;
-use App;
 use DB;
 
 class HomeController extends Controller
 {
     public function index() {
 
-        $info = Info::find(1);
+//        $info = Info::find(1);
         $user['individual'] = User::where('type', 'individual')->count();
         $user['government'] = User::where('type', 'government')->count();
         $user['private'] = User::where('type', 'private')->count();
         $user['school'] = User::where('type', 'school')->count();
         $blogs = Blog::where('status', 'active')->where('service_id', NULL)->where('user_id', NULL)->inRandomOrder()->limit(8)->get();
-        $services = Service::with('trees')->where('status', 'active')->inRandomOrder()->limit(8)->get();
+//        $services = Service::with('trees')->where('status', 'active')->inRandomOrder()->limit(8)->get();
         $sliders = Slider::all();
 
-        return view('front/home', compact('info','user','blogs','services','sliders'));
+        return view('front/home', compact('user','blogs','sliders'));
     }
 
     public function changLang(Request $request) {
@@ -67,10 +60,10 @@ class HomeController extends Controller
         ];
 
         $validate = Validator::make($request->all(), $rule);
-        if ($validate->fails()) { 
+        if ($validate->fails()) {
             return redirect()->back()->with('message', $validate->messages()->first())->with('status', 'error');
-        } 
-        
+        }
+
         $row = Contact::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -96,7 +89,7 @@ class HomeController extends Controller
         $blog = Blog::find($id);
 
         return view('front/blog-details', compact('blog'));
-        
+
     }
 
     public function partners() {
@@ -123,7 +116,7 @@ class HomeController extends Controller
         $video = Blog::where('status', 'active')->where('type','video')->where('service_id', $id)->where('user_id', NULL)->paginate(9);
 
         return view('front/service-details', compact('service','news','image','video'));
-        
+
     }
 
     public function serviceDetailsaccount($id) {
@@ -135,7 +128,7 @@ class HomeController extends Controller
         $video = Blog::where('status', 'active')->where('type','video')->where('service_id', $id)->where('user_id', Auth::guard('web')->user()->id)->paginate(9);
 
         return view('front/service-details-account', compact('service','news','image','video'));
-        
+
     }
 
     public function serviceDetailsaccountuser($id,$user_id) {
@@ -147,7 +140,7 @@ class HomeController extends Controller
         $video = Blog::where('status', 'active')->where('type','video')->where('service_id', $id)->where('user_id', $user_id)->paginate(9);
 
         return view('front/service-details-account-user', compact('service','news','image','video','user_id'));
-        
+
     }
 
     public function servicemodal($id) {
@@ -158,7 +151,7 @@ class HomeController extends Controller
         } else {
             return response()->json(['msg' => 'faild']);
         }
-        
+
     }
 
     public function servicesubmit(Request $request) {
@@ -212,20 +205,20 @@ class HomeController extends Controller
         $service = Service::with('trees')->find($id);
 
         return view('front/booking', compact('service'));
-        
+
     }
 
     public function treemodel($id) {
-        
+
         $tree = Tree::find($id);
 
         return response()->json(['data' => $tree->description]);
-        
+
     }
 
     public function order(Request $request) {
 
-        
+
         // dd($request->group[0]['follwers']);
         $user = User::find(Auth::guard('web')->user()->id);
         $service = Service::find($request->service_id);
@@ -238,7 +231,7 @@ class HomeController extends Controller
             'status' => '0',
             'payment' => '0',
         ]);
-        
+
         foreach ($request->quantity as $key => $qty_item) {
             if ($qty_item > 0) {
                 $saveOrderTree = OrderTree::create([
@@ -276,7 +269,7 @@ class HomeController extends Controller
                             'name' => $request->group[$u]['follwers'],
                         ]);
                     }
-                    
+
                 }
             }
         }
@@ -284,7 +277,7 @@ class HomeController extends Controller
         if($request->hasFile('payment') && $request->file('payment')->isValid()){
             $saveOrder->addMediaFromRequest('payment')->toMediaCollection('photo');
         }
-        
+
         return view('front/success', compact('service','saveOrder'));
     }
 
@@ -292,11 +285,11 @@ class HomeController extends Controller
 
         $check_phone = substr($request->phone, 0, 4);
         $error = [];
-        if ($check_phone != '9665') { 
+        if ($check_phone != '9665') {
             $service = Service::find($request->service_id);
             $error = 'عفوا .. يجب ان يبدأ رقم الجوال بـ 9665';
             return view('front/order', compact('service','error'));
-        } 
+        }
         $order = Order::create([
             'name' => $request->name,
             'phone' => $request->phone,
@@ -314,7 +307,7 @@ class HomeController extends Controller
 
         $services = Service::where('status', 'active')->where('name', 'LIKE', "%$search%")->orderBy('id','asc')->paginate(12);
         return view('front/search', compact('services'));
-        
+
     }
 
     public function policy() {

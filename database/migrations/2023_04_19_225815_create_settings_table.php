@@ -36,6 +36,7 @@ return new class extends Migration
             $table->string('linkedin')->nullable();
             $table->string('instagram')->nullable();
             $table->string('snapchat')->nullable();
+            $table->string('ticktok')->nullable();
             $table->string('keywords_ar')->nullable();
             $table->string('keywords_en')->nullable();
             $table->string('description_ar')->nullable();

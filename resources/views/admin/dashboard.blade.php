@@ -1,12 +1,8 @@
 @extends('admin.layout.master')
 
-@section('css')
+@section('style')
 <link href="{{asset('dash/assets/plugins/global/plugins.bundle.css')}}" rel="stylesheet" type="text/css"/>
 
-@endsection
-
-@section('style')
-    
 @endsection
 
 @section('breadcrumb')
@@ -34,7 +30,7 @@
 @section('script')
 <script src="{{asset('dash/assets/plugins/global/plugins.bundle.js')}}"></script>
 <script>
-    
+
     var element = document.getElementById('kt_apexcharts_1');
 
 var height = parseInt(KTUtil.css(element, 'height'));
@@ -128,7 +124,7 @@ var options = {
         },
         y: {
             formatter: function (val) {
-                return  val 
+                return  val
             }
         }
     },

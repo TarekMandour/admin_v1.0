@@ -36,14 +36,14 @@
                 </a>
             </div>
 
-            <div class="menu-item">
-                <a class="menu-link" href="{{route('admin.services.index')}}">
-                    <span class="menu-icon">
-                        <i class="fonticon-setting fs-2"></i>
-                    </span>
-                    <span class="menu-title">الحملات</span>
-                </a>
-            </div>
+{{--            <div class="menu-item">--}}
+{{--                <a class="menu-link" href="{{route('admin.services.index')}}">--}}
+{{--                    <span class="menu-icon">--}}
+{{--                        <i class="fonticon-setting fs-2"></i>--}}
+{{--                    </span>--}}
+{{--                    <span class="menu-title">الحملات</span>--}}
+{{--                </a>--}}
+{{--            </div>--}}
 
             <div class="menu-item">
                 <a class="menu-link" href="{{route('admin.citys.index')}}">
