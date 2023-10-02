@@ -49,6 +49,13 @@ class Setting extends Model implements HasMedia
         ->keepOriginalImageFormat()
         ->crop('crop-center', 1800, 500);
 
+        $this->addMediaCollection('mainphoto')
+        ->singleFile();
+
+        $this->addMediaConversion('mainphotothumb')
+        ->keepOriginalImageFormat()
+        ->crop('crop-center', 1180, 787);
+
     }
 
     public function getAppendNameAttribute()

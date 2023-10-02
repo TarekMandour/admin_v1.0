@@ -18,6 +18,11 @@ return new class extends Migration
             $table->text('vision')->nullable();
             $table->text('mission')->nullable();
             $table->text('massage')->nullable();
+            $table->string('name_en')->nullable();
+            $table->text('description_en')->nullable();
+            $table->text('vision_en')->nullable();
+            $table->text('mission_en')->nullable();
+            $table->text('massage_en')->nullable();
             $table->timestamps();
         });
     }
