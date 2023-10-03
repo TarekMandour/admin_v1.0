@@ -4,7 +4,7 @@
 @endsection
 
 @section('style')
-    
+
 @endsection
 
 @section('breadcrumb')
@@ -25,7 +25,7 @@
                 <span class="bullet bg-gray-300 w-5px h-2px"></span>
             </li>
             <li class="breadcrumb-item text-muted px-2">
-               اضف جديد  
+               اضف جديد
             </li>
         </ul>
     </div>
@@ -35,7 +35,7 @@
 
 @section('content')
 
-    <div id="kt_app_content_container" class="app-container container-fluid">       
+    <div id="kt_app_content_container" class="app-container container-fluid">
 
         <div class="card mb-5 mb-xl-10">
             <!--begin::Content-->
@@ -46,9 +46,9 @@
                     <div class="card-body  p-9">
 
                         <div class="row mb-6">
-                            <label class="col-lg-2 col-form-label fw-semibold fs-6">صورة الموظف</label>
+                            <label class="col-lg-2 col-form-label fw-semibold fs-6">{{__('admin.Employee.image')}}</label>
                             <div class="col-lg-8">
-                                <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('assets/media/svg/avatars/blank.svg')">
+                                <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url({{asset('assets/media/svg/avatars/blank.svg')}})">
                                     <div class="image-input-wrapper w-125px h-125px" style="background-image: url({{asset('dash/assets/media/avatars/blank.png')}})"></div>
                                     <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
                                         <i class="bi bi-pencil-fill fs-7"></i>
@@ -65,40 +65,46 @@
 
                                 <div class="form-text">Allowed file types: png, jpg, jpeg.</div>
                             </div>
-                        </div> 
+                        </div>
 
                         <div class="row mb-6">
-                            <label class="col-lg-2 col-form-label required fw-semibold fs-6">الاسم</label>
+                            <label class="col-lg-2 col-form-label required fw-semibold fs-6">{{__('admin.Employee.name_ar')}}</label>
                             <div class="col-lg-8 fv-row">
-                                <input type="text" name="name_ar" placeholder="الاسم" value="" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" />
+                                <input type="text" name="name_ar" placeholder="{{__('admin.Employee.name_ar')}}" value="" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" />
                             </div>
                         </div>
                         <div class="row mb-6">
-                            <label class="col-lg-2 col-form-label required fw-semibold fs-6">البريد الالكتروني </label>
+                            <label class="col-lg-2 col-form-label required fw-semibold fs-6">{{__('admin.Employee.name_en')}}</label>
                             <div class="col-lg-8 fv-row">
-                                <input type="text" name="email" placeholder="البريد الالكتروني" value="" class="form-control form-control-lg form-control-solid" />
+                                <input type="text" name="name_ar" placeholder="{{__('admin.Employee.name_en')}}" value="" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" />
+                            </div>
+                        </div>
+                        <div class="row mb-6">
+                            <label class="col-lg-2 col-form-label required fw-semibold fs-6">{{__('admin.Employee.email')}}</label>
+                            <div class="col-lg-8 fv-row">
+                                <input type="text" name="email" placeholder="{{__('admin.Employee.email')}}" value="" class="form-control form-control-lg form-control-solid" />
                             </div>
                         </div>
                         <div class="row mb-6">
                             <label class="col-lg-2 col-form-label fw-semibold fs-6">
-                                <span class="required">رقم الهاتف</span>
+                                <span class="required">{{__('admin.Employee.phone')}}</span>
                             </label>
                             <div class="col-lg-8 fv-row">
-                                <input type="tel" name="phone" placeholder="رقم الهاتف" value="" class="form-control form-control-lg form-control-solid" />
+                                <input type="tel" name="phone" placeholder="{{__('admin.Employee.phone')}}" value="" class="form-control form-control-lg form-control-solid" />
                             </div>
                         </div>
                         <div class="row mb-6">
                             <label class="col-lg-2 col-form-label fw-semibold fs-6 required">
-                                كلمة المرور
-                                <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="لا يقل عن 6 حروف"></i>
+                                {{__('admin.Employee.password')}}
+                                <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="{{__('crud.Employee.min_char_password')}}"></i>
                             </label>
                             <div class="col-lg-8 fv-row">
-                                <input type="password" name="password" placeholder="كلمة المرور" value="" class="form-control form-control-lg form-control-solid" />
+                                <input type="password" name="password" placeholder="{{__('admin.Employee.password')}}" value="" class="form-control form-control-lg form-control-solid" />
                             </div>
                         </div>
 
                         <div class="row mb-0">
-                            <label class="col-lg-2 col-form-label fw-semibold fs-6"> is_active</label>
+                            <label class="col-lg-2 col-form-label fw-semibold fs-6">{{__('admin.Employee.is_active')}}</label>
                             <div class="col-lg-8 d-flex align-items-center">
                                 <div class="form-check form-check-solid form-switch form-check-custom fv-row">
                                     <input class="form-check-input w-45px h-30px" type="checkbox" name="is_active" value="1" id="allowmarketing" checked="checked" />

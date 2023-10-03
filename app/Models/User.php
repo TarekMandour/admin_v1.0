@@ -22,13 +22,12 @@ class User extends Authenticatable implements HasMedia
      * @var array<int, string>
      */
     protected $fillable = [
-        'type', 'name',
-        'email', 'phone',
-        'password', 'is_active',
-        'city_id','neighborhood_id',
-        'address','tax_num',
-        'national_id','id_num_expired',
-        'id_num_export','nationality',
+        'name', 'phone',
+        'password', 'email',
+        'national_id', 'address',
+        'neighborhood_id',
+        'city_id','country_id',
+        'branch_id','is_active',
     ];
 
     /**
@@ -41,8 +40,8 @@ class User extends Authenticatable implements HasMedia
     ];
 
     public function tickets () {
-        $this->hasMany(Ticket::class);
+        $this->hasMany(Contact::class);
     }
 
-    
+
 }

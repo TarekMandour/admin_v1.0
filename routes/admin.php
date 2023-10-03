@@ -12,7 +12,7 @@ Route::post('/login', [AdminLoginController::class ,'adminLogin'])->name('admin.
 Route::get('/logout', [AdminLoginController::class ,'logout'])->name('admin.logout');
 
 Route::name('admin.')->middleware(['auth:admin'])->group(function () {
-    
+
     Route::middleware(['emp-access:dash'])->group(function () {
 
         Route::get('/','HomeController@index')->name('index');
@@ -52,6 +52,7 @@ Route::name('admin.')->middleware(['auth:admin'])->group(function () {
 
         Route::name('contacts.')->prefix('contacts')->group(function(){
             Route::get('/','ContactsController@index')->name('index');
+            Route::get('/show/{id}','ContactsController@show')->name('show');
             Route::post('/delete', 'ContactsController@destroy')->name('delete');
             Route::post('/store','ContactsController@store')->name('store');
             Route::get('/edit/{id}', 'ContactsController@edit')->name('edit');
@@ -76,6 +77,14 @@ Route::name('admin.')->middleware(['auth:admin'])->group(function () {
             Route::post('/update', 'CategorysController@update')->name('update');
         });
 
+        Route::name('countries.')->prefix('countries')->group(function(){
+            Route::get('/','CountriesController@index')->name('index');
+            Route::post('/delete', 'CountriesController@destroy')->name('delete');
+            Route::post('/store','CountriesController@store')->name('store');
+            Route::get('/edit/{id}', 'CountriesController@edit')->name('edit');
+            Route::post('/update', 'CountriesController@update')->name('update');
+        });
+
         Route::name('citys.')->prefix('citys')->group(function(){
             Route::get('/','CitysController@index')->name('index');
             Route::post('/delete', 'CitysController@destroy')->name('delete');
@@ -94,5 +103,5 @@ Route::name('admin.')->middleware(['auth:admin'])->group(function () {
         });
 
     });
-    
+
 });

@@ -25,7 +25,7 @@ return new class extends Migration
             $table->unsignedBigInteger('country_id');
             $table->foreign('country_id')->references('id')->on('cities')->onDelete('cascade');
             $table->unsignedBigInteger('branch_id');
-            $table->foreign('branch_id')->references('id')->on('branchs')->onDelete('cascade');
+            $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
             $table->enum('is_active', [0, 1, 2])->default(1)->comment("0 => not active, 1 => active, 2 => suspended");
             $table->softDeletes();
             $table->rememberToken();

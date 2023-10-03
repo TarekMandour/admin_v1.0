@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('blogs', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
+            $table->string('title_ar');
             $table->string('title_en');
             $table->string('link')->nullable();
             $table->text('description')->nullable();
@@ -26,7 +26,7 @@ return new class extends Migration
             $table->timestamps();
         });
     }
- 
+
     /**
      * Reverse the migrations.
      */

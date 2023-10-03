@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('branches', function (Blueprint $table) {
             $table->id();
+            $table->text('title_ar');
+            $table->text('description_ar');
+            $table->text('title_en');
+            $table->text('description_en');
+            $table->enum('is_active', [0, 1, 2])->default(1)->comment("0 => not active, 1 => active, 2 => suspended");
             $table->timestamps();
         });
     }

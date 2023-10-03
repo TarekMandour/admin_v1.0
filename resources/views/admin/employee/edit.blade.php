@@ -4,7 +4,7 @@
 @endsection
 
 @section('style')
-    
+
 @endsection
 
 @section('breadcrumb')
@@ -25,7 +25,7 @@
                 <span class="bullet bg-gray-300 w-5px h-2px"></span>
             </li>
             <li class="breadcrumb-item text-muted px-2">
-                تعديل   
+                تعديل
             </li>
         </ul>
     </div>
@@ -73,23 +73,29 @@
                         </div>
 
                         <div class="row mb-6">
-                            <label class="col-lg-2 col-form-label required fw-semibold fs-6">الاسم</label>
+                            <label class="col-lg-2 col-form-label required fw-semibold fs-6">{{__('admin.Employee.name_ar')}}</label>
                             <div class="col-lg-8 fv-row">
                                 <input type="text" name="name_ar" placeholder="First name" value="{{$data->name_ar}}" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" />
                             </div>
                         </div>
                         <div class="row mb-6">
-                            <label class="col-lg-2 col-form-label required fw-semibold fs-6"> البريد الالكتروني</label>
+                            <label class="col-lg-2 col-form-label required fw-semibold fs-6">{{__('admin.Employee.name_en')}}</label>
                             <div class="col-lg-8 fv-row">
-                                <input type="text" name="email" placeholder="البريد الالكتروني" value="{{$data->email}}" class="form-control form-control-lg form-control-solid" />
+                                <input type="text" name="name_ar" placeholder="First name" value="{{$data->name_en}}" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" />
+                            </div>
+                        </div>
+                        <div class="row mb-6">
+                            <label class="col-lg-2 col-form-label required fw-semibold fs-6">{{__('admin.Employee.email')}}</label>
+                            <div class="col-lg-8 fv-row">
+                                <input type="text" name="email" placeholder="{{__('admin.Employee.email')}}" value="{{$data->email}}" class="form-control form-control-lg form-control-solid" />
                             </div>
                         </div>
                         <div class="row mb-6">
                             <label class="col-lg-2 col-form-label fw-semibold fs-6">
-                                <span class="required">رقم الهاتف</span>
+                                <span class="required">{{__('admin.Employee.phone')}}</span>
                             </label>
                             <div class="col-lg-8 fv-row">
-                                <input type="tel" name="phone" placeholder="رقم الهاتف" value="{{$data->phone}}" class="form-control form-control-lg form-control-solid" />
+                                <input type="tel" name="phone" placeholder="{{__('admin.Employee.phone')}}" value="{{$data->phone}}" class="form-control form-control-lg form-control-solid" />
                             </div>
                         </div>
                         <div class="row mb-6">
@@ -98,11 +104,11 @@
                                 <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Min 6 characters"></i>
                             </label>
                             <div class="col-lg-8 fv-row">
-                                <input type="password" name="password" placeholder="كلمة المرور" value="" class="form-control form-control-lg form-control-solid" />
+                                <input type="password" name="password" placeholder="{{__('admin.Employee.password')}}" value="" class="form-control form-control-lg form-control-solid" />
                             </div>
                         </div>
                         <div class="row mb-0">
-                            <label class="col-lg-2 col-form-label fw-semibold fs-6"> is_active</label>
+                            <label class="col-lg-2 col-form-label fw-semibold fs-6">{{__('admin.Employee.is_active')}}</label>
                             <div class="col-lg-8 d-flex align-items-center">
                                 <div class="form-check form-check-solid form-switch form-check-custom fv-row">
                                     <input class="form-check-input w-45px h-30px" type="checkbox" name="is_active" value="1" id="allowmarketing" @if($data->is_active == 1) checked="checked" @endif />

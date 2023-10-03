@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('pages', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->text('description');
-            $table->text('vision')->nullable();
-            $table->text('mission')->nullable();
-            $table->text('massage')->nullable();
+            $table->string('name_ar');
+            $table->text('description_ar');
+            $table->text('vision_ar')->nullable();
+            $table->text('mission_ar')->nullable();
+            $table->text('massage_ar')->nullable();
             $table->string('name_en')->nullable();
             $table->text('description_en')->nullable();
             $table->text('vision_en')->nullable();

@@ -178,6 +178,10 @@
   --bs-border-color-translucent: rgba(255, 255, 255, 0.15);
 }
 
+.cancel_btn, .save_btn{
+    padding: 10px 40px !important;
+}
+
 *,
 *::before,
 *::after {

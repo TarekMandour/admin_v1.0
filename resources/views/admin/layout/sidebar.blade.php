@@ -8,18 +8,18 @@
             <div class="menu-item">
                 <a class="menu-link" href="{{url('/admin')}}">
                     <span class="menu-icon">
-                        <i class="fonticon-setting fs-2"></i>
+                        <i class="fa-solid fa-house fs-2"></i>
                     </span>
-                    <span class="menu-title">لوحة التحكم</span>
+                    <span class="menu-title">الرئيسية</span>
                 </a>
             </div>
 
             <div class="menu-item">
                 <a class="menu-link" href="">
                     <span class="menu-icon">
-                        <i class="fonticon-setting fs-2"></i>
+                        <i class="fa-solid fa-subscript fs-2"></i>
                     </span>
-                    <span class="menu-title">الطلبات</span>
+                    <span class="menu-title">الاشتراكات</span>
 
                     <span class="menu-badge" >
                         <span class="badge badge-danger" id="bdg-count">0</span>
@@ -30,25 +30,25 @@
             <div class="menu-item">
                 <a class="menu-link" href="{{route('admin.sliders.index')}}">
                     <span class="menu-icon">
-                        <i class="fonticon-setting fs-2"></i>
+                        <i class="fa-solid fa-sliders fs-2"></i>
                     </span>
                     <span class="menu-title">السلايدر</span>
                 </a>
             </div>
 
-{{--            <div class="menu-item">--}}
-{{--                <a class="menu-link" href="{{route('admin.services.index')}}">--}}
-{{--                    <span class="menu-icon">--}}
-{{--                        <i class="fonticon-setting fs-2"></i>--}}
-{{--                    </span>--}}
-{{--                    <span class="menu-title">الحملات</span>--}}
-{{--                </a>--}}
-{{--            </div>--}}
+            <div class="menu-item">
+                <a class="menu-link" href="{{route('admin.countries.index')}}">
+                    <span class="menu-icon">
+                        <i class="fa-solid fa-mountain-sun fs-2"></i>
+                    </span>
+                    <span class="menu-title">الدول</span>
+                </a>
+            </div>
 
             <div class="menu-item">
                 <a class="menu-link" href="{{route('admin.citys.index')}}">
                     <span class="menu-icon">
-                        <i class="fonticon-setting fs-2"></i>
+                        <i class="fa-solid fa-city fs-2"></i>
                     </span>
                     <span class="menu-title">المدن</span>
                 </a>
@@ -57,27 +57,36 @@
             <div class="menu-item">
                 <a class="menu-link" href="{{route('admin.users.index')}}">
                     <span class="menu-icon">
-                        <i class="fonticon-setting fs-2"></i>
+                        <i class="fa-solid fa-users fs-2"></i>
                     </span>
-                    <span class="menu-title">العملاء</span>
+                    <span class="menu-title">المشتركين</span>
                 </a>
             </div>
 
             <div class="menu-item">
-                <a class="menu-link" href="{{route('admin.contacts.index')}}">
+                <a class="menu-link" href="{{route('admin.users.index')}}">
                     <span class="menu-icon">
-                        <i class="fonticon-setting fs-2"></i>
+                        <i class="fa-solid fa-people-roof fs-2"></i>
                     </span>
-                    <span class="menu-title">الرسائل</span>
+                    <span class="menu-title">المشرفين</span>
                 </a>
             </div>
 
             <div class="menu-item">
                 <a class="menu-link" href="{{route('admin.employees.index')}}">
                     <span class="menu-icon">
-                        <i class="fonticon-setting fs-2"></i>
+                        <i class="fa-solid fa-user fs-2"></i>
                     </span>
                     <span class="menu-title">المديرين</span>
+                </a>
+            </div>
+
+            <div class="menu-item">
+                <a class="menu-link" href="{{route('admin.contacts.index')}}">
+                    <span class="menu-icon">
+                        <i class="fa-solid fa-message fs-2"></i>
+                    </span>
+                    <span class="menu-title">الرسائل</span>
                 </a>
             </div>
 

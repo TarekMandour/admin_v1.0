@@ -3,19 +3,18 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\CountryRequest;
+use App\Models\Country;
 use Illuminate\Http\Request;
-use App\Http\Requests\ContactRequest;
-use App\Models\Contact;
 use DataTables;
 use Validator;
 
-class ContactsController extends Controller
+class CountriesController extends Controller
 {
-    protected $viewPath = 'admin.contact';
-    private $route = 'admin.contacts';
+    protected $viewPath = 'admin.country';
+    private $route = 'admin.countries';
 
-    public function __construct(Contact $model)
+    public function __construct(Country $model)
     {
         $this->objectModel = $model;
     }
@@ -35,20 +34,15 @@ class ContactsController extends Controller
                                 </div>';
                     return $checkbox;
                 })
-                ->addColumn('status', function($row){
-                    if($row->status == 'read') {
-                        $status = '<div class="badge badge-light-success fw-bold">تم المشاهدة</div>';
-                    } else {
-                        $status = '<div class="badge badge-light-danger fw-bold">لم يتم المشاهدة</div>';
-                    }
-
-                    return $status;
+                ->addColumn('title', function($row){
+                    $title_ar = '<div class="d-flex flex-column"><a href="javascript:;" class="text-gray-800 text-hover-primary mb-1">'.$row->title_ar.'</a>';
+                    $title_en = '<div class="d-flex flex-column"><a href="javascript:;" class="text-gray-800 text-hover-primary mb-1">'.$row->title_en.'</a>';
+                    $nationality_ar = '<div class="d-flex flex-column"><a href="javascript:;" class="text-gray-800 text-hover-primary mb-1">'.$row->nationality_ar.'</a>';
+                    $nationality_en = '<div class="d-flex flex-column"><a href="javascript:;" class="text-gray-800 text-hover-primary mb-1">'.$row->nationality_en.'</a>';
+                    return [$title_ar, $title_en, $nationality_ar, $nationality_en];
                 })
                 ->addColumn('actions', function($row){
                     $actions = '<div class="ms-2">
-                                <a href="'.route($this->route.'.show', $row->id).'" class="btn btn-sm btn-icon btn-warning btn-active-dark me-2" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
-                                    <i class="bi bi-eye-fill fs-1x"></i>
-                                </a>
                                 <a href="'.route($this->route.'.edit', $row->id).'" class="btn btn-sm btn-icon btn-info btn-active-dark me-2" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
                                     <i class="bi bi-pencil-square fs-1x"></i>
                                 </a>
@@ -59,12 +53,11 @@ class ContactsController extends Controller
                     if (!empty($request->get('search'))) {
                             $instance->where(function($w) use($request){
                             $search = $request->get('search');
-                            $w->orWhere('name','LIKE', "%$search%")
-                            ->orWhere('phone','LIKE', "%$search%");
+                            $w->where('title', 'LIKE', "%$search%");
                         });
                     }
                 })
-                ->rawColumns(['name','status','checkbox','actions'])
+                ->rawColumns(['title_ar', 'title_en', 'nationality_ar', 'nationality_en','checkbox','actions'])
                 ->make(true);
         }
         return view($this->viewPath .'.index');
@@ -81,7 +74,7 @@ class ContactsController extends Controller
         return view($this->viewPath .'.create');
     }
 
-    public function store(ContactRequest $request)
+    public function store(CountryRequest $request)
     {
 
         $data = $request->validated();
@@ -100,7 +93,7 @@ class ContactsController extends Controller
         return view($this->viewPath .'.edit', compact('data'));
     }
 
-    public function update(ContactRequest $request)
+    public function update(CountryRequest $request)
     {
 
         $data = $request->validated();

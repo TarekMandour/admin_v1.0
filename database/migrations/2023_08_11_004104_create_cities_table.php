@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('cities', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
+            $table->string('title_ar');
             $table->string('title_en');
             $table->integer('country_id');
             $table->softDeletes();

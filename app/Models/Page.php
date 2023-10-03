@@ -13,7 +13,8 @@ class Page extends Model implements HasMedia
 {
     use HasFactory, InteractsWithMedia;
 
-    protected $guarded = ['id', 'created_at', 'updated_at'];
+    protected $guarded = ['id','name_ar', 'description_ar', 'vision_ar', 'mission_ar', 'massage_ar', 'name_en',
+        'description_en', 'vision_en', 'mission_en', 'massage_en', 'created_at', 'updated_at'];
 
     public function registerMediaCollections(Media $media = null): void
     {
