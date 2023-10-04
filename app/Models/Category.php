@@ -14,7 +14,7 @@ class Category extends Model implements HasMedia
 {
     use HasFactory, InteractsWithMedia, SoftDeletes;
 
-    protected $guarded = ['id', 'name_ar', 'name_en', 'parent_id', 'status', 'created_at', 'updated_at'];
+    protected $guarded = ['id', 'created_at', 'updated_at'];
 
     public function parent()
     {

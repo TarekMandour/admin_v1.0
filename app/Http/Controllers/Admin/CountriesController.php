@@ -34,12 +34,23 @@ class CountriesController extends Controller
                                 </div>';
                     return $checkbox;
                 })
-                ->addColumn('title', function($row){
-                    $title_ar = '<div class="d-flex flex-column"><a href="javascript:;" class="text-gray-800 text-hover-primary mb-1">'.$row->title_ar.'</a>';
-                    $title_en = '<div class="d-flex flex-column"><a href="javascript:;" class="text-gray-800 text-hover-primary mb-1">'.$row->title_en.'</a>';
-                    $nationality_ar = '<div class="d-flex flex-column"><a href="javascript:;" class="text-gray-800 text-hover-primary mb-1">'.$row->nationality_ar.'</a>';
-                    $nationality_en = '<div class="d-flex flex-column"><a href="javascript:;" class="text-gray-800 text-hover-primary mb-1">'.$row->nationality_en.'</a>';
-                    return [$title_ar, $title_en, $nationality_ar, $nationality_en];
+                ->addColumn('title_ar', function($row){
+                    $title_ar = '<div class="d-flex flex-column"><a href="javascript:;" class="text-gray-800 text-hover-primary mb-1">'.$row->title_ar.'</a></div>';
+
+                    return $title_ar;
+                })
+                ->addColumn('title_en', function($row){
+                    $title_en = '<div class="d-flex flex-column"><a href="javascript:;" class="text-gray-800 text-hover-primary mb-1">'.$row->title_en.'</a></div>';
+
+                    return $title_en;
+                })
+                ->addColumn('nationality_ar', function($row){
+                    $nationality_ar = '<div class="d-flex flex-column"><a href="javascript:;" class="text-gray-800 text-hover-primary mb-1">'.$row->nationality_ar.'</a></div>';
+                    return $nationality_ar;
+                })
+                ->addColumn('nationality_en', function($row){
+                    $nationality_en = '<div class="d-flex flex-column"><a href="javascript:;" class="text-gray-800 text-hover-primary mb-1">'.$row->nationality_en.'</a></div>';
+                    return $nationality_en;
                 })
                 ->addColumn('actions', function($row){
                     $actions = '<div class="ms-2">

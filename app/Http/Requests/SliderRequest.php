@@ -23,9 +23,9 @@ class SliderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title'=>'nullable',
-            'title_en' => 'nullable',
-            'photo' => ['nullable', 'image', 'mimes:png,jpg,jpeg,svg',Rule::requiredIf($this->routeIs('admin.sliders.store'))],
+            'title_ar'=>'required',
+            'title_en' => 'required',
+            'photo' => ['nullable', 'image', 'mimes:png,jpg,jpeg,svg,webp',Rule::requiredIf($this->routeIs('admin.sliders.store'))],
         ];
     }
 }

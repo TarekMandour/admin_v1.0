@@ -4,13 +4,9 @@
     $viewPath = 'admin.city';
 @endphp
 
-@section('css')
+@section('style')
     <link href="{{asset('dash/assets/plugins/custom/datatables/datatables.bundle.rtl.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('dash/assets/plugins/custom/datatables/buttons.bootstrap4.min.css')}}" rel="stylesheet" type="text/css" />
-@endsection
-
-@section('style')
-    
 @endsection
 
 @section('breadcrumb')
@@ -19,9 +15,9 @@
     <div data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_header_nav'}" class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
         <a  href="{{url('/admin')}}">
             <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">
-                لوحة التحكم
+                الرئيسية
             </h1>
-        </a> 
+        </a>
         <span class="h-20px border-gray-300 border-start mx-4"></span>
         <ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1">
             <li class="breadcrumb-item text-muted px-2">
@@ -30,7 +26,7 @@
             {{-- <li class="breadcrumb-item">
                 <span class="bullet bg-gray-300 w-5px h-2px"></span>
             </li> --}}
-            
+
         </ul>
     </div>
     <!--end::Page title-->
@@ -40,7 +36,7 @@
 @section('content')
     <!--begin::Container-->
     <div id="kt_app_content_container" class="app-container container-fluid">
-            
+
             <div class="card no-border">
                 <!--begin::Card header-->
                 <div class="card-header border-0 pt-6">
@@ -83,7 +79,9 @@
                                         <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_datatable_table .form-check-input" value="1" />
                                     </div>
                                 </th>
-                                <th class="min-w-125px text-start">عنوان</th>
+                                <th class="min-w-125px text-start">الدولة</th>
+                                <th class="min-w-125px text-start">العنوان عربي</th>
+                                <th class="min-w-125px text-start">العنوان انجليزي</th>
                                 <th class="min-w-125px text-start">الاجراء</th>
                             </tr>
                             <!--end::Table row-->
@@ -134,8 +132,8 @@
                                     </div>
 
                                     <div class="text-center pt-15">
-                                        <button type="button" class="btn btn-light me-3" data-bs-dismiss="modal">الغاء</button>
-                                        <button type="submit" class="btn btn-primary" id="submit">
+                                        <button type="button" class="btn btn-light me-3 cancel_btn" data-bs-dismiss="modal">الغاء</button>
+                                        <button type="submit" class="btn btn-primary save_btn" id="submit">
                                             <span class="indicator-label">حفظ</span>
                                             <span class="indicator-progress">Please wait...
                                             <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
@@ -163,7 +161,7 @@
 
 <script>
     $(function () {
-      
+
         var table = $('#kt_datatable_table').DataTable({
             processing: false,
             serverSide: true,
@@ -195,13 +193,15 @@
             },
             columns: [
                 {data: 'checkbox', name: 'checkbox'},
-                {data: 'title', name: 'title'},
+                {data: 'country_id', name: 'country_id'},
+                {data: 'title_ar', name: 'title_ar'},
+                {data: 'title_en', name: 'title_en'},
                 {data: 'actions', name: 'actions'},
             ]
         });
 
         table.buttons().container().appendTo($('.dbuttons'));
-        
+
         const filterSearch = document.querySelector('[data-kt-db-table-filter="search"]');
         filterSearch.addEventListener('keyup', function (e) {
             table.draw();
@@ -215,7 +215,7 @@
 
             if (checkIDs.length > 0) {
                 var token = $(this).data("token");
-                
+
                 Swal.fire({
                     title: 'هل انت متأكد ؟',
                     text: "لا يمكن استرجاع البيانات المحذوفه",
@@ -255,7 +255,7 @@
                 });
             } else {
                 toastr.error("", "حدد العناصر اولا");
-            }        
+            }
 
         });
     });

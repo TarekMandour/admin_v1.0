@@ -37,12 +37,20 @@ class CategorysController extends Controller
                 })
                 ->addColumn('parent', function($row){
                     if($row->parent) {
-                        $parentName = $row->parent->name;
+                        $parentName = $row->parent->name_ar;
                     } else {
                         $parentName = '----';
                     }
                     $parent = '<div class="d-flex flex-column"><a href="javascript:;" class="text-gray-800 text-hover-primary mb-1">'.$parentName.'</a>';
                     return $parent;
+                })
+                ->addColumn('name_ar', function($row){
+                    $name_ar = '<div class="d-flex flex-column"><a href="javascript:;" class="text-gray-800 text-hover-primary mb-1">'.$row->name_ar.'</a></div>';
+                    return $name_ar;
+                })
+                ->addColumn('name_en', function($row){
+                    $name_en = '<div class="d-flex flex-column"><a href="javascript:;" class="text-gray-800 text-hover-primary mb-1">'.$row->name_en.'</a></div>';
+                    return $name_en;
                 })
                 ->addColumn('actions', function($row){
                     $actions = '<div class="ms-2">
@@ -60,7 +68,7 @@ class CategorysController extends Controller
                         });
                     }
                 })
-                ->rawColumns(['parent','checkbox','actions'])
+                ->rawColumns(['parent', 'name_ar', 'name_en','checkbox','actions'])
                 ->make(true);
         }
         return view($this->viewPath .'.index');
@@ -86,7 +94,7 @@ class CategorysController extends Controller
         if($request->hasFile('photo') && $request->file('photo')->isValid()){
             $result->addMediaFromRequest('photo')->toMediaCollection('photo');
         }
-        
+
         return redirect(route($this->route . '.index'))->with('message', 'تم الاضافة بنجاح')->with('status', 'success');
     }
 
@@ -112,7 +120,7 @@ class CategorysController extends Controller
     }
 
     public function destroy(Request $request)
-    {   
+    {
 
         try{
             $this->objectModel::whereIn('id',$request->id)->delete();

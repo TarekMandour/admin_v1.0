@@ -35,9 +35,30 @@ class SlidersController extends Controller
                                 </div>';
                     return $checkbox;
                 })
-                ->addColumn('title', function($row){
-                    $title = '<div class="d-flex flex-column"><a href="javascript:;" class="text-gray-800 text-hover-primary mb-1">'.$row->title.'</a>';
-                    return $title;
+                ->addColumn('category_id', function($row){
+                    $category_id = '<div class="d-flex flex-column"><a href="javascript:;" class="text-gray-800 text-hover-primary mb-1">'.$row->category?->name_ar.'</a>';
+                    return $category_id;
+                })
+                ->addColumn('title_ar', function($row){
+                    $title_ar = '<div class="d-flex flex-column"><a href="javascript:;" class="text-gray-800 text-hover-primary mb-1">'.$row->title_ar.'</a>';
+                    return $title_ar;
+                })
+                ->addColumn('title_en', function($row){
+                    $title_en = '<div class="d-flex flex-column"><a href="javascript:;" class="text-gray-800 text-hover-primary mb-1">'.$row->title_en.'</a>';
+                    return $title_en;
+                })
+                ->addColumn('sort', function($row){
+                    $sort = '<div class="d-flex flex-column"><a href="javascript:;" class="text-gray-800 text-hover-primary mb-1">'.$row->sort.'</a>';
+                    return $sort;
+                })
+                ->addColumn('type', function($row){
+                    if($row->type == 'slider') {
+                        $type = '<div class="badge badge-light-success fw-bold">سلايدر</div>';
+                    } else {
+                        $type = '<div class="badge badge-light-success fw-bold">تصنيف</div>';
+                    }
+
+                    return $type;
                 })
                 ->addColumn('actions', function($row){
                     $actions = '<div class="ms-2">
@@ -51,11 +72,12 @@ class SlidersController extends Controller
                     if (!empty($request->get('search'))) {
                             $instance->where(function($w) use($request){
                             $search = $request->get('search');
-                            $w->where('title', 'LIKE', "%$search%");
+                            $w->where('title_ar', 'LIKE', "%$search%")
+                            ->orWhere('title_en', 'LIKE', "%$search%");
                         });
                     }
                 })
-                ->rawColumns(['title','checkbox','actions'])
+                ->rawColumns(['category_id','title_ar', 'title_en', 'sort', 'type','checkbox','actions'])
                 ->make(true);
         }
         return view($this->viewPath .'.index');
@@ -81,7 +103,7 @@ class SlidersController extends Controller
         if($request->hasFile('photo') && $request->file('photo')->isValid()){
             $result->addMediaFromRequest('photo')->toMediaCollection('photo');
         }
-        
+
         return redirect(route($this->route . '.index'))->with('message', 'تم الاضافة بنجاح')->with('status', 'success');
     }
 
@@ -108,7 +130,7 @@ class SlidersController extends Controller
     }
 
     public function destroy(Request $request)
-    {   
+    {
 
         try{
             $this->objectModel::whereIn('id',$request->id)->delete();

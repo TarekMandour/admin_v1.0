@@ -20,33 +20,41 @@
             </span>
         </div>
 
-        <div class="form-text">Allowed file types: png, jpg, jpeg.</div>
-    </div>
-</div> 
-
-<div class="row mb-6">
-    <label class="col-lg-2 col-form-label required fw-semibold fs-6">اسم</label>
-    <div class="col-lg-8 fv-row">
-        <input type="text" name="name" placeholder="الاسم" value="{{old('name',$data->name ?? '')}}" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" />
+        <div class="form-text">Allowed file types: png, jpg, jpeg, webp.</div>
     </div>
 </div>
 
 <div class="row mb-6">
     <!--begin::Label-->
-    <label class="col-lg-2 col-form-label fw-semibold fs-6">متفرع من </label>
+    <label class="col-lg-2 col-form-label fw-semibold fs-6">التصنيف الرئيسي </label>
     <!--end::Label-->
     <div class="col-lg-8 fv-row">
         <select  data-control="select2" data-placeholder="Select an option" class=" input-text form-control  form-select  mb-3 mb-lg-0"  name="parent_id">
             <option value="0">اختر قسم</option>
             @foreach(\App\Models\Category::all() as $cat)
                 <option @if(isset($data) && $data->parent_id == $cat->id) selected @endif value="{{$cat->id}}">
-                    {{$cat->name}}
+                    {{$cat->name_ar}}
                 </option>
             @endforeach
         </select>
     </div>
     <!--end::Input-->
 </div>
+
+<div class="row mb-6">
+    <label class="col-lg-2 col-form-label required fw-semibold fs-6">الاسم عربي</label>
+    <div class="col-lg-8 fv-row">
+        <input type="text" name="name_ar" placeholder="الاسم عربي" value="{{old('name_ar',$data->name_ar ?? '')}}" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" />
+    </div>
+</div>
+
+<div class="row mb-6">
+    <label class="col-lg-2 col-form-label required fw-semibold fs-6">الاسم انجليزي</label>
+    <div class="col-lg-8 fv-row">
+        <input type="text" name="name_en" placeholder="الاسم انجليزي" value="{{old('name_en',$data->name_en ?? '')}}" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" />
+    </div>
+</div>
+
 
 <div class="fv-row mb-6">
     <div

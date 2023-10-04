@@ -22,10 +22,11 @@ class CategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255',
+            'name_ar' => 'required|string|max:255',
+            'name_en' => 'required|string|max:255',
             'parent_id' => 'nullable',
             'status' => 'required',
-            'photo' => ['nullable', 'image', 'mimes:png,jpg,jpeg,svg'],
+            'photo' => ['nullable', 'image', 'mimes:png,jpg,jpeg,svg,webp'],
         ];
     }
 }

@@ -35,9 +35,17 @@ class CitysController extends Controller
                                 </div>';
                     return $checkbox;
                 })
-                ->addColumn('title', function($row){
-                    $title = '<div class="d-flex flex-column"><a href="javascript:;" class="text-gray-800 text-hover-primary mb-1">'.$row->title.'</a>';
-                    return $title;
+                ->addColumn('country_id', function($row){
+                    $country_id = '<div class="d-flex flex-column"><a href="javascript:;" class="text-gray-800 text-hover-primary mb-1">'.$row->country->title_ar.'</a></div>';
+                    return $country_id;
+                })
+                ->addColumn('title_ar', function($row){
+                    $title_ar = '<div class="d-flex flex-column"><a href="javascript:;" class="text-gray-800 text-hover-primary mb-1">'.$row->title_ar.'</a></div>';
+                    return $title_ar;
+                })
+                ->addColumn('title_en', function($row){
+                    $title_en = '<div class="d-flex flex-column"><a href="javascript:;" class="text-gray-800 text-hover-primary mb-1">'.$row->title_en.'</a></div>';
+                    return $title_en;
                 })
                 ->addColumn('actions', function($row){
                     $actions = '<div class="ms-2">
@@ -51,11 +59,12 @@ class CitysController extends Controller
                     if (!empty($request->get('search'))) {
                             $instance->where(function($w) use($request){
                             $search = $request->get('search');
-                            $w->where('title', 'LIKE', "%$search%");
+                            $w->where('title_ar', 'LIKE', "%$search%")
+                            ->orWhere('title_en', 'LIKE', "%$search%");
                         });
                     }
                 })
-                ->rawColumns(['title','checkbox','actions'])
+                ->rawColumns(['title_ar', 'title_en', 'country_id','checkbox','actions'])
                 ->make(true);
         }
         return view($this->viewPath .'.index');
@@ -81,7 +90,7 @@ class CitysController extends Controller
         if($request->hasFile('photo') && $request->file('photo')->isValid()){
             $result->addMediaFromRequest('photo')->toMediaCollection('photo');
         }
-        
+
         return redirect(route($this->route . '.index'))->with('message', 'تم الاضافة بنجاح')->with('status', 'success');
     }
 
@@ -107,7 +116,7 @@ class CitysController extends Controller
     }
 
     public function destroy(Request $request)
-    {   
+    {
 
         try{
             $this->objectModel::whereIn('id',$request->id)->delete();

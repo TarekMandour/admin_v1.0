@@ -22,7 +22,9 @@ class CityRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|string|max:255',
+            'title_ar' => 'required|string|max:255',
+            'title_en' => 'required|string|max:255',
+            'country_id' => 'required|exists:countries,id',
         ];
     }
 }

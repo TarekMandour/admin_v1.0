@@ -1,7 +1,7 @@
 @extends('admin.layout.master')
 @php
-    $route = 'admin.citys';
-    $viewPath = 'admin.city';
+    $route = 'admin.countries';
+    $viewPath = 'admin.country';
 @endphp
 
 @section('style')
