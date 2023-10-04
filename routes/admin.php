@@ -32,6 +32,16 @@ Route::name('admin.')->middleware(['auth:admin'])->group(function () {
             Route::post('/update', 'EmployeesController@update')->name('update');
         });
 
+        Route::name('supervisors.')->prefix('supervisors')->group(function(){
+            Route::get('/','SupervisorsController@index')->name('index');
+            Route::get('/show/{id}','SupervisorsController@show')->name('show');
+            Route::post('/delete', 'SupervisorsController@destroy')->name('delete');
+            Route::get('/create','SupervisorsController@create')->name('create');
+            Route::post('/store','SupervisorsController@store')->name('store');
+            Route::get('/edit/{id}', 'SupervisorsController@edit')->name('edit');
+            Route::post('/update', 'SupervisorsController@update')->name('update');
+        });
+
         Route::name('users.')->prefix('users')->group(function(){
             Route::get('/','UsersController@index')->name('index');
             Route::get('/show/{id}','UsersController@show')->name('show');
