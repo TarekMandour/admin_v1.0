@@ -41,7 +41,7 @@ class SupervisorsController extends Controller
                 })
                 ->addColumn('is_active', function($row){
                     if($row->is_active == 1) {
-                        $is_active = '<div class="badge badge-light-success fw-bold">مقعل</div>';
+                        $is_active = '<div class="badge badge-light-success fw-bold">مفعل</div>';
                     } else {
                         $is_active = '<div class="badge badge-light-danger fw-bold">غير مفعل</div>';
                     }
@@ -50,10 +50,10 @@ class SupervisorsController extends Controller
                 })
                 ->addColumn('actions', function($row){
                     $actions = '<div class="ms-2">
-                                <a href="'.route('admin.employees.show', $row->id).'" class="btn btn-sm btn-icon btn-warning btn-active-dark me-2" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+                                <a href="'.route('admin.supervisors.show', $row->id).'" class="btn btn-sm btn-icon btn-warning btn-active-dark me-2" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
                                     <i class="bi bi-eye-fill fs-1x"></i>
                                 </a>
-                                <a href="'.route('admin.employees.edit', $row->id).'" class="btn btn-sm btn-icon btn-info btn-active-dark me-2" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+                                <a href="'.route('admin.supervisors.edit', $row->id).'" class="btn btn-sm btn-icon btn-info btn-active-dark me-2" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
                                     <i class="bi bi-pencil-square fs-1x"></i>
                                 </a>
                             </div>';
@@ -93,8 +93,8 @@ class SupervisorsController extends Controller
     {
         $rule = [
             'name_ar' => 'required|string',
-            'email' => 'email|unique:employees',
-            'phone' => 'required|unique:employees',
+            'email' => 'email|unique:supervisors',
+            'phone' => 'required|unique:supervisors',
             'password' => 'nullable|min:6',
             'photo' => 'image|mimes:png,jpg,jpeg|max:2048'
         ];
@@ -110,7 +110,7 @@ class SupervisorsController extends Controller
             'phone' => $request->phone,
             'password' => Hash::make($request->password),
             'role_id' => 1,
-            'type' => 'dash',
+            'type' => 'supervisor',
             'is_active' => $request->is_active ?? '0',
         ]);
 
@@ -123,7 +123,7 @@ class SupervisorsController extends Controller
 
     public function edit($id)
     {
-        $data = Employee::find($id);
+        $data = Supervisor::find($id);
         return view('admin.supervisor.edit', compact('data'));
     }
 
@@ -149,7 +149,7 @@ class SupervisorsController extends Controller
             'phone' => $request->phone,
             'password' => ($request->password) ? Hash::make($request->password): $data->password,
             'role_id' => 1,
-            'type' => 'dash',
+            'type' => 'supervisor',
             'is_active' => $request->is_active ?? '0',
         ]);
 
@@ -157,14 +157,14 @@ class SupervisorsController extends Controller
             $data->addMediaFromRequest('photo')->toMediaCollection('profile');
         }
 
-        return redirect('admin/supervisor')->with('message', 'تم التعديل بنجاح')->with('status', 'success');
+        return redirect('admin/supervisors')->with('message', 'تم التعديل بنجاح')->with('status', 'success');
     }
 
     public function destroy(Request $request)
     {
 
         try{
-            Employee::whereIn('id',$request->id)->delete();
+            Supervisor::whereIn('id',$request->id)->delete();
         } catch (\Exception $e) {
             return response()->json(['message' => 'error']);
         }

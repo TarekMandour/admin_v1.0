@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('title_en');
             $table->text('description_en');
             $table->enum('is_active', [0, 1, 2])->default(1)->comment("0 => not active, 1 => active, 2 => suspended");
+            $table->softDeletes();
             $table->timestamps();
         });
     }

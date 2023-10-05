@@ -76,7 +76,7 @@
             </div>
 
             <div class="menu-item">
-                <a class="menu-link" href="{{route('admin.users.index')}}">
+                <a class="menu-link" href="{{route('admin.supervisors.index')}}">
                     <span class="menu-icon">
                         <i class="fa-solid fa-people-roof fs-2"></i>
                     </span>
@@ -97,6 +97,17 @@
                 <a class="menu-link" href="{{route('admin.contacts.index')}}">
                     <span class="menu-icon">
                         <i class="fa-solid fa-message fs-2"></i>
+                    </span>
+                    <span class="menu-title">تذاكر الدعم الفني</span>
+                    <span class="menu-badge" >
+                        <span class="badge badge-danger" id="bdg-count">{{\App\Models\Contact::where('status', 'unread')->count()}}</span>
+                    </span>
+                </a>
+            </div>
+            <div class="menu-item">
+                <a class="menu-link" href="{{route('admin.contacts.index')}}">
+                    <span class="menu-icon">
+                        <i class="fa-solid fa-envelope fs-2"></i>
                     </span>
                     <span class="menu-title">الرسائل</span>
                     <span class="menu-badge" >

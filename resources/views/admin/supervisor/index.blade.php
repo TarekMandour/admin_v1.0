@@ -18,7 +18,7 @@
         <span class="h-20px border-gray-300 border-start mx-4"></span>
         <ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1">
             <li class="breadcrumb-item text-muted px-2">
-                <a  href="#" class="text-muted text-hover-primary">المشتركين</a>
+                <a  href="#" class="text-muted text-hover-primary">المشرفين</a>
             </li>
             {{-- <li class="breadcrumb-item">
                 <span class="bullet bg-gray-300 w-5px h-2px"></span>
@@ -52,7 +52,7 @@
                     <div class="card-toolbar">
                         <!--begin::Toolbar-->
                         <div class="d-flex justify-content-end dbuttons">
-                            <a href="{{route('admin.users.create')}}" class="btn btn-sm btn-icon btn-primary btn-active-dark me-3 p-3">
+                            <a href="{{route('admin.supervisors.create')}}" class="btn btn-sm btn-icon btn-primary btn-active-dark me-3 p-3">
                                 <i class="bi bi-plus-square fs-1x"></i>
                             </a>
                             <button type="button" class="btn btn-sm btn-icon btn-primary btn-active-dark me-3 p-3" data-bs-toggle="modal" data-bs-target="#kt_modal_filter">
@@ -79,9 +79,8 @@
                                         <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_datatable_table .form-check-input" value="1" />
                                     </div>
                                 </th>
-                                <th class="min-w-125px text-start">المشترك</th>
-                                <th class="min-w-125px text-start">رقم الهاتف</th>
-                                <th class="min-w-125px text-start">النوع</th>
+                                <th class="min-w-125px text-start">المشرف</th>
+                                <th class="min-w-125px text-start">رقم الجوال</th>
                                 <th class="min-w-125px text-start">الحالة</th>
                                 <th class="min-w-125px text-start">الاجراء</th>
                             </tr>
@@ -105,7 +104,7 @@
                             <!--begin::Modal header-->
                             <div class="modal-header" id="kt_modal_filter_header">
                                 <!--begin::Modal title-->
-                                <h2 class="fw-bold">الفلتر</h2>
+                                <h2 class="fw-bold">فلتر البحث</h2>
                                 <!--end::Modal title-->
                                 <!--begin::Close-->
                                 <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
@@ -128,17 +127,8 @@
                                     <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_user_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_user_header" data-kt-scroll-wrappers="#kt_modal_add_user_scroll" data-kt-scroll-offset="300px">
 
                                         <div class="fv-row mb-7">
-                                            <label class="required fw-semibold fs-6 mb-2">نوع الحساب  </label>
-                                            <select  data-control="select2" id="type" data-placeholder="اختر نوع الحساب" class=" input-text form-control  form-select  mb-3 mb-lg-0"  name="type">
-                                                <option value="">اختر نوع الحساب</option>
-                                                <option value="user">عميل</option>
-                                                <option value="provider">مالك</option>
-                                            </select>
-                                        </div>
 
-                                        <div class="fv-row mb-7">
-
-                                            <label class="required fw-semibold fs-6 mb-2">مفعل ؟</label>
+                                            <label class="required fw-semibold fs-6 mb-2">حالة الحساب</label>
                                             <select name="is_active" id="is_active" data-control="select2" data-placeholder="اختـر ..." data-hide-search="true" class="form-select form-select-solid fw-bold">
                                                 <option></option>
                                                 <option value="1">مفعل</option>
@@ -151,7 +141,7 @@
                                     <div class="text-center pt-15">
                                         <button type="button" class="btn btn-light me-3" data-bs-dismiss="modal">الغاء</button>
                                         <button type="submit" class="btn btn-primary" id="submit">
-                                            <span class="indicator-label">تطبيق</span>
+                                            <span class="indicator-label">حفظ</span>
                                             <span class="indicator-progress">Please wait...
                                             <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                                         </button>
@@ -203,10 +193,9 @@
                 //{extend: 'colvis', className: 'btn secondary', text: 'إظهار / إخفاء الأعمدة '}
             ],
             ajax: {
-                url: "{{ route('admin.users.index') }}",
+                url: "{{ route('admin.supervisors.index') }}",
                 data: function (d) {
                     d.is_active = $('#is_active').val(),
-                    d.type = $('#type').val(),
                     d.search = $('#search').val()
                 }
             },
@@ -214,7 +203,6 @@
                 {data: 'checkbox', name: 'checkbox'},
                 {data: 'name', name: 'name'},
                 {data: 'phone', name: 'phone'},
-                {data: 'type', name: 'start_date'},
                 {data: 'is_active', name: 'is_active'},
                 {data: 'actions', name: 'actions'},
             ]
@@ -254,7 +242,7 @@
                     if (isConfirm.value) {
                         $.ajax(
                         {
-                            url: "{{route('admin.users.delete')}}",
+                            url: "{{route('admin.supervisors.delete')}}",
                             type: 'post',
                             dataType: "JSON",
                             data: {
