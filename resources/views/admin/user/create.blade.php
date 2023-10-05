@@ -125,9 +125,9 @@
                                     <div class="col-lg-8 fv-row">
                                         <select  data-control="select2" data-placeholder="اختر المدينه" id="city" class=" input-text form-control  form-select  mb-3 mb-lg-0"  name="city_id">
                                             <option value="">اختر المدينه</option>
-                                            @foreach(\App\Models\City::all() as $city)
+                                            @foreach(\App\Models\City::whereNull('deleted_at')->get() as $city)
                                                 <option value="{{$city->id}}">
-                                                    {{$city->title}}
+                                                    {{$city->title_ar}}
                                                 </option>
                                             @endforeach
                                         </select>
@@ -142,7 +142,7 @@
                                     <div class="col-lg-8 fv-row">
                                         <select  data-control="select2" data-placeholder="اختر الجنسية" id="nationality" class=" input-text form-control  form-select  mb-3 mb-lg-0"  name="nationality">
                                             <option value="">اختر الجنسية</option>
-                                            @foreach(\App\Models\Country::all() as $country)
+                                            @foreach(\App\Models\Country::whereNull('deleted_at')->get() as $country)
                                                 <option value="{{$country->id}}">
                                                     {{$country->nationality_ar}}
                                                 </option>
@@ -158,7 +158,7 @@
                                     <label class="col-lg-2 col-form-label required fw-semibold fs-6">الفرع  </label>
                                     <!--end::Label-->
                                     <div class="col-lg-8 fv-row">
-                                        <select  data-control="select2" data-placeholder="اختر فرع المسابقة" id="nationality" class=" input-text form-control  form-select  mb-3 mb-lg-0"  name="nationality">
+                                        <select  data-control="select2" data-placeholder="اختر فرع المسابقة" id="branch_id" class=" input-text form-control  form-select  mb-3 mb-lg-0"  name="branch_id">
                                             <option value="">اختر الجنسية</option>
                                             @foreach(\App\Models\Branch::all() as $branch)
                                                 <option value="{{$branch->id}}">

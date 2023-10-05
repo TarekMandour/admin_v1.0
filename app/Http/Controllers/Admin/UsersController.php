@@ -11,6 +11,13 @@ use Validator;
 
 class UsersController extends Controller
 {
+    protected $viewPath = 'admin.user';
+    private $route = 'admin.users';
+
+    public function __construct(User $model)
+    {
+        $this->objectModel = $model;
+    }
 
     public function index(Request $request)
     {
@@ -32,20 +39,40 @@ class UsersController extends Controller
                     return $name;
                 })
                 ->addColumn('phone', function($row){
- 
+
                     $phone = $row->phone;
-                    
+
                     return $phone;
                 })
-                ->addColumn('type', function($row){
-                    if($row->type == 'user') {
-                        $type = 'عميل';
-                    } else if ($row->type == 'provider') {
-                        $type = 'مالك';
-                    }
-                    
-                    
-                    return $type;
+                ->addColumn('email', function($row){
+
+                    $email = $row->email;
+
+                    return $email;
+                })
+                ->addColumn('country_id', function($row){
+
+                    $country_id = $row->country->title_ar;
+
+                    return $country_id;
+                })
+                ->addColumn('city_id', function($row){
+
+                    $city_id = $row->city->title_ar;
+
+                    return $city_id;
+                })
+                ->addColumn('nationality', function($row){
+
+                    $nationality = $row->country->nationality_ar;
+
+                    return $nationality;
+                })
+                ->addColumn('branch_id', function($row){
+
+                    $branch_id = $row->branch->title_ar;
+
+                    return $branch_id;
                 })
                 ->addColumn('is_active', function($row){
                     if($row->is_active == 1) {
@@ -53,12 +80,15 @@ class UsersController extends Controller
                     } else {
                         $is_active = '<div class="badge badge-light-danger fw-bold">غير مفعل</div>';
                     }
-                    
+
                     return $is_active;
                 })
                 ->addColumn('actions', function($row){
                     $actions = '<div class="ms-2">
-                                <a href="'.route('admin.users.edit', $row->id).'" class="btn btn-sm btn-icon btn-info btn-active-dark me-2" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+                                <a href="'.route($this->route.'.show', $row->id).'" class="btn btn-sm btn-icon btn-warning btn-active-dark me-2" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+                                    <i class="bi bi-eye-fill fs-1x"></i>
+                                </a>
+                                <a href="'.route($this->route.'.edit', $row->id).'" class="btn btn-sm btn-icon btn-info btn-active-dark me-2" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
                                     <i class="bi bi-pencil-square fs-1x"></i>
                                 </a>
                             </div>';
@@ -69,8 +99,14 @@ class UsersController extends Controller
                         $instance->where('is_active', $request->get('is_active'));
                     }
 
-                    if ($request->get('type') == 'user' || $request->get('type') == 'provider') {
-                        $instance->where('type', $request->get('type'));
+                    if ($request->get('country_id')) {
+                        $instance->where('country_id', $request->get('country_id'));
+                    }
+                    if ($request->get('city_id')) {
+                        $instance->where('city_id', $request->get('city_id'));
+                    }
+                    if ($request->get('branch_id')) {
+                        $instance->where('branch_id', $request->get('branch_id'));
                     }
 
                     if (!empty($request->get('search'))) {
@@ -82,7 +118,7 @@ class UsersController extends Controller
                         });
                     }
                 })
-                ->rawColumns(['name','phone','type','is_active','checkbox','actions'])
+                ->rawColumns(['name','phone','email', 'country_id', 'city_id', 'nationality', 'branch_id','is_active','checkbox','actions'])
                 ->make(true);
         }
         return view('admin.user.index');
@@ -105,28 +141,23 @@ class UsersController extends Controller
             'name' => 'required|string',
             'phone' => 'required|unique:users',
             'password' => 'required|min:6',
-            'type' => 'required',
             'photo' => 'image|mimes:png,jpg,jpeg|max:2048'
         ];
 
         $validate = Validator::make($request->all(), $rule);
-        if ($validate->fails()) { 
+        if ($validate->fails()) {
             return redirect()->back()->with('message', $validate->messages()->first())->with('status', 'error');
-        } 
+        }
         $row = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
-            'type' => $request->type,
             'password' => Hash::make($request->password),
-            'tax_num' => $request->tax_num,
-            'national_id' => $request->national_id,
-            'address' => $request->address,
-            'id_num_expired' => $request->id_num_expired,
-            'id_num_export' => $request->id_num_export,
             'nationality' => $request->nationality,
+            'address' => $request->address,
             'city_id' => $request->city_id,
-            'neighborhood_id' => $request->neighborhood_id,
+            'country_id' => $request->country_id,
+            'branch_id' => $request->branch_id,
             'is_active' => $request->is_active ?? '0',
         ]);
 
@@ -149,30 +180,25 @@ class UsersController extends Controller
             'name' => 'required|string',
             'phone' => 'required|unique:users,phone,'.$request->id,
             'password' => 'nullable|min:6',
-            'type' => 'required',
             'photo' => 'image|mimes:png,jpg,jpeg|max:2048'
         ];
 
         $validate = Validator::make($request->all(), $rule);
-        if ($validate->fails()) { 
+        if ($validate->fails()) {
             return redirect()->back()->with('message', $validate->messages()->first())->with('status', 'error');
-        } 
+        }
 
         $data = User::find($request->id);
         $data->update([
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
-            'type' => $request->type,
-            'password' => ($request->password) ? Hash::make($request->password): $data->password,
-            'tax_num' => $request->tax_num,
-            'national_id' => $request->national_id,
-            'address' => $request->address,
-            'id_num_expired' => $request->id_num_expired,
-            'id_num_export' => $request->id_num_export,
+            'password' => Hash::make($request->password),
             'nationality' => $request->nationality,
+            'address' => $request->address,
             'city_id' => $request->city_id,
-            'neighborhood_id' => $request->neighborhood_id,
+            'country_id' => $request->country_id,
+            'branch_id' => $request->branch_id,
             'is_active' => $request->is_active ?? '0',
         ]);
 
@@ -184,7 +210,7 @@ class UsersController extends Controller
     }
 
     public function destroy(Request $request)
-    {   
+    {
 
         try{
             User::whereIn('id',$request->id)->delete();

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -41,6 +42,19 @@ class User extends Authenticatable implements HasMedia
 
     public function tickets () {
         $this->hasMany(Contact::class);
+    }
+
+    public function country():BelongsTo
+    {
+        return $this->belongsTo(Country::class, 'country_id');
+    }
+    public function city():BelongsTo
+    {
+        return $this->belongsTo(City::class, 'city_id');
+    }
+    public function branch():BelongsTo
+    {
+        return $this->belongsTo(Branch::class, 'branch_id');
     }
 
 

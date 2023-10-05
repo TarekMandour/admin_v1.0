@@ -103,6 +103,14 @@ Route::name('admin.')->middleware(['auth:admin'])->group(function () {
             Route::post('/update', 'CitysController@update')->name('update');
         });
 
+        Route::name('branches.')->prefix('branches')->group(function(){
+            Route::get('/','BranchesController@index')->name('index');
+            Route::post('/delete', 'BranchesController@destroy')->name('delete');
+            Route::post('/store','BranchesController@store')->name('store');
+            Route::get('/edit/{id}', 'BranchesController@edit')->name('edit');
+            Route::post('/update', 'BranchesController@update')->name('update');
+        });
+
         Route::name('neighborhoods.')->prefix('neighborhoods')->group(function(){
             Route::get('/','NeighborhoodsController@index')->name('index');
             Route::post('/delete', 'NeighborhoodsController@destroy')->name('delete');

@@ -55,6 +55,15 @@
             </div>
 
             <div class="menu-item">
+                <a class="menu-link" href="{{route('admin.branches.index')}}">
+                    <span class="menu-icon">
+                        <i class="fa-solid fa-code-branch fs-2"></i>
+                    </span>
+                    <span class="menu-title">فروع المسابقة</span>
+                </a>
+            </div>
+
+            <div class="menu-item">
                 <a class="menu-link" href="{{route('admin.categorys.index')}}">
                     <span class="menu-icon">
                         <i class="fa-solid fa-list fs-2"></i>
