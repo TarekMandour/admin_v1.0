@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html @if (App::getLocale() == 'ar') lang="ar" direction="rtl" dir="rtl" style="direction: rtl;" @else lang="ar" direction="rtl" dir="rtl" style="direction: rtl;" @endif>
 	<!--begin::Head-->
-	<head><base href="{{url('/admin')}}"/>
+	<head><base href="{{url('/supervisors')}}"/>
 		<title>{{$settings->append_name}}</title>
 		<meta charset="utf-8" />
 		<meta name="description" content="{{$settings->append_description}}" />
 		<meta name="keywords" content="{{$settings->append_keywords}}" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-        @include('admin.layout.head')
+        @include('supervisor.layout.head')
 
 	</head>
 	<!--end::Head-->
@@ -20,11 +20,11 @@
 		<div class="d-flex flex-column flex-root app-root" id="kt_app_root">
 			<!--begin::Page-->
 			<div class="app-page flex-column flex-column-fluid" id="kt_app_page">
-				@include('admin.layout.header')
+				@include('supervisor.layout.header')
 				<!--begin::Wrapper-->
 				<div class="app-wrapper flex-column flex-row-fluid" id="kt_app_wrapper">
 
-					@include('admin.layout.sidebar')
+					@include('supervisor.layout.sidebar')
 
 					<!--begin::Main-->
 					<div class="app-main flex-column flex-row-fluid" id="kt_app_main">
@@ -41,12 +41,12 @@
 						</div>
 						<!--end::Content wrapper-->
 
-						@include('admin.layout.footer')
+						@include('supervisor.layout.footer')
 
 					</div>
 					<!--end:::Main-->
 
-					@include('admin.layout.aside')
+					@include('supervisor.layout.aside')
 
 				</div>
 				<!--end::Wrapper-->
@@ -55,7 +55,7 @@
 		</div>
 		<!--end::App-->
 
-		@include('admin.layout.footer-script')
+		@include('supervisor.layout.footer-script')
 	</body>
 	<!--end::Body-->
 </html>

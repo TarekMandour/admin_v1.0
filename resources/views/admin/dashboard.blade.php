@@ -231,7 +231,7 @@
                 </div>
                 <!--end::Header-->
                 <!--begin::Card body-->
-                <div class="card-body d-flex align-items-end pt-6">
+                <div class="card-body d-flex align-items-center pt-6">
                     <!--begin::Row-->
                     <div class="row align-items-center mx-0 w-100">
                         <!--begin::Col-->
@@ -437,10 +437,8 @@ var chart = new ApexCharts(element, options);
 chart.render();
 </script>
     <script>
-        // Class definition
-        var KTCardsWidget19 = function () {
-            // Private methods
-            var initChart = function() {
+        $(document).ready(function (){
+            function initChart() {
                 var el = document.getElementById('kt_card_widget_19_chart');
 
                 if (!el) {
@@ -456,7 +454,6 @@ chart.render();
 
                 var canvas = document.createElement('canvas');
                 var span = document.createElement('span');
-
                 if (typeof(G_vmlCanvasManager) !== 'undefined') {
                     G_vmlCanvasManager.initElement(canvas);
                 }
@@ -484,17 +481,15 @@ chart.render();
                 };
 
                 // Init
-                drawCircle('#E4E6EF', options.lineWidth, 100 / 100);
-                drawCircle(KTUtil.getCssVariableValue('--bs-primary'), options.lineWidth, 100 / 150);
-                drawCircle(KTUtil.getCssVariableValue('--bs-success'), options.lineWidth, 100 / 250);
+                @php
+                $total_users = \App\Models\User::whereNull('deleted_at')->count() + \App\Models\Supervisor::whereNull('deleted_at')->count() + \App\Models\Employee::whereNull('deleted_at')->count();
+                 @endphp
+                drawCircle('#E4E6EF', options.lineWidth, {{\App\Models\User::whereNull('deleted_at')->count() / $total_users}});
+                drawCircle(KTUtil.getCssVariableValue('--bs-primary'), options.lineWidth, {{\App\Models\Supervisor::whereNull('deleted_at')->count() / $total_users}});
+                drawCircle(KTUtil.getCssVariableValue('--bs-success'), options.lineWidth, {{\App\Models\Employee::whereNull('deleted_at')->count() / $total_users}});
             }
+            initChart();
+        });
 
-            // Public methods
-            return {
-                init: function () {
-                    initChart();
-                }
-            }
-        }();
     </script>
 @endsection

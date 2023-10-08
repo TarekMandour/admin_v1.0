@@ -29,7 +29,7 @@
             </div>
             <!--end::Sidebar mobile toggle-->
             <!--begin::Logo-->
-            <a href="{{url('/admin')}}" class="app-sidebar-logo">
+            <a href="{{url('/supervisors')}}" class="app-sidebar-logo">
                 <img alt="Logo" src="{{$settings->getFirstMediaUrl('logo')}}" class="h-50px theme-light-show" />
                 <img alt="Logo" src="{{$settings->getFirstMediaUrl('logoDark')}}" class="h-50px theme-dark-show" />
             </a>
@@ -46,8 +46,8 @@
             <div class="app-navbar-item ms-2 ms-lg-6" id="kt_header_user_menu_toggle">
                 <!--begin::Menu wrapper-->
                 <div class="cursor-pointer symbol symbol-circle symbol-30px symbol-lg-45px" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-start">
-                    @if (Auth::guard('admin')->user()->getMedia('profile')->count())
-                        <img src="{{Auth::guard('admin')->user()->getFirstMediaUrl('profile')}}" alt="{{$settings->append_name}}" />
+                    @if (Auth::guard('supervisor')->user()->getMedia('profile')->count())
+                        <img src="{{Auth::guard('supervisor')->user()->getFirstMediaUrl('profile')}}" alt="{{$settings->append_name}}" />
                     @else
                         <img alt="{{$settings->append_name}}" src="{{asset('dash/assets/media/avatars/blank.png')}}" />
                     @endif
@@ -59,8 +59,8 @@
                         <div class="menu-content d-flex align-items-center px-3">
                             <!--begin::Avatar-->
                             <div class="symbol symbol-50px me-5">
-                                @if (Auth::guard('admin')->user()->getMedia('profile')->count())
-                                <img alt="{{$settings->append_name}}" src="{{Auth::guard('admin')->user()->getFirstMediaUrl('profile')}}" />
+                                @if (Auth::guard('supervisor')->user()->getMedia('profile')->count())
+                                <img alt="{{$settings->append_name}}" src="{{Auth::guard('supervisor')->user()->getFirstMediaUrl('profile')}}" />
                                 @else
                                     <img alt="{{$settings->append_name}}" src="{{asset('dash/assets/media/avatars/blank.png')}}" />
                                 @endif
@@ -68,8 +68,8 @@
                             <!--end::Avatar-->
                             <!--begin::Username-->
                             <div class="d-flex flex-column">
-                                <div class="fw-bold d-flex align-items-center fs-5">{{Auth::guard('admin')->name}}</div>
-                                <a href="javascript:;" class="fw-semibold text-muted text-hover-primary fs-7">{{Auth::guard('admin')->user()->email}}</a>
+                                <div class="fw-bold d-flex align-items-center fs-5">{{Auth::guard('supervisor')->name}}</div>
+                                <a href="javascript:;" class="fw-semibold text-muted text-hover-primary fs-7">{{Auth::guard('supervisor')->user()->email}}</a>
                             </div>
                             <!--end::Username-->
                         </div>
@@ -78,7 +78,7 @@
                     <div class="separator my-2"></div>
 
                     <div class="menu-item px-5">
-                        <a href="{{route('admin.employees.show', Auth::guard('admin')->id())}}" class="menu-link px-5">{{trans('auth.profile')}}</a>
+                        <a href="{{route('supervisor.employees.show', Auth::guard('supervisor')->id())}}" class="menu-link px-5">{{trans('auth.profile')}}</a>
                     </div>
 
                     <div class="separator my-2"></div>
@@ -180,7 +180,7 @@
                     </div>
 
                     <div class="menu-item px-5">
-                        <a href="{{route('admin.logout')}}" class="menu-link px-5">{{trans('auth.logout')}}</a>
+                        <a href="{{route('supervisor.logout')}}" class="menu-link px-5">{{trans('auth.logout')}}</a>
                     </div>
                     <!--end::Menu item-->
                 </div>
@@ -191,7 +191,7 @@
             <!--begin::Action-->
             <div class="app-navbar-item ms-2 ms-lg-6 me-lg-5">
                 <!--begin::Link-->
-                <a href="{{route('admin.logout')}}" class="btn btn-icon btn-custom btn-color-gray-600 btn-active-color-primary w-35px h-35px w-md-40px h-md-40px">
+                <a href="{{route('supervisor.logout')}}" class="btn btn-icon btn-custom btn-color-gray-600 btn-active-color-primary w-35px h-35px w-md-40px h-md-40px">
                     <!--begin::Svg Icon | path: icons/duotune/arrows/arr096.svg-->
                     <span class="svg-icon svg-icon-1">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

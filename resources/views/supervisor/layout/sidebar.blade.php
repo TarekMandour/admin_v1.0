@@ -6,7 +6,7 @@
         <div id="#kt_app_sidebar_menu" data-kt-menu="true" data-kt-menu-expand="false" class="app-sidebar-menu-primary menu menu-column menu-rounded menu-sub-indention menu-state-bullet-primary px-6 mb-5">
 
             <div class="menu-item">
-                <a class="menu-link" href="{{url('/admin')}}">
+                <a class="menu-link" href="{{url('/supervisors')}}">
                     <span class="menu-icon">
                         <i class="fa-solid fa-house fs-2"></i>
                     </span>
@@ -28,7 +28,7 @@
 {{--            </div>--}}
 
             <div class="menu-item">
-                <a class="menu-link" href="{{route('admin.sliders.index')}}">
+                <a class="menu-link" href="{{route('supervisor.sliders.index')}}">
                     <span class="menu-icon">
                         <i class="fa-solid fa-sliders fs-2"></i>
                     </span>
@@ -37,7 +37,7 @@
             </div>
 
             <div class="menu-item">
-                <a class="menu-link" href="{{route('admin.countries.index')}}">
+                <a class="menu-link" href="{{route('supervisor.countries.index')}}">
                     <span class="menu-icon">
                         <i class="fa-solid fa-mountain-sun fs-2"></i>
                     </span>
@@ -46,7 +46,7 @@
             </div>
 
             <div class="menu-item">
-                <a class="menu-link" href="{{route('admin.citys.index')}}">
+                <a class="menu-link" href="{{route('supervisor.citys.index')}}">
                     <span class="menu-icon">
                         <i class="fa-solid fa-city fs-2"></i>
                     </span>
@@ -55,7 +55,7 @@
             </div>
 
             <div class="menu-item">
-                <a class="menu-link" href="{{route('admin.categorys.index')}}">
+                <a class="menu-link" href="{{route('supervisor.categorys.index')}}">
                     <span class="menu-icon">
                         <i class="fa-solid fa-list fs-2"></i>
                     </span>
@@ -64,7 +64,7 @@
             </div>
 
             <div class="menu-item">
-                <a class="menu-link" href="{{route('admin.users.index')}}">
+                <a class="menu-link" href="{{route('supervisor.users.index')}}">
                     <span class="menu-icon">
                         <i class="fa-solid fa-users fs-2"></i>
                     </span>
@@ -76,7 +76,7 @@
             </div>
 
             <div class="menu-item">
-                <a class="menu-link" href="{{route('admin.users.index')}}">
+                <a class="menu-link" href="{{route('supervisor.users.index')}}">
                     <span class="menu-icon">
                         <i class="fa-solid fa-people-roof fs-2"></i>
                     </span>
@@ -85,7 +85,7 @@
             </div>
 
             <div class="menu-item">
-                <a class="menu-link" href="{{route('admin.employees.index')}}">
+                <a class="menu-link" href="{{route('supervisor.employees.index')}}">
                     <span class="menu-icon">
                         <i class="fa-solid fa-user fs-2"></i>
                     </span>
@@ -94,7 +94,7 @@
             </div>
 
             <div class="menu-item">
-                <a class="menu-link" href="{{route('admin.contacts.index')}}">
+                <a class="menu-link" href="{{route('supervisor.contacts.index')}}">
                     <span class="menu-icon">
                         <i class="fa-solid fa-message fs-2"></i>
                     </span>
@@ -106,7 +106,7 @@
             </div>
 
             <div class="menu-item">
-                <a class="menu-link" href="{{route('admin.settings.edit', 1)}}">
+                <a class="menu-link" href="{{route('supervisor.settings.edit', 1)}}">
                     <span class="menu-icon">
                         <i class="fonticon-setting fs-2"></i>
                     </span>

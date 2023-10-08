@@ -1,4 +1,4 @@
-@extends('admin.layout.master')
+@extends('supervisor.layout.master')
 
 @section('style')
 <link href="{{asset('dash/assets/plugins/global/plugins.bundle.css')}}" rel="stylesheet" type="text/css"/>
