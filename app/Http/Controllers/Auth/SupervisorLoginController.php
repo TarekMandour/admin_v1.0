@@ -30,7 +30,7 @@ class SupervisorLoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = 'supervisors/login';
 
     /**
      * Create a new controller instance.
@@ -58,7 +58,7 @@ class SupervisorLoginController extends Controller
 
         if($supervisor){
             if($supervisor->is_active == 1){
-                if (Auth::guard('supervisor')->attempt(['email' => $request->email,'password' => $request->password, 'type' => 'dash'], $request->get('remember'))){
+                if (Auth::guard('supervisor')->attempt(['email' => $request->email,'password' => $request->password, 'type' => 'supervisor'], $request->get('remember'))){
                     return redirect()->intended('/supervisors');
                 } else {
                     return back()->withErrors(['password' => trans('auth.error_password') ])->withInput($request->only('email', 'remember'));
@@ -75,7 +75,7 @@ class SupervisorLoginController extends Controller
 
     public function logout() {
         Auth::guard('supervisor')->logout();
-        return redirect('supervisor/login');
+        return redirect('supervisors/login');
     }
 
 }
