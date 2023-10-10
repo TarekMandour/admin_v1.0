@@ -13,7 +13,7 @@ Route::get('/logout', [SupervisorLoginController::class ,'logout'])->name('super
 
 Route::name('supervisor.')->middleware(['auth:supervisor'])->group(function () {
 
-    Route::middleware(['supervisor-access:supervisor'])->group(function () {
+    Route::middleware(['supervisor-access:supervisors'])->group(function () {
         Route::get('/',function (){
             return 'success';
         })->name('index');
