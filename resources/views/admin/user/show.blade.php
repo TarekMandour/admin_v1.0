@@ -10,7 +10,7 @@
     <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0">
         <!--begin::Item-->
         <li class="breadcrumb-item text-muted">
-            <a href="{{route('admin.employees.index')}}" class="text-muted text-hover-primary">المشتركين</a>
+            <a href="{{route('admin.users.index')}}" class="text-muted text-hover-primary">المشتركين</a>
         </li>
         <!--end::Item-->
         <!--begin::Item-->

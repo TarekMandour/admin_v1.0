@@ -1,25 +1,22 @@
-@extends('admin.layout.master')
+@extends('supervisor.layout.master')
 @php
-    $route = 'admin.categorys';
-    $viewPath = 'admin.category';
+    $route = 'supervisor.categorys';
+    $viewPath = 'supervisor.category';
 @endphp
 
-@section('css')
+@section('style')
     <link href="{{asset('dash/assets/plugins/custom/datatables/datatables.bundle.rtl.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('dash/assets/plugins/custom/datatables/buttons.bootstrap4.min.css')}}" rel="stylesheet" type="text/css" />
 @endsection
 
-@section('style')
-
-@endsection
 
 @section('breadcrumb')
 <div class="d-flex align-items-center" id="kt_header_nav">
     <!--begin::Page title-->
     <div data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_header_nav'}" class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
-        <a  href="{{url('/admin')}}">
+        <a  href="{{url('/supervisors')}}">
             <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">
-                لوحة التحكم
+                الرئيسية
             </h1>
         </a>
         <span class="h-20px border-gray-300 border-start mx-4"></span>

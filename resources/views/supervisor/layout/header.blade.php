@@ -47,9 +47,9 @@
                 <!--begin::Menu wrapper-->
                 <div class="cursor-pointer symbol symbol-circle symbol-30px symbol-lg-45px" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-start">
                     @if (Auth::guard('supervisor')->user()->getMedia('profile')->count())
-                        <img src="{{Auth::guard('supervisor')->user()->getFirstMediaUrl('profile')}}" alt="{{$settings->append_name}}" />
+                        <img src="{{Auth::guard('supervisor')->user()->getFirstMediaUrl('profile')}}" alt="{{$settings->name_ar}}" />
                     @else
-                        <img alt="{{$settings->append_name}}" src="{{asset('dash/assets/media/avatars/blank.png')}}" />
+                        <img alt="{{$settings->name_ar}}" src="{{asset('dash/assets/media/avatars/blank.png')}}" />
                     @endif
                 </div>
                 <!--begin::User account menu-->

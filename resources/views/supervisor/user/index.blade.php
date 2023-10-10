@@ -1,21 +1,21 @@
-@extends('admin.layout.master')
-
-@section('css')
+@extends('supervisor.layout.master')
+@php
+    $route = 'supervisor.users';
+    $viewPath = 'supervisor.user';
+@endphp
+@section('style')
     <link href="{{asset('dash/assets/plugins/custom/datatables/datatables.bundle.rtl.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('dash/assets/plugins/custom/datatables/buttons.bootstrap4.min.css')}}" rel="stylesheet" type="text/css" />
 @endsection
 
-@section('style')
-    
-@endsection
 
 @section('breadcrumb')
 <div class="d-flex align-items-center" id="kt_header_nav">
     <!--begin::Page title-->
     <div data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_header_nav'}" class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
-        <a  href="{{url('/admin')}}">
+        <a  href="{{url('/supervisors')}}">
             <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">
-                لوحة التحكم
+                الرئيسية
             </h1>
         </a>
         <span class="h-20px border-gray-300 border-start mx-4"></span>
@@ -26,7 +26,7 @@
             {{-- <li class="breadcrumb-item">
                 <span class="bullet bg-gray-300 w-5px h-2px"></span>
             </li> --}}
-            
+
         </ul>
     </div>
     <!--end::Page title-->
@@ -36,7 +36,7 @@
 @section('content')
     <!--begin::Container-->
     <div id="kt_app_content_container" class="app-container container-fluid">
-            
+
             <div class="card no-border">
                 <!--begin::Card header-->
                 <div class="card-header border-0 pt-6">
@@ -55,7 +55,7 @@
                     <div class="card-toolbar">
                         <!--begin::Toolbar-->
                         <div class="d-flex justify-content-end dbuttons">
-                            <a href="{{route('admin.users.create')}}" class="btn btn-sm btn-icon btn-primary btn-active-dark me-3 p-3">
+                            <a href="{{route($route.'.create')}}" class="btn btn-sm btn-icon btn-primary btn-active-dark me-3 p-3">
                                 <i class="bi bi-plus-square fs-1x"></i>
                             </a>
                             <button type="button" class="btn btn-sm btn-icon btn-primary btn-active-dark me-3 p-3" data-bs-toggle="modal" data-bs-target="#kt_modal_filter">
@@ -82,11 +82,15 @@
                                         <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_datatable_table .form-check-input" value="1" />
                                     </div>
                                 </th>
-                                <th class="min-w-125px text-start">العملاء</th>
+                                <th class="min-w-125px text-start">المشترك</th>
                                 <th class="min-w-125px text-start">رقم الهاتف</th>
-                                <th class="min-w-125px text-start">النوع</th>
-                                <th class="min-w-125px text-start">الحالة</th>
+                                <th class="min-w-125px text-start">البريد الالكتروني</th>
+                                <th class="min-w-125px text-start">الدولة</th>
+                                <th class="min-w-125px text-start">المدينة</th>
                                 <th class="min-w-125px text-start">الاجراء</th>
+                                <th class="min-w-125px text-start">الجنسية</th>
+                                <th class="min-w-125px text-start">الفرع</th>
+                                <th class="min-w-125px text-start">الحالة</th>
                             </tr>
                             <!--end::Table row-->
                         </thead>
@@ -181,7 +185,7 @@
 
 <script>
     $(function () {
-      
+
         var table = $('#kt_datatable_table').DataTable({
             processing: false,
             serverSide: true,
@@ -206,7 +210,7 @@
                 //{extend: 'colvis', className: 'btn secondary', text: 'إظهار / إخفاء الأعمدة '}
             ],
             ajax: {
-                url: "{{ route('admin.users.index') }}",
+                url: "{{ route($route.'.index') }}",
                 data: function (d) {
                     d.is_active = $('#is_active').val(),
                     d.type = $('#type').val(),
@@ -217,19 +221,23 @@
                 {data: 'checkbox', name: 'checkbox'},
                 {data: 'name', name: 'name'},
                 {data: 'phone', name: 'phone'},
-                {data: 'type', name: 'start_date'},
-                {data: 'is_active', name: 'is_active'},
+                {data: 'email', name: 'email'},
+                {data: 'country_id', name: 'country_id'},
+                {data: 'city_id', name: 'city_id'},
                 {data: 'actions', name: 'actions'},
+                {data: 'nationality', name: 'nationality'},
+                {data: 'branch_id', name: 'branch_id'},
+                {data: 'is_active', name: 'is_active'},
             ]
         });
 
         table.buttons().container().appendTo($('.dbuttons'));
-        
+
         const filterSearch = document.querySelector('[data-kt-db-table-filter="search"]');
         filterSearch.addEventListener('keyup', function (e) {
             table.draw();
         });
-        
+
         $('#submit').click(function(){
             $("#kt_modal_filter").modal('hide');
             table.draw();
@@ -243,7 +251,7 @@
 
             if (checkIDs.length > 0) {
                 var token = $(this).data("token");
-                
+
                 Swal.fire({
                     title: 'هل انت متأكد ؟',
                     text: "لا يمكن استرجاع البيانات المحذوفه",
@@ -257,7 +265,7 @@
                     if (isConfirm.value) {
                         $.ajax(
                         {
-                            url: "{{route('admin.users.delete')}}",
+                            url: "{{route($route.'.delete')}}",
                             type: 'post',
                             dataType: "JSON",
                             data: {
@@ -283,7 +291,7 @@
                 });
             } else {
                 toastr.error("", "حدد العناصر اولا");
-            }        
+            }
 
         });
     });

@@ -28,15 +28,6 @@
 {{--            </div>--}}
 
             <div class="menu-item">
-                <a class="menu-link" href="{{route('supervisor.sliders.index')}}">
-                    <span class="menu-icon">
-                        <i class="fa-solid fa-sliders fs-2"></i>
-                    </span>
-                    <span class="menu-title">السلايدر</span>
-                </a>
-            </div>
-
-            <div class="menu-item">
                 <a class="menu-link" href="{{route('supervisor.countries.index')}}">
                     <span class="menu-icon">
                         <i class="fa-solid fa-mountain-sun fs-2"></i>
@@ -76,7 +67,7 @@
             </div>
 
             <div class="menu-item">
-                <a class="menu-link" href="{{route('supervisor.users.index')}}">
+                <a class="menu-link" href="{{route('supervisor.all_supervisors.index')}}">
                     <span class="menu-icon">
                         <i class="fa-solid fa-people-roof fs-2"></i>
                     </span>
@@ -85,22 +76,13 @@
             </div>
 
             <div class="menu-item">
-                <a class="menu-link" href="{{route('supervisor.employees.index')}}">
-                    <span class="menu-icon">
-                        <i class="fa-solid fa-user fs-2"></i>
-                    </span>
-                    <span class="menu-title">المديرين</span>
-                </a>
-            </div>
-
-            <div class="menu-item">
-                <a class="menu-link" href="{{route('supervisor.contacts.index')}}">
+                <a class="menu-link" href="{{route('supervisor.messages.index')}}">
                     <span class="menu-icon">
                         <i class="fa-solid fa-message fs-2"></i>
                     </span>
                     <span class="menu-title">الرسائل</span>
                     <span class="menu-badge" >
-                        <span class="badge badge-danger" id="bdg-count">{{\App\Models\Contact::where('status', 'unread')->count()}}</span>
+                        <span class="badge badge-danger" id="bdg-count">{{\App\Models\Message::where('status', 'unread')->count()}}</span>
                     </span>
                 </a>
             </div>

@@ -1,23 +1,18 @@
-@extends('admin.layout.master')
-
-@section('css')
-    
-@endsection
-
-@section('style')
-    
-@endsection
-
+@extends('supervisor.layout.master')
+@php
+    $route = 'supervisor.all_supervisors';
+    $viewPath = 'supervisor.supervisor';
+@endphp
 @section('breadcrumb')
 <div class="page-title d-flex flex-column justify-content-center gap-1 me-3 pt-6">
     <!--begin::Title-->
-    <h1 class="page-heading d-flex flex-column justify-content-center text-dark fw-bold fs-3 m-0">البروفايل </h1>
+    <h1 class="page-heading d-flex flex-column justify-content-center text-dark fw-bold fs-3 m-0">المشرفين </h1>
     <!--end::Title-->
     <!--begin::Breadcrumb-->
     <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0">
         <!--begin::Item-->
         <li class="breadcrumb-item text-muted">
-            <a href="{{route('admin.employees.index')}}" class="text-muted text-hover-primary">الموظفين</a>
+            <a href="{{route('supervisor.all_supervisors.index')}}" class="text-muted text-hover-primary">المشرفين</a>
         </li>
         <!--end::Item-->
         <!--begin::Item-->
@@ -26,7 +21,7 @@
         </li>
         <!--end::Item-->
         <!--begin::Item-->
-        <li class="breadcrumb-item text-muted">البروفايل</li>
+        <li class="breadcrumb-item text-muted">عرض</li>
         <!--end::Item-->
     </ul>
     <!--end::Breadcrumb-->
@@ -47,12 +42,12 @@
                             @if ($data->getMedia('profile')->count())
                             <img src="{{$data->getFirstMediaUrl('profile')}}" >
                             @else
-                            <img src="assets/media/svg/avatars/blank.svg" >
+                            <img src="{{asset('assets/media/svg/avatars/blank.svg')}}" >
                             @endif
                         </div>
                     </div>
                     <div class="col-lg-8">
-                        
+
                     </div>
                 </div>
 
@@ -61,7 +56,7 @@
                         <div class="fs-6 fw-semibold">الاسم</div>
                     </div>
                     <div class="col-lg-9">
-                        <div class="fw-bold fs-5">{{$data->append_name}}</div>
+                        <div class="fw-bold fs-5">{{$data->name_ar}}</div>
                     </div>
                 </div>
 

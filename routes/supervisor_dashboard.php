@@ -31,7 +31,7 @@ Route::name('supervisor.')->middleware(['auth:supervisor'])->group(function () {
             Route::get('/edit/{id}', 'EmployeesController@edit')->name('edit');
             Route::post('/update', 'EmployeesController@update')->name('update');
         });
-        Route::name('supervisors.')->prefix('supervisors')->group(function(){
+        Route::name('all_supervisors.')->prefix('all_supervisors')->group(function(){
             Route::get('/','SupervisorsController@index')->name('index');
             Route::get('/show/{id}','SupervisorsController@show')->name('show');
             Route::post('/delete', 'SupervisorsController@destroy')->name('delete');

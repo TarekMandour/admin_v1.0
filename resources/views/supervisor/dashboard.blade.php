@@ -113,7 +113,7 @@
                                 </div>
                                 <!--end::Col-->
                                 <!--begin::Col-->
-                                <div class="col-6" onclick="window.location.href='{{route('supervisor.supervisors.index')}}'" style="cursor: pointer">
+                                <div class="col-6" onclick="window.location.href='{{route('supervisor.all_supervisors.index')}}'" style="cursor: pointer">
                                     <!--begin::Items-->
                                     <div class="bg-gray-100 bg-opacity-70 rounded-2 px-6 py-5">
                                         <!--begin::Symbol-->

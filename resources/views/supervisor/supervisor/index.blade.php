@@ -1,27 +1,28 @@
-@extends('admin.layout.master')
+@extends('supervisor.layout.master')
+@php
+    $route = 'supervisor.users';
+    $viewPath = 'supervisor.user';
+@endphp
 
-@section('css')
+@section('style')
     <link href="{{asset('dash/assets/plugins/custom/datatables/datatables.bundle.rtl.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('dash/assets/plugins/custom/datatables/buttons.bootstrap4.min.css')}}" rel="stylesheet" type="text/css" />
 @endsection
 
-@section('style')
-
-@endsection
 
 @section('breadcrumb')
 <div class="d-flex align-items-center" id="kt_header_nav">
     <!--begin::Page title-->
     <div data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_header_nav'}" class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
-        <a  href="{{url('/admin')}}">
+        <a  href="{{url('/supervisor')}}">
             <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">
-                لوحة التحكم
+                الرئيسية
             </h1>
         </a>
         <span class="h-20px border-gray-300 border-start mx-4"></span>
         <ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1">
             <li class="breadcrumb-item text-muted px-2">
-                <a  href="#" class="text-muted text-hover-primary">الموظفين</a>
+                <a  href="{{route('supervisor.all_supervisors.index')}}" class="text-muted text-hover-primary">المشرفين</a>
             </li>
             {{-- <li class="breadcrumb-item">
                 <span class="bullet bg-gray-300 w-5px h-2px"></span>
@@ -55,7 +56,7 @@
                     <div class="card-toolbar">
                         <!--begin::Toolbar-->
                         <div class="d-flex justify-content-end dbuttons">
-                            <a href="{{route('admin.employees.create')}}" class="btn btn-sm btn-icon btn-primary btn-active-dark me-3 p-3">
+                            <a href="{{route($route. '.create')}}" class="btn btn-sm btn-icon btn-primary btn-active-dark me-3 p-3">
                                 <i class="bi bi-plus-square fs-1x"></i>
                             </a>
                             <button type="button" class="btn btn-sm btn-icon btn-primary btn-active-dark me-3 p-3" data-bs-toggle="modal" data-bs-target="#kt_modal_filter">
@@ -82,10 +83,10 @@
                                         <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_datatable_table .form-check-input" value="1" />
                                     </div>
                                 </th>
-                                <th class="min-w-125px text-start">{{__('admin.Employee.employee')}}</th>
-                                <th class="min-w-125px text-start">{{__('admin.Employee.phone')}}</th>
-                                <th class="min-w-125px text-start">{{__('admin.Employee.is_active')}}</th>
-                                <th class="min-w-125px text-start">{{__('admin.Employee.action')}}</th>
+                                <th class="min-w-125px text-start">المشرف</th>
+                                <th class="min-w-125px text-start">رقم الجوال</th>
+                                <th class="min-w-125px text-start">الحالة</th>
+                                <th class="min-w-125px text-start">الاجراء</th>
                             </tr>
                             <!--end::Table row-->
                         </thead>
@@ -196,7 +197,7 @@
                 //{extend: 'colvis', className: 'btn secondary', text: 'إظهار / إخفاء الأعمدة '}
             ],
             ajax: {
-                url: "{{ route('admin.employees.index') }}",
+                url: "{{ route('supervisor.all_supervisors.index') }}",
                 data: function (d) {
                     d.is_active = $('#is_active').val(),
                     d.search = $('#search').val()
@@ -227,7 +228,7 @@
             event.preventDefault();
             var checkIDs = $("#kt_datatable_table input:checkbox:checked").map(function(){
             return $(this).val();
-            }).get(); // <----
+            }).get();
 
             if (checkIDs.length > 0) {
                 var token = $(this).data("token");
@@ -245,7 +246,7 @@
                     if (isConfirm.value) {
                         $.ajax(
                         {
-                            url: "{{route('admin.employees.delete')}}",
+                            url: "{{route($route.'.delete')}}",
                             type: 'post',
                             dataType: "JSON",
                             data: {
