@@ -81,7 +81,7 @@
                         <!--begin::Row-->
                         <div class="row g-3 g-lg-6">
                             <!--begin::Col-->
-                            <div class="col-6">
+                            <div class="col-6" onclick="window.location.href='{{route('admin.users.index')}}'" style="cursor: pointer">
                                 <!--begin::Items-->
                                 <div class="bg-gray-100 bg-opacity-70 rounded-2 px-6 py-5">
                                     <!--begin::Symbol-->
@@ -113,7 +113,7 @@
                             </div>
                             <!--end::Col-->
                             <!--begin::Col-->
-                            <div class="col-6">
+                            <div class="col-6" onclick="window.location.href='{{route('admin.supervisors.index')}}'" style="cursor: pointer">
                                 <!--begin::Items-->
                                 <div class="bg-gray-100 bg-opacity-70 rounded-2 px-6 py-5">
                                     <!--begin::Symbol-->
@@ -145,7 +145,7 @@
                             </div>
                             <!--end::Col-->
                             <!--begin::Col-->
-                            <div class="col-6">
+                            <div class="col-6" onclick="window.location.href='{{route('admin.contacts.index')}}'" style="cursor: pointer">
                                 <!--begin::Items-->
                                 <div class="bg-gray-100 bg-opacity-70 rounded-2 px-6 py-5">
                                     <!--begin::Symbol-->
@@ -177,7 +177,7 @@
                             </div>
                             <!--end::Col-->
                             <!--begin::Col-->
-                            <div class="col-6">
+                            <div class="col-6" style="cursor: pointer">
                                 <!--begin::Items-->
                                 <div class="bg-gray-100 bg-opacity-70 rounded-2 px-6 py-5">
                                     <!--begin::Symbol-->
@@ -436,7 +436,7 @@ var options = {
 var chart = new ApexCharts(element, options);
 chart.render();
 </script>
-    <script>
+<script>
         $(document).ready(function (){
             function initChart() {
                 var el = document.getElementById('kt_card_widget_19_chart');

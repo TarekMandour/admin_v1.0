@@ -16,12 +16,14 @@ return new class extends Migration
             $table->string('name');
             $table->string('phone');
             $table->text('email')->nullable();
-            $table->text('content');
+            $table->text('description');
 //            $table->unsignedBigInteger('user_id')->nullable();
 //            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->enum('status',['read','unread'])->default('unread');
-            $table->enum('ref_type',['user','supervisor']);
-            $table->unsignedInteger('ref_id');
+            $table->enum('sender_type',['user','supervisor']);
+            $table->unsignedInteger('sender_id');
+            $table->enum('receiver_type',['user','supervisor']);
+            $table->unsignedInteger('receiver_id');
             $table->softDeletes();
             $table->timestamps();
         });

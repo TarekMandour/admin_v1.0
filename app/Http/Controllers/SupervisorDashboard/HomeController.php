@@ -82,7 +82,7 @@ class HomeController extends Controller
 
         $count_user = array_reverse($count_user);
         $month_result = array(array_reverse($month)) ;
-        return view('supervisor/dashboard', compact('month_result','count_user'));
+        return view('supervisor.dashboard', compact('month_result','count_user'));
     }
 
     public function changLang(Request $request) {

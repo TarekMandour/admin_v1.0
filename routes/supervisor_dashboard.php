@@ -14,8 +14,10 @@ Route::get('/logout', [SupervisorLoginController::class ,'logout'])->name('super
 Route::name('supervisor.')->middleware(['auth:supervisor'])->group(function () {
 
     Route::middleware(['supervisor-access:supervisor'])->group(function () {
-
-        Route::get('/','HomeController@index')->name('index');
+        Route::get('/',function (){
+            return 'success';
+        })->name('index');
+//        Route::get('/','HomeController@index')->name('index');
 
         Route::name('settings.')->prefix('settings')->group(function(){
             Route::get('/edit/{id}', 'SettingsController@edit')->name('edit');
@@ -66,6 +68,15 @@ Route::name('supervisor.')->middleware(['auth:supervisor'])->group(function () {
             Route::post('/store','ContactsController@store')->name('store');
             Route::get('/edit/{id}', 'ContactsController@edit')->name('edit');
             Route::post('/update', 'ContactsController@update')->name('update');
+        });
+        Route::name('messages.')->prefix('messages')->group(function(){
+            Route::get('/','MessagesController@index')->name('index');
+            Route::get('/show/{id}','MessagesController@show')->name('show');
+            Route::post('/delete', 'MessagesController@destroy')->name('delete');
+            Route::get('/create','MessagesController@create')->name('create');
+            Route::post('/store','MessagesController@store')->name('store');
+            Route::get('/edit/{id}', 'MessagesController@edit')->name('edit');
+            Route::post('/update', 'MessagesController@update')->name('update');
         });
 
         Route::name('pages.')->prefix('pages')->group(function(){
