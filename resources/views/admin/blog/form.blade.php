@@ -22,15 +22,29 @@
 
         <div class="form-text">Allowed file types: png, jpg, jpeg.</div>
     </div>
-</div> 
+</div>
 
 <div class="row mb-6">
     <!--begin::Label-->
-    <label class="col-lg-2 col-form-label fw-semibold fs-6">نوع الخبر </label>
+    <label class="col-lg-2 col-form-label fw-semibold fs-6">التصنيف </label>
+    <!--end::Label-->
+    <div class="col-lg-8 fv-row">
+        <select  data-control="select2" data-placeholder="Select an option" class="newstype input-text form-control  form-select  mb-3 mb-lg-0"  name="category_id">
+            @foreach(\App\Models\Category::where('status', 'active')->get() as $category)
+                <option value="{{$category->id}}">{{$category->name_ar}}</option>
+            @endforeach
+        </select>
+    </div>
+    <!--end::Input-->
+</div>
+
+<div class="row mb-6">
+    <!--begin::Label-->
+    <label class="col-lg-2 col-form-label fw-semibold fs-6">نوع المقال </label>
     <!--end::Label-->
     <div class="col-lg-8 fv-row">
         <select  data-control="select2" data-placeholder="Select an option" class="newstype input-text form-control  form-select  mb-3 mb-lg-0"  name="type">
-            <option value="news" @if(isset($data) && $data->type == "news") selected @endif>خبر عام </option>
+            <option value="news" @if(isset($data) && $data->type == "news") selected @endif>عام </option>
             <option value="image" @if(isset($data) && $data->type == "image") selected @endif>معرض صور </option>
             <option value="video" @if(isset($data) && $data->type == "video") selected @endif>معرض فيديوهات </option>
         </select>
@@ -39,21 +53,21 @@
 </div>
 
 <div class="row mb-6">
-    <label class="col-lg-2 col-form-label required fw-semibold fs-6">عنوان الخبر</label>
+    <label class="col-lg-2 col-form-label required fw-semibold fs-6">عنوان المقال عربي</label>
     <div class="col-lg-8 fv-row">
-        <input type="text" name="title" placeholder="عنوان الخبر" value="{{old('title',$data->title ?? '')}}" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" />
+        <input type="text" name="title_ar" placeholder="عنوان المقال عربي" value="{{old('title_ar',$data->title_ar ?? '')}}" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" />
     </div>
 </div>
 
 <div class="row mb-6">
-    <label class="col-lg-2 col-form-label required fw-semibold fs-6">عنوان الخبر انجليزي</label>
+    <label class="col-lg-2 col-form-label required fw-semibold fs-6">عنوان المقال انجليزي</label>
     <div class="col-lg-8 fv-row">
-        <input type="text" name="title_en" placeholder="عنوان الخبر" value="{{old('title_en',$data->title_en ?? '')}}" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" />
+        <input type="text" name="title_en" placeholder="عنوان المقال انجليزي" value="{{old('title_en',$data->title_en ?? '')}}" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" />
     </div>
 </div>
 
-<div class="row mb-6 show-news" @if(isset($data) && $data->type != "news") style="display: none" @endif>
-    <label class="col-lg-2 col-form-label required fw-semibold fs-6">محتوى خبر</label>
+<div class="row mb-6">
+    <label class="col-lg-2 col-form-label required fw-semibold fs-6">محتوى المقال</label>
     <div class="col-lg-8 fv-row">
         <textarea name="description" id="kt_docs_tinymce_basic">
             {{old('description',$data->description ?? '')}}
@@ -61,8 +75,8 @@
     </div>
 </div>
 
-<div class="row mb-6 show-news" @if(isset($data) && $data->type != "news") style="display: none" @endif>
-    <label class="col-lg-2 col-form-label required fw-semibold fs-6">محتوى خبر انجليزي</label>
+<div class="row mb-6">
+    <label class="col-lg-2 col-form-label required fw-semibold fs-6">محتوى المقال انجليزي</label>
     <div class="col-lg-8 fv-row">
         <textarea name="description_en" id="kt_docs_tinymce_basic2">
             {{old('description_en',$data->description_en ?? '')}}
@@ -70,46 +84,46 @@
     </div>
 </div>
 
-<div class="row mb-6 show-video" @if(isset($data) && $data->type != "video") style="display: none" @endif>
+<div class="row mb-6 show-video" @if(isset($data) && $data->type != "video") style="display: none" @endif style="display: none">
     <label class="col-lg-2 col-form-label required fw-semibold fs-6">لينك الفيديو</label>
     <div class="col-lg-8 fv-row">
         <input type="text" name="link" placeholder="لينك الفيديو" value="{{old('link',$data->link ?? '')}}" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" />
     </div>
 </div>
 
-<div class="row mb-6">
-    <!--begin::Label-->
-    <label class="col-lg-2 col-form-label fw-semibold fs-6">  خبر لمبادره ؟ </label>
-    <!--end::Label-->
-    <div class="col-lg-8 fv-row">
-        <select  data-control="select2" data-placeholder="اختر مبادره" class=" input-text form-control  form-select  mb-3 mb-lg-0"  name="service_id">
-            <option value="">اختر مبادرة</option>
-            @foreach(\App\Models\Service::all() as $service)
-                <option @if(isset($data) && $data->service_id == $service->id) selected @endif value="{{$service->id}}">
-                    {{$service->name}}
-                </option>
-            @endforeach
-        </select>
-    </div>
-    <!--end::Input-->
-</div>
+{{--<div class="row mb-6">--}}
+{{--    <!--begin::Label-->--}}
+{{--    <label class="col-lg-2 col-form-label fw-semibold fs-6">  خبر لمبادره ؟ </label>--}}
+{{--    <!--end::Label-->--}}
+{{--    <div class="col-lg-8 fv-row">--}}
+{{--        <select  data-control="select2" data-placeholder="اختر مبادره" class=" input-text form-control  form-select  mb-3 mb-lg-0"  name="service_id">--}}
+{{--            <option value="">اختر مبادرة</option>--}}
+{{--            @foreach(\App\Models\Service::all() as $service)--}}
+{{--                <option @if(isset($data) && $data->service_id == $service->id) selected @endif value="{{$service->id}}">--}}
+{{--                    {{$service->name}}--}}
+{{--                </option>--}}
+{{--            @endforeach--}}
+{{--        </select>--}}
+{{--    </div>--}}
+{{--    <!--end::Input-->--}}
+{{--</div>--}}
 
-<div class="row mb-6">
-    <!--begin::Label-->
-    <label class="col-lg-2 col-form-label fw-semibold fs-6"> خبر لمؤسسة ؟ </label>
-    <!--end::Label-->
-    <div class="col-lg-8 fv-row">
-        <select  data-control="select2" data-placeholder="اختر مؤسسة" class=" input-text form-control  form-select  mb-3 mb-lg-0"  name="user_id">
-            <option value="">اختر مؤسسة</option>
-            @foreach(\App\Models\User::where('type','!=','individual')->get() as $user)
-                <option @if(isset($data) && $data->user_id == $user->id) selected @endif value="{{$user->id}}">
-                    {{$user->name}}
-                </option>
-            @endforeach
-        </select>
-    </div>
-    <!--end::Input-->
-</div>
+{{--<div class="row mb-6">--}}
+{{--    <!--begin::Label-->--}}
+{{--    <label class="col-lg-2 col-form-label fw-semibold fs-6"> خبر لمؤسسة ؟ </label>--}}
+{{--    <!--end::Label-->--}}
+{{--    <div class="col-lg-8 fv-row">--}}
+{{--        <select  data-control="select2" data-placeholder="اختر مؤسسة" class=" input-text form-control  form-select  mb-3 mb-lg-0"  name="user_id">--}}
+{{--            <option value="">اختر مؤسسة</option>--}}
+{{--            @foreach(\App\Models\User::where('type','!=','individual')->get() as $user)--}}
+{{--                <option @if(isset($data) && $data->user_id == $user->id) selected @endif value="{{$user->id}}">--}}
+{{--                    {{$user->name}}--}}
+{{--                </option>--}}
+{{--            @endforeach--}}
+{{--        </select>--}}
+{{--    </div>--}}
+{{--    <!--end::Input-->--}}
+{{--</div>--}}
 
 <div class="fv-row mb-6">
     <div
@@ -125,7 +139,6 @@
     </div>
 </div>
 
-<input type="hidden" name="category_id" value="1"/>
 
 <script src="{{ URL::asset('dash/assets/plugins/custom/tinymce/tinymce.bundle.js')}}"></script>
 

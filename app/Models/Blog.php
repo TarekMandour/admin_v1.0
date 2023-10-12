@@ -14,8 +14,7 @@ class Blog extends Model implements HasMedia
 {
     use HasFactory, InteractsWithMedia, SoftDeletes;
 
-    protected $guarded = ['id', 'title_ar', 'title_en', 'link', 'description', 'description_en','type',
-        'status', 'category_id', 'created_at', 'updated_at'];
+    protected $guarded = ['id', 'created_at', 'updated_at'];
 
     public function category()
     {

@@ -23,15 +23,13 @@ class BlogRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|string|max:255',
-            'description' => 'nullable',
-            'title_en' => 'nullable',
-            'description_en' => 'nullable',
+            'title_ar' => 'required|string|max:255',
+            'description' => 'required',
+            'title_en' => 'required',
+            'description_en' => 'required',
             'link' => 'nullable',
             'type' => 'required',
             'status' => 'required',
-            'service_id' => 'nullable',
-            'user_id' => 'nullable',
             'category_id'=>'required|exists:categories,id',
         ];
     }

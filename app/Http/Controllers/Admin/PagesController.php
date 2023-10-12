@@ -44,7 +44,7 @@ class PagesController extends Controller
                     $name_ar = '<div class="d-flex flex-column"><a href="javascript:;" class="text-gray-800 text-hover-primary mb-1">'.$row->name_ar.'</a></div>';
                     return $name_ar;
                 })
-                ->addColumn('title_ar', function($row){
+                ->addColumn('name_en', function($row){
                     $name_en = '<div class="d-flex flex-column"><a href="javascript:;" class="text-gray-800 text-hover-primary mb-1">'.$row->name_en.'</a></div>';
                     return $name_en;
                 })

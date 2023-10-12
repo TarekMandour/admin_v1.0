@@ -36,8 +36,27 @@ class BlogsController extends Controller
                             </div>';
                     return $checkbox;
                 })
+                ->addColumn('title_ar', function($row){
+                    $title_ar = '<div class="d-flex flex-column"><a href="javascript:;" class="text-gray-800 text-hover-primary mb-1">'.$row->title_ar.'</a></div>';
+                    return $title_ar;
+                })
+                ->addColumn('title_en', function($row){
+                    $title_en = '<div class="d-flex flex-column"><a href="javascript:;" class="text-gray-800 text-hover-primary mb-1">'.$row->title_en.'</a></div>';
+                    return $title_en;
+                })
+                ->addColumn('type', function($row){
+                    $type = '<div class="d-flex flex-column"><a href="javascript:;" class="text-gray-800 text-hover-primary mb-1">'.$row->type.'</a></div>';
+                    return $type;
+                })
+                ->addColumn('category_id', function($row){
+                    $category_id = '<div class="d-flex flex-column"><a href="javascript:;" class="text-gray-800 text-hover-primary mb-1">'.$row->category->name_ar.'</a></div>';
+                    return $category_id;
+                })
                 ->addColumn('actions', function($row){
                     $actions = '<div class="ms-2">
+                                <a href="'.route($this->route.'.show', $row->id).'" class="btn btn-sm btn-icon btn-warning btn-active-dark me-2" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+                                    <i class="bi bi-eye-fill fs-1x"></i>
+                                </a>
                                 <a href="'.route($this->route.'.edit', $row->id).'" class="btn btn-sm btn-icon btn-info btn-active-dark me-2" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
                                     <i class="bi bi-pencil-square fs-1x"></i>
                                 </a>
@@ -65,7 +84,7 @@ class BlogsController extends Controller
                         });
                     }
                 })
-                ->rawColumns(['checkbox','actions'])
+                ->rawColumns(['checkbox', 'category_id', 'title_ar', 'title_en', 'type','actions'])
                 ->make(true);
         }
         return view($this->viewPath .'.index');
@@ -90,10 +109,10 @@ class BlogsController extends Controller
 
         if($request->hasFile('photo')){
             $result->addMultipleMediaFromRequest(['photo'])->each(function ($fileAdder) {
-                $fileAdder->toMediaCollection('photo');
+                $fileAdder->addMediaCollection('photo');
             });
         }
-        
+
         return redirect(route($this->route . '.index'))->with('message', 'تم الاضافة بنجاح')->with('status', 'success');
     }
 
@@ -121,7 +140,7 @@ class BlogsController extends Controller
     }
 
     public function destroy(Request $request)
-    {   
+    {
 
         try{
             $this->objectModel::whereIn('id',$request->id)->delete();

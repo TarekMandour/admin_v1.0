@@ -111,6 +111,16 @@ Route::name('admin.')->middleware(['auth:admin'])->group(function () {
             Route::post('/update', 'BranchesController@update')->name('update');
         });
 
+        Route::name('blogs.')->prefix('blogs')->group(function(){
+            Route::get('/','BlogsController@index')->name('index');
+            Route::get('/show/{id}','BlogsController@show')->name('show');
+            Route::post('/delete', 'BlogsController@destroy')->name('delete');
+            Route::get('/create','BlogsController@create')->name('create');
+            Route::post('/store','BlogsController@store')->name('store');
+            Route::get('/edit/{id}', 'BlogsController@edit')->name('edit');
+            Route::post('/update', 'BlogsController@update')->name('update');
+        });
+
         Route::name('neighborhoods.')->prefix('neighborhoods')->group(function(){
             Route::get('/','NeighborhoodsController@index')->name('index');
             Route::post('/delete', 'NeighborhoodsController@destroy')->name('delete');

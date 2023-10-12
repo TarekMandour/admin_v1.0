@@ -69,6 +69,15 @@
             </div>
 
             <div class="menu-item">
+                <a class="menu-link" href="{{route('admin.blogs.index')}}">
+                    <span class="menu-icon">
+                        <i class="fa-solid fa-list fs-2"></i>
+                    </span>
+                    <span class="menu-title">المدونات والأخبار</span>
+                </a>
+            </div>
+
+            <div class="menu-item">
                 <a class="menu-link" href="{{route('admin.users.index')}}">
                     <span class="menu-icon">
                         <i class="fa-solid fa-users fs-2"></i>
