@@ -14,19 +14,6 @@
                 </a>
             </div>
 
-{{--            <div class="menu-item">--}}
-{{--                <a class="menu-link" href="">--}}
-{{--                    <span class="menu-icon">--}}
-{{--                        <i class="fa-solid fa-subscript fs-2"></i>--}}
-{{--                    </span>--}}
-{{--                    <span class="menu-title">الاشتراكات</span>--}}
-
-{{--                    <span class="menu-badge" >--}}
-{{--                        <span class="badge badge-danger" id="bdg-count">{{\App\Models\User::whereNotNull('branch_id')->count()}}</span>--}}
-{{--                    </span>--}}
-{{--                </a>--}}
-{{--            </div>--}}
-
             <div class="menu-item">
                 <a class="menu-link" href="{{route('admin.sliders.index')}}">
                     <span class="menu-icon">
@@ -69,6 +56,15 @@
                         <i class="fa-solid fa-list fs-2"></i>
                     </span>
                     <span class="menu-title">التصنيفات</span>
+                </a>
+            </div>
+
+            <div class="menu-item">
+                <a class="menu-link" href="{{route('admin.pages.index')}}">
+                    <span class="menu-icon">
+                        <i class="fa-solid fa-list fs-2"></i>
+                    </span>
+                    <span class="menu-title">الصفحات</span>
                 </a>
             </div>
 

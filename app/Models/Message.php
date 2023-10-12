@@ -8,20 +8,23 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class Message extends Model
+class Message extends Model implements HasMedia
 {
-    use HasFactory;
+    use HasFactory, InteractsWithMedia;
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
-    public function user():BelongsTo
+    public function registerMediaCollections(Media $media = null): void
     {
-        if ($this->ref_type == 'user'){
-            return $this->belongsTo(User::class, 'ref_id');
-        }else{
-            return $this->belongsTo(Supervisor::class, 'ref_id');
-        }
+        $this->addMediaCollection('messages')
+            ->singleFile();
+
+        $this->addMediaConversion('thumb')
+            ->keepOriginalImageFormat()
+            ->crop('crop-center', 150, 150);
     }
 }

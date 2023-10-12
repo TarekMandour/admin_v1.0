@@ -24,14 +24,19 @@
                 <div class="form-text">Allowed file types: png, jpg, jpeg.</div>
             </div>
         </div>
-
         <div class="row mb-6">
-            <label class="col-lg-2 col-form-label required fw-semibold fs-6">اسم المرسل</label>
+            <label class="col-lg-2 col-form-label required fw-semibold fs-6">اسم المستقبل</label>
             <div class="col-lg-10 fv-row">
-                <input type="text" name="name" placeholder="الاسم" value="{{old('name',$data->name ?? '')}}" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" />
+                <select  data-control="select2" data-placeholder="Select an option" class=" input-text form-control  form-select  mb-3 mb-lg-0"  name="receiver_id">
+                    <option value="0">اختر مشترك</option>
+                    @foreach(\App\Models\User::all() as $user)
+                        <option @if(isset($data) && $data->receiver_id == $user->id) selected @endif value="{{$user->id}}">
+                            {{$user->name}}
+                        </option>
+                    @endforeach
+                </select>
             </div>
         </div>
-
         <div class="row mb-6">
             <label class="col-lg-2 col-form-label required fw-semibold fs-6">محتوى الرسالة</label>
             <div class="col-lg-10 fv-row">
@@ -40,19 +45,13 @@
                 </textarea>
             </div>
         </div>
-        <div class="row mb-6">
-            <label class="col-lg-2 col-form-label required fw-semibold fs-6">اسم المستقبل</label>
-            <div class="col-lg-10 fv-row">
-                <select  data-control="select2" data-placeholder="Select an option" class=" input-text form-control  form-select  mb-3 mb-lg-0"  name=".">
-                    <option value="0">اختر قسم</option>
-                    @foreach(\App\Models\Category::all() as $cat)
-                        <option @if(isset($data) && $data->parent_id == $cat->id) selected @endif value="{{$cat->id}}">
-                            {{$cat->name_ar}}
-                        </option>
-                    @endforeach
-                </select>
-            </div>
-        </div>
+{{--        <div class="row mb-6">--}}
+{{--            <label class="col-lg-2 col-form-label required fw-semibold fs-6">ارفاق صورة</label>--}}
+{{--            <div class="col-lg-10 fv-row">--}}
+{{--                <input type="file" name="photo" accept=".png, .jpg, .jpeg"/>--}}
+{{--                <div class="form-text">Allowed file types: png, jpg, jpeg.</div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
         <div class="fv-row mb-6">
             <div
                 class="form-check form-switch form-check-custom form-check-solid">

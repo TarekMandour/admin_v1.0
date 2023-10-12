@@ -22,11 +22,16 @@ class PageRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255',
-            'description' => 'required',
-            'vision' => 'nullable',
-            'massage' => 'nullable',
-            'mission' => 'nullable',
+            'name_ar' => 'required|string|max:255',
+            'description_ar' => 'required',
+            'vision_ar' => 'nullable',
+            'massage_ar' => 'nullable',
+            'mission_ar' => 'nullable',
+            'name_en' => 'required|string|max:255',
+            'description_en' => 'required',
+            'vision_en' => 'nullable',
+            'massage_en' => 'nullable',
+            'mission_en' => 'nullable',
             'photo' => ['nullable', 'image', 'mimes:png,jpg,jpeg,svg'],
             'photo2' => ['nullable', 'image', 'mimes:png,jpg,jpeg,svg'],
         ];

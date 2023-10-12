@@ -1,11 +1,5 @@
-@extends('admin.layout.master')
+@extends('supervisor.layout.master')
 
-@section('css')
-@endsection
-
-@section('style')
-
-@endsection
 
 @section('breadcrumb')
 <div class="page-title d-flex flex-column justify-content-center gap-1 me-3 pt-6">
@@ -27,7 +21,7 @@
             <!--begin::Content-->
             <div id="kt_account_settings_profile_details" class="collapse show">
                 <!--begin::Form-->
-                <form action="{{route('admin.settings.update')}}" method="POST" enctype="multipart/form-data" id="kt_account_profile_details_form" class="form">
+                <form action="{{route('supervisor.settings.update')}}" method="POST" enctype="multipart/form-data" id="kt_account_profile_details_form" class="form">
                     @csrf
                     <!--begin::Card body-->
                     <div class="card-body border-top p-9">

@@ -1,8 +1,8 @@
 <div class="row">
     <div @if (isset($data) && $data->id == 1) class="col-lg-6" @else class="col-lg-12" @endif>
         <div class="row mb-6">
-            <label class="col-lg-2 col-form-label fw-semibold fs-6">صورة</label>
-            <div class="col-lg-10">
+            <label class="col-lg-3 col-form-label fw-semibold fs-6">صورة</label>
+            <div class="col-lg-9">
                 <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url({{asset('dash/assets/media/avatars/blank.png')}})">
                     @if (isset($data) && $data->getMedia('photo')->count())
                     <div class="image-input-wrapper w-125px h-125px" style="background-image: url({{$data->getFirstMediaUrl('photo', 'thumb')}})"></div>
@@ -21,32 +21,61 @@
                         <i class="bi bi-x fs-2"></i>
                     </span>
                 </div>
-        
+
                 <div class="form-text">Allowed file types: png, jpg, jpeg.</div>
             </div>
-        </div> 
-        
+        </div>
+
         <div class="row mb-6">
-            <label class="col-lg-2 col-form-label required fw-semibold fs-6">اسم</label>
-            <div class="col-lg-10 fv-row">
-                <input type="text" name="name" placeholder="الاسم" value="{{old('name',$data->name ?? '')}}" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" />
+            <label class="col-lg-3 col-form-label required fw-semibold fs-6">الاسم عربي</label>
+            <div class="col-lg-9 fv-row">
+                <input type="text" name="name_ar" placeholder="الاسم عربي" value="{{old('name_ar',$data->name_ar ?? '')}}" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" />
             </div>
         </div>
-        
+
         <div class="row mb-6">
-            <label class="col-lg-2 col-form-label required fw-semibold fs-6">محتوى الصفحة</label>
-            <div class="col-lg-10 fv-row">
-                <textarea name="description" id="kt_docs_tinymce_basic">
-                    {{old('description',$data->description ?? '')}}
+            <label class="col-lg-3 col-form-label required fw-semibold fs-6">محتوى الصفحة عربي</label>
+            <div class="col-lg-9 fv-row">
+                <textarea name="description_ar" id="kt_docs_tinymce_basic">
+                    {{old('description_ar',$data->description_ar ?? '')}}
                 </textarea>
             </div>
         </div>
+        @if (isset($data) && $data->id == 1)
+        <div class="row mb-6">
+            <label class="col-lg-3 col-form-label required fw-semibold fs-6">الرؤية عربي </label>
+            <div class="col-lg-9 fv-row">
+                <textarea name="vision" id="kt_docs_tinymce_basic2">
+                    {{old('vision',$data->vision ?? '')}}
+                </textarea>
+            </div>
+        </div>
+
+        <div class="row mb-6">
+            <label class="col-lg-3 col-form-label required fw-semibold fs-6">الرسالة عربي</label>
+            <div class="col-lg-9 fv-row">
+                <textarea name="massage" id="kt_docs_tinymce_basic3">
+                    {{old('massage',$data->massage ?? '')}}
+                </textarea>
+            </div>
+        </div>
+
+        <div class="row mb-6">
+            <label class="col-lg-3 col-form-label required fw-semibold fs-6">الهدف عربي</label>
+            <div class="col-lg-9 fv-row">
+                <textarea name="mission" id="kt_docs_tinymce_basic4">
+                    {{old('mission',$data->mission ?? '')}}
+                </textarea>
+            </div>
+        </div>
+        @endif
+
+
     </div>
-    @if (isset($data) && $data->id == 1)
     <div class="col-lg-6">
         <div class="row mb-6">
-            <label class="col-lg-2 col-form-label fw-semibold fs-6">صورة 2</label>
-            <div class="col-lg-10">
+            <label class="col-lg-3 col-form-label fw-semibold fs-6">صورة 2</label>
+            <div class="col-lg-9">
                 <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url({{asset('dash/assets/media/avatars/blank.png')}})">
                     @if (isset($data) && $data->getMedia('photo2')->count())
                     <div class="image-input-wrapper w-125px h-125px" style="background-image: url({{$data->getFirstMediaUrl('photo2', 'thumb')}})"></div>
@@ -65,39 +94,56 @@
                         <i class="bi bi-x fs-2"></i>
                     </span>
                 </div>
-        
+
                 <div class="form-text">Allowed file types: png, jpg, jpeg.</div>
             </div>
-        </div> 
+        </div>
 
         <div class="row mb-6">
-            <label class="col-lg-2 col-form-label required fw-semibold fs-6">الرؤية </label>
-            <div class="col-lg-10 fv-row">
+            <label class="col-lg-3 col-form-label required fw-semibold fs-6">الاسم انجليزي</label>
+            <div class="col-lg-9 fv-row">
+                <input type="text" name="name_en" placeholder="الاسم" value="{{old('name_en',$data->name_en ?? '')}}" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" />
+            </div>
+        </div>
+
+        <div class="row mb-6">
+            <label class="col-lg-3 col-form-label required fw-semibold fs-6">محتوى الصفحة انجليزي</label>
+            <div class="col-lg-9 fv-row">
+                <textarea name="description_en" id="kt_docs_tinymce_basic">
+                    {{old('description_en',$data->description_en ?? '')}}
+                </textarea>
+            </div>
+        </div>
+
+        @if (isset($data) && $data->id == 1)
+            <div class="row mb-6">
+                <label class="col-lg-3 col-form-label required fw-semibold fs-6">الرؤية انجليزي </label>
+                <div class="col-lg-9 fv-row">
                 <textarea name="vision" id="kt_docs_tinymce_basic2">
                     {{old('vision',$data->vision ?? '')}}
                 </textarea>
+                </div>
             </div>
-        </div>
-        
-        <div class="row mb-6">
-            <label class="col-lg-2 col-form-label required fw-semibold fs-6">الرسالة </label>
-            <div class="col-lg-10 fv-row">
+
+            <div class="row mb-6">
+                <label class="col-lg-3 col-form-label required fw-semibold fs-6">الرسالة انجليزي</label>
+                <div class="col-lg-9 fv-row">
                 <textarea name="massage" id="kt_docs_tinymce_basic3">
                     {{old('massage',$data->massage ?? '')}}
                 </textarea>
+                </div>
             </div>
-        </div>
-        
-        <div class="row mb-6">
-            <label class="col-lg-2 col-form-label required fw-semibold fs-6">الهدف </label>
-            <div class="col-lg-10 fv-row">
+
+            <div class="row mb-6">
+                <label class="col-lg-3 col-form-label required fw-semibold fs-6">الهدف انجليزي</label>
+                <div class="col-lg-9 fv-row">
                 <textarea name="mission" id="kt_docs_tinymce_basic4">
                     {{old('mission',$data->mission ?? '')}}
                 </textarea>
+                </div>
             </div>
-        </div>
+        @endif
     </div>
-    @endif
 </div>
 
 

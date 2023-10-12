@@ -1,7 +1,7 @@
-@extends('admin.layout.master')
+@extends('supervisor.layout.master')
 @php
-    $route = 'admin.pages';
-    $viewPath = 'admin.page';
+    $route = 'supervisor.branches';
+    $viewPath = 'supervisor.branch';
 @endphp
 
 @section('style')
@@ -21,8 +21,11 @@
         <span class="h-20px border-gray-300 border-start mx-4"></span>
         <ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1">
             <li class="breadcrumb-item text-muted px-2">
-                <a  href="#" class="text-muted text-hover-primary">الصفحات</a>
+                <a  href="#" class="text-muted text-hover-primary">فروع المسابقة</a>
             </li>
+            {{-- <li class="breadcrumb-item">
+                <span class="bullet bg-gray-300 w-5px h-2px"></span>
+            </li> --}}
 
         </ul>
     </div>
@@ -52,9 +55,9 @@
                     <div class="card-toolbar">
                         <!--begin::Toolbar-->
                         <div class="d-flex justify-content-end dbuttons">
-                            <a href="{{route($route. '.create')}}" class="btn btn-sm btn-icon btn-primary btn-active-dark me-3 p-3">
+                            <button type="button" class="btn btn-sm btn-icon btn-primary btn-active-dark me-3 p-3" data-bs-toggle="modal" data-bs-target="#kt_modal_create">
                                 <i class="bi bi-plus-square fs-1x"></i>
-                            </a>
+                            </button>
                             <button type="button" class="btn btn-sm btn-icon btn-danger btn-active-dark me-3 p-3" id="btn_delete" data-token="{{ csrf_token() }}">
                                 <i class="bi bi-trash3-fill fs-1x"></i>
                             </button>
@@ -76,8 +79,10 @@
                                         <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_datatable_table .form-check-input" value="1" />
                                     </div>
                                 </th>
-                                <th class="min-w-125px text-start">عنوان الصفحة عربي</th>
-                                <th class="min-w-125px text-start">عنوان الصفحة انجليزي</th>
+                                <th class="min-w-125px text-start">العنوان عربي</th>
+                                <th class="min-w-125px text-start">العنوان انجليزي</th>
+                                <th class="min-w-125px text-start">الوصف عربي</th>
+                                <th class="min-w-125px text-start">الوصف انجليزي</th>
                                 <th class="min-w-125px text-start">الاجراء</th>
                             </tr>
                             <!--end::Table row-->
@@ -92,6 +97,59 @@
                 </div>
                 <!--end::Card body-->
 
+                <div class="modal fade" id="kt_modal_create" tabindex="-1" aria-hidden="true">
+                    <!--begin::Modal dialog-->
+                    <div class="modal-dialog modal-dialog-centered mw-650px">
+                        <!--begin::Modal content-->
+                        <div class="modal-content">
+                            <!--begin::Modal header-->
+                            <div class="modal-header" id="kt_modal_create_header">
+                                <!--begin::Modal title-->
+                                <h2 class="fw-bold">اضافة</h2>
+                                <!--end::Modal title-->
+                                <!--begin::Close-->
+                                <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
+                                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                                    <span class="svg-icon svg-icon-1">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
+                                        </svg>
+                                    </span>
+                                    <!--end::Svg Icon-->
+                                </div>
+                                <!--end::Close-->
+                            </div>
+                            <!--end::Modal header-->
+                            <!--begin::Modal body-->
+                            <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+                                <!--begin::Form-->
+                                <form action="{{route($route. '.store')}}" method="POST" enctype="multipart/form-data" id="kt_account_profile_details_form" class="form">
+                                    @csrf
+                                    <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_user_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_user_header" data-kt-scroll-wrappers="#kt_modal_add_user_scroll" data-kt-scroll-offset="300px">
+
+                                        @include($viewPath. '.form')
+
+                                    </div>
+
+                                    <div class="text-center pt-15">
+                                        <button type="button" class="btn btn-light me-3 cancel_btn" data-bs-dismiss="modal">الغاء</button>
+                                        <button type="submit" class="btn btn-primary save_btn" id="submit">
+                                            <span class="indicator-label">حفظ</span>
+                                            <span class="indicator-progress">Please wait...
+                                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                        </button>
+                                    </div>
+                                    <!--end::Actions-->
+                                </form>
+                                <!--end::Form-->
+                            </div>
+                            <!--end::Modal body-->
+                        </div>
+                        <!--end::Modal content-->
+                    </div>
+                    <!--end::Modal dialog-->
+                </div>
             </div>
     </div>
     <!--end::Container-->
@@ -136,8 +194,10 @@
             },
             columns: [
                 {data: 'checkbox', name: 'checkbox'},
-                {data: 'name_ar', name: 'name_ar'},
-                {data: 'name_en', name: 'name_en'},
+                {data: 'title_ar', name: 'title_ar'},
+                {data: 'title_en', name: 'title_en'},
+                {data: 'description_ar', name: 'description_ar'},
+                {data: 'description_en', name: 'description_en'},
                 {data: 'actions', name: 'actions'},
             ]
         });

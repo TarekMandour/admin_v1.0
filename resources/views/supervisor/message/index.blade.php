@@ -59,6 +59,9 @@
                             <a href="{{route($route. '.create')}}" class="btn btn-sm btn-icon btn-primary btn-active-dark me-3 p-3">
                                 <i class="bi bi-plus-square fs-1x"></i>
                             </a>
+                            <button type="button" class="btn btn-sm btn-icon btn-primary btn-active-dark me-3 p-3" data-bs-toggle="modal" data-bs-target="#kt_modal_filter">
+                                <i class="bi bi-funnel-fill fs-1x"></i>
+                            </button>
                             <button type="button" class="btn btn-sm btn-icon btn-danger btn-active-dark me-3 p-3" id="btn_delete" data-token="{{ csrf_token() }}">
                                 <i class="bi bi-trash3-fill fs-1x"></i>
                             </button>
@@ -96,7 +99,65 @@
                     <!--end::Table-->
                 </div>
                 <!--end::Card body-->
+                <div class="modal fade" id="kt_modal_filter" tabindex="-1" aria-hidden="true">
+                    <!--begin::Modal dialog-->
+                    <div class="modal-dialog modal-dialog-centered mw-650px">
+                        <!--begin::Modal content-->
+                        <div class="modal-content">
+                            <!--begin::Modal header-->
+                            <div class="modal-header" id="kt_modal_filter_header">
+                                <!--begin::Modal title-->
+                                <h2 class="fw-bold">الفلتر</h2>
+                                <!--end::Modal title-->
+                                <!--begin::Close-->
+                                <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
+                                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                                    <span class="svg-icon svg-icon-1">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
+                                        </svg>
+                                    </span>
+                                    <!--end::Svg Icon-->
+                                </div>
+                                <!--end::Close-->
+                            </div>
+                            <!--end::Modal header-->
+                            <!--begin::Modal body-->
+                            <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+                                <!--begin::Form-->
 
+                                <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_user_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_user_header" data-kt-scroll-wrappers="#kt_modal_add_user_scroll" data-kt-scroll-offset="300px">
+
+                                    <div class="fv-row mb-7">
+
+                                        <label class="required fw-semibold fs-6 mb-2">الحالة</label>
+                                        <select name="status" id="status" data-control="select2" data-placeholder="اختـر ..." data-hide-search="true" class="form-select form-select-solid fw-bold">
+                                            <option value="read">تم المشاهدة</option>
+                                            <option value="unread">لم يتم المشاهدة</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+
+                                <div class="text-center pt-15">
+                                    <button type="button" class="btn btn-light me-3" data-bs-dismiss="modal">الغاء</button>
+                                    <button type="submit" class="btn btn-primary" id="submit">
+                                        <span class="indicator-label">تطبيق</span>
+                                        <span class="indicator-progress">Please wait...
+                                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                    </button>
+                                </div>
+                                <!--end::Actions-->
+                                </form>
+                                <!--end::Form-->
+                            </div>
+                            <!--end::Modal body-->
+                        </div>
+                        <!--end::Modal content-->
+                    </div>
+                    <!--end::Modal dialog-->
+                </div>
             </div>
     </div>
     <!--end::Container-->
@@ -136,6 +197,7 @@
             ajax: {
                 url: "{{ route($route.'.index') }}",
                 data: function (d) {
+                    d.status = $('#status').val(),
                     d.search = $('#search').val()
                 }
             },
@@ -147,11 +209,15 @@
                 {data: 'actions', name: 'actions'},
             ]
         });
-
         table.buttons().container().appendTo($('.dbuttons'));
 
         const filterSearch = document.querySelector('[data-kt-db-table-filter="search"]');
         filterSearch.addEventListener('keyup', function (e) {
+            table.draw();
+        });
+
+        $('#submit').click(function(){
+            $("#kt_modal_filter").modal('hide');
             table.draw();
         });
 

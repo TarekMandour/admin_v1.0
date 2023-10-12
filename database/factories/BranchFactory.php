@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Category>
  */
-class CategoryFactory extends Factory
+class BranchFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,9 +17,10 @@ class CategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'name_ar' => 'الأخبار',
-            'name_en' => 'News',
-            'status' => 'active',
+            'title_ar' => 'الفرع الأول',
+            'title_en' => 'First Branch',
+            'description_ar' => 'الفرع الأول',
+            'description_en' => 'First Branch',
         ];
     }
 }

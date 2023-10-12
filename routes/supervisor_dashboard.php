@@ -110,6 +110,13 @@ Route::name('supervisor.')->middleware(['auth:supervisor'])->group(function () {
             Route::get('/edit/{id}', 'CitysController@edit')->name('edit');
             Route::post('/update', 'CitysController@update')->name('update');
         });
+        Route::name('branches.')->prefix('branches')->group(function(){
+            Route::get('/','branchesController@index')->name('index');
+            Route::post('/delete', 'branchesController@destroy')->name('delete');
+            Route::post('/store','branchesController@store')->name('store');
+            Route::get('/edit/{id}', 'branchesController@edit')->name('edit');
+            Route::post('/update', 'branchesController@update')->name('update');
+        });
 
         Route::name('neighborhoods.')->prefix('neighborhoods')->group(function(){
             Route::get('/','NeighborhoodsController@index')->name('index');

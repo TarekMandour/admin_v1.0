@@ -5,6 +5,7 @@ namespace App\Http\Controllers\SupervisorDashboard;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MessageRequest;
 use App\Models\Message;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Http\Requests\ContactRequest;
@@ -27,7 +28,7 @@ class MessagesController extends Controller
         $data = $this->objectModel::get();
 
         if ($request->ajax()) {
-            $data = $this->objectModel::where('receiver_type', 'supervisor')->query();
+            $data = $this->objectModel::query();
             $data = $data->orderBy('id', 'DESC');
 
             return Datatables::of($data)
@@ -66,6 +67,9 @@ class MessagesController extends Controller
                     return $actions;
                 })
                 ->filter(function ($instance) use ($request) {
+                    if ($request->get('status')) {
+                        $instance->where('status', $request->get('status'));
+                    }
                     if (!empty($request->get('search'))) {
                             $instance->where(function($w) use($request){
                             $search = $request->get('search');
@@ -95,8 +99,8 @@ class MessagesController extends Controller
     {
 
         $rule = [
-            'name' => 'required|string|max:255',
-            'phone' => 'required',
+            'receiver_id' => 'required|exists:users,id',
+            'phone' => 'nullable',
             'email' => 'nullable',
             'description' => 'required',
             'photo' => 'required',
@@ -109,19 +113,19 @@ class MessagesController extends Controller
         }
 
         $row = Message::create([
-            'name' => auth('supervisor')->user()->name,
+            'name' => auth('supervisor')->user()->name_ar,
             'email' => auth('supervisor')->user()->email,
             'phone' => auth('supervisor')->user()->phone,
             'description' => $request->description,
             'status' => $request->status,
-            'receiver_type' => $request->receiver_type,
+            'receiver_type' => 'user',
             'receiver_id' => $request->receiver_id,
             'sender_type'=>'supervisor',
             'sender_id'=>auth('supervisor')->user()->id,
         ]);
 
         if($request->hasFile('photo') && $request->file('photo')->isValid()){
-            $row->addMediaFromRequest('photo')->toMediaCollection('profile');
+            $row->addMediaFromRequest('photo')->toMediaCollection('messages');
         }
 
 
@@ -138,12 +142,12 @@ class MessagesController extends Controller
     {
 
         $rule = [
-            'name' => 'required|string|max:255',
-            'phone' => 'required',
+            'name' => 'nullable',
+            'phone' => 'nullable',
             'email' => 'nullable',
-            'description' => 'required',
-            'photo' => 'required',
-            'status' => 'required',
+            'description' => 'nullable',
+            'photo' => 'nullable',
+            'status' => 'nullable',
         ];
 
         $validate = Validator::make($request->all(), $rule);
@@ -153,12 +157,12 @@ class MessagesController extends Controller
 
         $data = Message::find($request->id);
         $data->update([
-            'name' => auth('supervisor')->user()->name,
+            'name' => auth('supervisor')->user()->name_ar,
             'email' => auth('supervisor')->user()->email,
             'phone' => auth('supervisor')->user()->phone,
             'description' => $request->description,
             'status' => $request->status,
-            'receiver_type' => $request->receiver_type,
+            'receiver_type' => 'user',
             'receiver_id' => $request->receiver_id,
             'sender_type'=>'supervisor',
             'sender_id'=>auth('supervisor')->user()->id,

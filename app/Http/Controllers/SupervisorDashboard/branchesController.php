@@ -1,21 +1,23 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\SupervisorDashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\BranchRequest;
+use App\Models\Branch;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
-use App\Http\Requests\PageRequest;
-use App\Models\Page;
+use App\Http\Requests\CityRequest;
+use App\Models\City;
 use DataTables;
 use Validator;
 
-class PagesController extends Controller
+class branchesController extends Controller
 {
-    protected $viewPath = 'admin.page';
-    private $route = 'admin.pages';
+    protected $viewPath = 'supervisor.branch';
+    private $route = 'supervisor.branches';
 
-    public function __construct(Page $model)
+    public function __construct(Branch $model)
     {
         $this->objectModel = $model;
     }
@@ -30,23 +32,26 @@ class PagesController extends Controller
 
             return Datatables::of($data)
                 ->addColumn('checkbox', function($row){
-                    $checkbox = '';
-
-                    if ($row->id != 1) {
-                        $checkbox .= '<div class="form-check form-check-sm p-3 form-check-custom form-check-solid">
-                                <input class="form-check-input" type="checkbox" value="'.$row->id.'" />
-                            </div>';
-                    }
-
+                    $checkbox = '<div class="form-check form-check-sm p-3 form-check-custom form-check-solid">
+                                    <input class="form-check-input" type="checkbox" value="'.$row->id.'" />
+                                </div>';
                     return $checkbox;
                 })
-                ->addColumn('name_ar', function($row){
-                    $name_ar = '<div class="d-flex flex-column"><a href="javascript:;" class="text-gray-800 text-hover-primary mb-1">'.$row->name_ar.'</a></div>';
-                    return $name_ar;
-                })
                 ->addColumn('title_ar', function($row){
-                    $name_en = '<div class="d-flex flex-column"><a href="javascript:;" class="text-gray-800 text-hover-primary mb-1">'.$row->name_en.'</a></div>';
-                    return $name_en;
+                    $title_ar = '<div class="d-flex flex-column"><a href="javascript:;" class="text-gray-800 text-hover-primary mb-1">'.$row->title_ar.'</a></div>';
+                    return $title_ar;
+                })
+                ->addColumn('description_ar', function($row){
+                    $description_ar = '<div class="d-flex flex-column"><a href="javascript:;" class="text-gray-800 text-hover-primary mb-1">'.$row->description_ar.'</a></div>';
+                    return $description_ar;
+                })
+                ->addColumn('title_en', function($row){
+                    $title_en = '<div class="d-flex flex-column"><a href="javascript:;" class="text-gray-800 text-hover-primary mb-1">'.$row->title_en.'</a></div>';
+                    return $title_en;
+                })
+                ->addColumn('description_en', function($row){
+                    $description_en = '<div class="d-flex flex-column"><a href="javascript:;" class="text-gray-800 text-hover-primary mb-1">'.$row->description_en.'</a></div>';
+                    return $description_en;
                 })
                 ->addColumn('actions', function($row){
                     $actions = '<div class="ms-2">
@@ -60,12 +65,14 @@ class PagesController extends Controller
                     if (!empty($request->get('search'))) {
                             $instance->where(function($w) use($request){
                             $search = $request->get('search');
-                            $w->where('name_ar', 'LIKE', "%$search%")
-                            ->orWhere('name_en', 'LIKE', "%$search%");
+                            $w->where('title_ar', 'LIKE', "%$search%")
+                            ->orWhere('title_en', 'LIKE', "%$search%")
+                            ->orWhere('description_ar', 'LIKE', "%$search%")
+                            ->orWhere('description_en', 'LIKE', "%$search%");
                         });
                     }
                 })
-                ->rawColumns(['checkbox', 'name_ar', 'name_en','actions'])
+                ->rawColumns(['title_ar', 'title_en','description_ar', 'description_en','checkbox','actions'])
                 ->make(true);
         }
         return view($this->viewPath .'.index');
@@ -82,7 +89,7 @@ class PagesController extends Controller
         return view($this->viewPath .'.create');
     }
 
-    public function store(PageRequest $request)
+    public function store(BranchRequest $request)
     {
 
         $data = $request->validated();
@@ -90,10 +97,6 @@ class PagesController extends Controller
 
         if($request->hasFile('photo') && $request->file('photo')->isValid()){
             $result->addMediaFromRequest('photo')->toMediaCollection('photo');
-        }
-
-        if($request->hasFile('photo2') && $request->file('photo2')->isValid()){
-            $result->addMediaFromRequest('photo2')->toMediaCollection('photo2');
         }
 
         return redirect(route($this->route . '.index'))->with('message', 'تم الاضافة بنجاح')->with('status', 'success');
@@ -105,7 +108,7 @@ class PagesController extends Controller
         return view($this->viewPath .'.edit', compact('data'));
     }
 
-    public function update(PageRequest $request)
+    public function update(BranchRequest $request)
     {
 
         $data = $request->validated();
@@ -115,10 +118,6 @@ class PagesController extends Controller
 
         if($request->hasFile('photo') && $request->file('photo')->isValid()){
             $result->addMediaFromRequest('photo')->toMediaCollection('photo');
-        }
-
-        if($request->hasFile('photo2') && $request->file('photo2')->isValid()){
-            $result->addMediaFromRequest('photo2')->toMediaCollection('photo2');
         }
 
         return redirect(route($this->route . '.index'))->with('message', 'تم التعديل بنجاح')->with('status', 'success');

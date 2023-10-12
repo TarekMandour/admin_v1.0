@@ -46,11 +46,11 @@
             </div>
 
             <div class="menu-item">
-                <a class="menu-link" href="{{route('supervisor.categorys.index')}}">
+                <a class="menu-link" href="{{route('supervisor.branches.index')}}">
                     <span class="menu-icon">
-                        <i class="fa-solid fa-list fs-2"></i>
+                        <i class="fa-solid fa-code-branch fs-2"></i>
                     </span>
-                    <span class="menu-title">التصنيفات</span>
+                    <span class="menu-title">فروع المسابقة</span>
                 </a>
             </div>
 
@@ -87,14 +87,14 @@
                 </a>
             </div>
 
-            <div class="menu-item">
-                <a class="menu-link" href="{{route('supervisor.settings.edit', 1)}}">
-                    <span class="menu-icon">
-                        <i class="fonticon-setting fs-2"></i>
-                    </span>
-                    <span class="menu-title">الاعدادات العامة</span>
-                </a>
-            </div>
+{{--            <div class="menu-item">--}}
+{{--                <a class="menu-link" href="{{route('supervisor.settings.edit', 1)}}">--}}
+{{--                    <span class="menu-icon">--}}
+{{--                        <i class="fonticon-setting fs-2"></i>--}}
+{{--                    </span>--}}
+{{--                    <span class="menu-title">الاعدادات العامة</span>--}}
+{{--                </a>--}}
+{{--            </div>--}}
 
         </div>
 
