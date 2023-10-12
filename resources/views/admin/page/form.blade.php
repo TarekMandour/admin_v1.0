@@ -1,5 +1,5 @@
 <div class="row">
-    <div @if (isset($data) && $data->id == 1) class="col-lg-6" @else class="col-lg-12" @endif>
+    <div class="col-lg-6">
         <div class="row mb-6">
             <label class="col-lg-3 col-form-label fw-semibold fs-6">صورة</label>
             <div class="col-lg-9">
@@ -78,9 +78,9 @@
             <div class="col-lg-9">
                 <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url({{asset('dash/assets/media/avatars/blank.png')}})">
                     @if (isset($data) && $data->getMedia('photo2')->count())
-                    <div class="image-input-wrapper w-125px h-125px" style="background-image: url({{$data->getFirstMediaUrl('photo2', 'thumb')}})"></div>
+                        <div class="image-input-wrapper w-125px h-125px" style="background-image: url({{$data->getFirstMediaUrl('photo2', 'thumb')}})"></div>
                     @else
-                    <div class="image-input-wrapper w-125px h-125px" style="background-image: url({{asset('dash/assets/media/avatars/blank.png')}})"></div>
+                        <div class="image-input-wrapper w-125px h-125px" style="background-image: url({{asset('dash/assets/media/avatars/blank.png')}})"></div>
                     @endif
                     <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
                         <i class="bi bi-pencil-fill fs-7"></i>
