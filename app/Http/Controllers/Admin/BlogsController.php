@@ -45,7 +45,15 @@ class BlogsController extends Controller
                     return $title_en;
                 })
                 ->addColumn('type', function($row){
-                    $type = '<div class="d-flex flex-column"><a href="javascript:;" class="text-gray-800 text-hover-primary mb-1">'.$row->type.'</a></div>';
+                    if ($row->type == 'news') {
+                        $type = '<div class="d-flex flex-column"><a href="javascript:;" class="text-gray-800 text-hover-primary mb-1">عام</a></div>';
+                    }elseif ($row->type == 'image'){
+                        $type = '<div class="d-flex flex-column"><a href="javascript:;" class="text-gray-800 text-hover-primary mb-1">معرض صور</a></div>';
+
+                    }else{
+                        $type = '<div class="d-flex flex-column"><a href="javascript:;" class="text-gray-800 text-hover-primary mb-1">معرض فيديوهات</a></div>';
+
+                    }
                     return $type;
                 })
                 ->addColumn('category_id', function($row){
@@ -79,8 +87,10 @@ class BlogsController extends Controller
                     if (!empty($request->get('search'))) {
                             $instance->where(function($w) use($request){
                             $search = $request->get('search');
-                            $w->orWhere('title', 'LIKE', "%$search%")
-                            ->orWhere('type', 'LIKE', "%$search%");
+                            $w->orWhere('title_ar', 'LIKE', "%$search%")
+                            ->orWhere('title_en', 'LIKE', "%$search%")
+                            ->orWhere('description_ar', 'LIKE', "%$search%")
+                            ->orWhere('description_en', 'LIKE', "%$search%");
                         });
                     }
                 })
