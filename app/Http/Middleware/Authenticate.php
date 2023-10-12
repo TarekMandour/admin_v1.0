@@ -21,8 +21,13 @@ class Authenticate extends Middleware
             elseif(Route::is('supervisor.*')) {
                 return route('supervisor.login');
             }
-
+            elseif(Route::is('user.*')) {
+                return route('user.login');
+            }
+            else
             return route('index');
-        };
+        }
+        else
+            return route('index');
     }
 }

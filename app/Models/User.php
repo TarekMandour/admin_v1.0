@@ -56,6 +56,14 @@ class User extends Authenticatable implements HasMedia
     {
         return $this->belongsTo(Branch::class, 'branch_id');
     }
+    public function registerMediaCollections(Media $media = null): void
+    {
+        $this->addMediaCollection('profile')
+            ->singleFile();
 
+        $this->addMediaConversion('thumb')
+            ->keepOriginalImageFormat()
+            ->crop('crop-center', 150, 150);
+    }
 
 }

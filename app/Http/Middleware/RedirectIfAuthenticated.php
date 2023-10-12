@@ -27,6 +27,9 @@ class RedirectIfAuthenticated
             if ($guard == "supervisor" && Auth::guard($guard)->check()) {
                 return redirect("/supervisors"); //name of the route to be redirected on successful supervisor login
             }
+            if ($guard == "web" && Auth::guard($guard)->check()) {
+                return redirect("/user"); //name of the route to be redirected on successful supervisor login
+            }
 
             if (Auth::guard($guard)->check()) {
                 return redirect('my-account');

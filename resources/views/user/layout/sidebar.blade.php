@@ -6,77 +6,24 @@
         <div id="#kt_app_sidebar_menu" data-kt-menu="true" data-kt-menu-expand="false" class="app-sidebar-menu-primary menu menu-column menu-rounded menu-sub-indention menu-state-bullet-primary px-6 mb-5">
 
             <div class="menu-item">
-                <a class="menu-link" href="{{url('/admin')}}">
+                <a class="menu-link" href="{{url('/user')}}">
                     <span class="menu-icon">
                         <i class="fa-solid fa-house fs-2"></i>
                     </span>
                     <span class="menu-title">الرئيسية</span>
                 </a>
             </div>
-
-{{--            <div class="menu-item">--}}
-{{--                <a class="menu-link" href="">--}}
-{{--                    <span class="menu-icon">--}}
-{{--                        <i class="fa-solid fa-subscript fs-2"></i>--}}
-{{--                    </span>--}}
-{{--                    <span class="menu-title">الاشتراكات</span>--}}
-
-{{--                    <span class="menu-badge" >--}}
-{{--                        <span class="badge badge-danger" id="bdg-count">{{\App\Models\User::whereNotNull('branch_id')->count()}}</span>--}}
-{{--                    </span>--}}
-{{--                </a>--}}
-{{--            </div>--}}
-
             <div class="menu-item">
-                <a class="menu-link" href="{{route('admin.sliders.index')}}">
-                    <span class="menu-icon">
-                        <i class="fa-solid fa-sliders fs-2"></i>
-                    </span>
-                    <span class="menu-title">السلايدر</span>
-                </a>
-            </div>
-
-            <div class="menu-item">
-                <a class="menu-link" href="{{route('admin.countries.index')}}">
-                    <span class="menu-icon">
-                        <i class="fa-solid fa-mountain-sun fs-2"></i>
-                    </span>
-                    <span class="menu-title">الدول</span>
-                </a>
-            </div>
-
-            <div class="menu-item">
-                <a class="menu-link" href="{{route('admin.citys.index')}}">
-                    <span class="menu-icon">
-                        <i class="fa-solid fa-city fs-2"></i>
-                    </span>
-                    <span class="menu-title">المدن</span>
-                </a>
-            </div>
-
-            <div class="menu-item">
-                <a class="menu-link" href="{{route('admin.categorys.index')}}">
-                    <span class="menu-icon">
-                        <i class="fa-solid fa-list fs-2"></i>
-                    </span>
-                    <span class="menu-title">التصنيفات</span>
-                </a>
-            </div>
-
-            <div class="menu-item">
-                <a class="menu-link" href="{{route('admin.users.index')}}">
+                <a class="menu-link" href="{{route('user.users.edit', auth('web')->user()->id)}}">
                     <span class="menu-icon">
                         <i class="fa-solid fa-users fs-2"></i>
                     </span>
-                    <span class="menu-title">المشتركين</span>
-                    <span class="menu-badge" >
-                        <span class="badge badge-danger" id="bdg-count">{{\App\Models\User::whereNotNull('branch_id')->count()}}</span>
-                    </span>
+                    <span class="menu-title">الملف الشخصي</span>
                 </a>
             </div>
 
             <div class="menu-item">
-                <a class="menu-link" href="{{route('admin.users.index')}}">
+                <a class="menu-link" href="{{route('user.all_supervisors.index')}}">
                     <span class="menu-icon">
                         <i class="fa-solid fa-people-roof fs-2"></i>
                     </span>
@@ -84,33 +31,16 @@
                 </a>
             </div>
 
-            <div class="menu-item">
-                <a class="menu-link" href="{{route('admin.employees.index')}}">
-                    <span class="menu-icon">
-                        <i class="fa-solid fa-user fs-2"></i>
-                    </span>
-                    <span class="menu-title">المديرين</span>
-                </a>
-            </div>
 
             <div class="menu-item">
-                <a class="menu-link" href="{{route('admin.contacts.index')}}">
+                <a class="menu-link" href="{{route('user.messages.index')}}">
                     <span class="menu-icon">
                         <i class="fa-solid fa-message fs-2"></i>
                     </span>
                     <span class="menu-title">الرسائل</span>
                     <span class="menu-badge" >
-                        <span class="badge badge-danger" id="bdg-count">{{\App\Models\Contact::where('status', 'unread')->count()}}</span>
+                        <span class="badge badge-danger" id="bdg-count">{{\App\Models\Message::where('sender_type', 'user')->where('sender_id',auth('web')->user()->id)->where('status', 'unread')->count()}}</span>
                     </span>
-                </a>
-            </div>
-
-            <div class="menu-item">
-                <a class="menu-link" href="{{route('admin.settings.edit', 1)}}">
-                    <span class="menu-icon">
-                        <i class="fonticon-setting fs-2"></i>
-                    </span>
-                    <span class="menu-title">الاعدادات العامة</span>
                 </a>
             </div>
 

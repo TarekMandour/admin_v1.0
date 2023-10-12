@@ -1,13 +1,8 @@
-@extends('admin.layout.master')
-
-@section('css')
-
-@endsection
-
-@section('style')
-
-@endsection
-
+@extends('user.layout.master')
+@php
+    $route = 'user.messages';
+    $viewPath = 'user.message';
+@endphp
 @section('breadcrumb')
 <div class="page-title d-flex flex-column justify-content-center gap-1 me-3 pt-6">
     <!--begin::Title-->
@@ -17,7 +12,7 @@
     <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0">
         <!--begin::Item-->
         <li class="breadcrumb-item text-muted">
-            <a href="{{route('admin.employees.index')}}" class="text-muted text-hover-primary">الرسائل</a>
+            <a href="{{route('user.all_supervisors.index')}}" class="text-muted text-hover-primary">الرسائل</a>
         </li>
         <!--end::Item-->
         <!--begin::Item-->
@@ -42,20 +37,27 @@
             <div class="card-body p-9">
 
                 <div class="row mb-8">
-                    <div class="col-xl-2">
-                        <div class="fs-6 fw-semibold">الاسم</div>
+                    <div class="col-xl-3">
+                        <div class="w-100">
+                            @if ($data->getMedia('messages')->count())
+                            <img src="{{$data->getFirstMediaUrl('messages')}}" class="w-100">
+                                <a class="m-5 btn btn-success" href="{{$data->getFirstMediaUrl('messages')}}" download>تحميل الصورة</a>
+                            @else
+                            <img src="{{asset('assets/media/svg/avatars/blank.svg')}}" class="w-100">
+                            @endif
+                        </div>
                     </div>
-                    <div class="col-lg-9">
-                        <div class="fw-bold fs-5">{{$data->name}}</div>
+                    <div class="col-lg-8">
+
                     </div>
                 </div>
 
                 <div class="row mb-8">
                     <div class="col-xl-2">
-                        <div class="fs-6 fw-semibold">رقم الهاتف</div>
+                        <div class="fs-6 fw-semibold">الاسم</div>
                     </div>
                     <div class="col-lg-9">
-                        <div class="fw-bold fs-5">{{$data->phone}}</div>
+                        <div class="fw-bold fs-5">{{$data->name}}</div>
                     </div>
                 </div>
 
@@ -67,36 +69,20 @@
                         <div class="fw-bold fs-5">{{$data->email}}</div>
                     </div>
                 </div>
-
+                <div class="row mb-8">
+                    <div class="col-xl-2">
+                        <div class="fs-6 fw-semibold">رقم الهاتف</div>
+                    </div>
+                    <div class="col-lg-9">
+                        <div class="fw-bold fs-5">{{$data->phone}}</div>
+                    </div>
+                </div>
                 <div class="row mb-8">
                     <div class="col-xl-2">
                         <div class="fs-6 fw-semibold">محتوى الرسالة</div>
                     </div>
-                    <div class="col-xl-9 fv-row">
-                        <div class="fw-bold fs-5">{{$data->content}}</div>
-                    </div>
-                </div>
-
-                <div class="row mb-8">
-                    <div class="col-xl-2">
-                        <div class="fs-6 fw-semibold">الحالة</div>
-                    </div>
-                    <div class="col-xl-9 fv-row">
-                        @if($data->status == 'read')
-                        <div class="badge badge-light-success fw-bold">تم المشاهدة</div>
-                        @else
-                        <div class="badge badge-light-danger fw-bold">لم يتم المشاهدة</div>
-                        @endif
-{{--                        <div class="fw-bold fs-5">{{$data->status}}</div>--}}
-                    </div>
-                </div>
-
-                <div class="row mb-8">
-                    <div class="col-xl-2">
-                        <div class="fs-6 fw-semibold">تاريخ الانشاء</div>
-                    </div>
                     <div class="col-lg-9">
-                        <div class="fw-bold fs-5">{{$data->created_at}}</div>
+                        <div class="fw-bold fs-5">{!! $data->description !!}</div>
                     </div>
                 </div>
 

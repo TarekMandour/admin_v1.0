@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
@@ -29,7 +30,7 @@ class UserLoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = 'user/login';
 
     /**
      * Create a new controller instance.
@@ -38,27 +39,27 @@ class UserLoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest:admin')->except('logout');
+        $this->middleware('guest:web')->except('logout');
     }
 
-    public function showAdminLoginForm()
+    public function showUserLoginForm()
     {
-        return view('admin.auth.login');
+        return view('user.auth.login');
     }
 
-    public function adminLogin(Request $request)
+    public function userLogin(Request $request)
     {
         $this->validate($request, [
             'email'   => 'required|email',
             'password' => 'required|min:6'
         ]);
 
-        $employee = Employee::whereEmail($request->email)->first();
+        $user = User::whereEmail($request->email)->first();
 
-        if($employee){
-            if($employee->is_active == 1){
-                if (Auth::guard('admin')->attempt(['email' => $request->email,'password' => $request->password, 'type' => 'dash'], $request->get('remember'))){
-                    return redirect()->intended('/admin');
+        if($user){
+            if($user->is_active == 1){
+                if (Auth::guard('web')->attempt(['email' => $request->email,'password' => $request->password], $request->get('remember'))){
+                    return redirect()->intended('/user');
                 } else {
                     return back()->withErrors(['password' => trans('auth.error_password') ])->withInput($request->only('email', 'remember'));
                 }
@@ -73,8 +74,8 @@ class UserLoginController extends Controller
     }
 
     public function logout() {
-        Auth::guard('admin')->logout();
-        return redirect('admin/login');
+        Auth::guard('web')->logout();
+        return redirect('user/login');
     }
 
 }

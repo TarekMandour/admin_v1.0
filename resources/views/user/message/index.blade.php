@@ -1,27 +1,28 @@
-@extends('admin.layout.master')
+@extends('user.layout.master')
+@php
+    $route = 'user.messages';
+    $viewPath = 'user.message';
+@endphp
 
-@section('css')
+@section('style')
     <link href="{{asset('dash/assets/plugins/custom/datatables/datatables.bundle.rtl.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('dash/assets/plugins/custom/datatables/buttons.bootstrap4.min.css')}}" rel="stylesheet" type="text/css" />
 @endsection
 
-@section('style')
-
-@endsection
 
 @section('breadcrumb')
 <div class="d-flex align-items-center" id="kt_header_nav">
     <!--begin::Page title-->
     <div data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_header_nav'}" class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
-        <a  href="{{url('/admin')}}">
+        <a  href="{{url('/user')}}">
             <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">
-                لوحة التحكم
+                الرئيسية
             </h1>
         </a>
         <span class="h-20px border-gray-300 border-start mx-4"></span>
         <ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1">
             <li class="breadcrumb-item text-muted px-2">
-                <a  href="#" class="text-muted text-hover-primary">الموظفين</a>
+                <a  href="#" class="text-muted text-hover-primary">الرسائل</a>
             </li>
             {{-- <li class="breadcrumb-item">
                 <span class="bullet bg-gray-300 w-5px h-2px"></span>
@@ -49,13 +50,13 @@
                                     <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="currentColor" />
                                 </svg>
                             </span>
-                            <input type="text" data-kt-db-table-filter="search" id="search" name="search" class="form-control form-control-solid bg-light-dark text-dark w-250px ps-14" placeholder="Search user" />
+                            <input type="text" data-kt-db-table-filter="search" id="search" name="search" class="form-control form-control-solid bg-light-dark text-dark w-250px ps-14" placeholder="البحث" />
                         </div>
                     </div>
                     <div class="card-toolbar">
                         <!--begin::Toolbar-->
                         <div class="d-flex justify-content-end dbuttons">
-                            <a href="{{route('admin.employees.create')}}" class="btn btn-sm btn-icon btn-primary btn-active-dark me-3 p-3">
+                            <a href="{{route($route. '.create')}}" class="btn btn-sm btn-icon btn-primary btn-active-dark me-3 p-3">
                                 <i class="bi bi-plus-square fs-1x"></i>
                             </a>
                             <button type="button" class="btn btn-sm btn-icon btn-primary btn-active-dark me-3 p-3" data-bs-toggle="modal" data-bs-target="#kt_modal_filter">
@@ -82,10 +83,10 @@
                                         <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_datatable_table .form-check-input" value="1" />
                                     </div>
                                 </th>
-                                <th class="min-w-125px text-start">{{__('admin.Employee.employee')}}</th>
-                                <th class="min-w-125px text-start">{{__('admin.Employee.phone')}}</th>
-                                <th class="min-w-125px text-start">{{__('admin.Employee.is_active')}}</th>
-                                <th class="min-w-125px text-start">{{__('admin.Employee.action')}}</th>
+                                <th class="min-w-125px text-start">اسم المرسل</th>
+                                <th class="min-w-125px text-start">البريد الالكتروني</th>
+                                <th class="min-w-125px text-start">الحالة</th>
+                                <th class="min-w-125px text-start">الاجراء</th>
                             </tr>
                             <!--end::Table row-->
                         </thead>
@@ -98,7 +99,6 @@
                     <!--end::Table-->
                 </div>
                 <!--end::Card body-->
-
                 <div class="modal fade" id="kt_modal_filter" tabindex="-1" aria-hidden="true">
                     <!--begin::Modal dialog-->
                     <div class="modal-dialog modal-dialog-centered mw-650px">
@@ -107,7 +107,7 @@
                             <!--begin::Modal header-->
                             <div class="modal-header" id="kt_modal_filter_header">
                                 <!--begin::Modal title-->
-                                <h2 class="fw-bold">فلتر البحث</h2>
+                                <h2 class="fw-bold">الفلتر</h2>
                                 <!--end::Modal title-->
                                 <!--begin::Close-->
                                 <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
@@ -127,29 +127,29 @@
                             <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
                                 <!--begin::Form-->
 
-                                    <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_user_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_user_header" data-kt-scroll-wrappers="#kt_modal_add_user_scroll" data-kt-scroll-offset="300px">
+                                <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_user_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_user_header" data-kt-scroll-wrappers="#kt_modal_add_user_scroll" data-kt-scroll-offset="300px">
 
-                                        <div class="fv-row mb-7">
+                                    <div class="fv-row mb-7">
 
-                                            <label class="required fw-semibold fs-6 mb-2">حالة الحساب</label>
-                                            <select name="is_active" id="is_active" data-control="select2" data-placeholder="اختـر ..." data-hide-search="true" class="form-select form-select-solid fw-bold">
-                                                <option></option>
-                                                <option value="1">مفعل</option>
-                                                <option value="0">غير مفعل</option>
-                                            </select>
-                                        </div>
-
+                                        <label class="required fw-semibold fs-6 mb-2">الحالة</label>
+                                        <select id="status" data-control="select2" data-placeholder="اختـر ..." data-hide-search="true" class="form-select form-select-solid fw-bold" name="status" >
+                                            <option >اختر ...</option>
+                                            <option value="read">تم المشاهدة</option>
+                                            <option value="unread">لم يتم المشاهدة</option>
+                                        </select>
                                     </div>
 
-                                    <div class="text-center pt-15">
-                                        <button type="button" class="btn btn-light me-3" data-bs-dismiss="modal">الغاء</button>
-                                        <button type="submit" class="btn btn-primary" id="submit">
-                                            <span class="indicator-label">حفظ</span>
-                                            <span class="indicator-progress">Please wait...
+                                </div>
+
+                                <div class="text-center pt-15">
+                                    <button type="button" class="btn btn-light me-3" data-bs-dismiss="modal">الغاء</button>
+                                    <button type="submit" class="btn btn-primary" id="submit">
+                                        <span class="indicator-label">تطبيق</span>
+                                        <span class="indicator-progress">Please wait...
                                             <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                                        </button>
-                                    </div>
-                                    <!--end::Actions-->
+                                    </button>
+                                </div>
+                                <!--end::Actions-->
                                 </form>
                                 <!--end::Form-->
                             </div>
@@ -196,21 +196,20 @@
                 //{extend: 'colvis', className: 'btn secondary', text: 'إظهار / إخفاء الأعمدة '}
             ],
             ajax: {
-                url: "{{ route('admin.employees.index') }}",
+                url: "{{ route($route.'.index') }}",
                 data: function (d) {
-                    d.is_active = $('#is_active').val(),
+                    d.status = $('#status').val(),
                     d.search = $('#search').val()
                 }
             },
             columns: [
                 {data: 'checkbox', name: 'checkbox'},
                 {data: 'name', name: 'name'},
-                {data: 'phone', name: 'phone'},
-                {data: 'is_active', name: 'is_active'},
+                {data: 'email', name: 'email'},
+                {data: 'status', name: 'status'},
                 {data: 'actions', name: 'actions'},
             ]
         });
-
         table.buttons().container().appendTo($('.dbuttons'));
 
         const filterSearch = document.querySelector('[data-kt-db-table-filter="search"]');
@@ -245,7 +244,7 @@
                     if (isConfirm.value) {
                         $.ajax(
                         {
-                            url: "{{route('admin.employees.delete')}}",
+                            url: "{{route($route.'.delete')}}",
                             type: 'post',
                             dataType: "JSON",
                             data: {

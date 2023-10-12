@@ -1,7 +1,7 @@
 @extends('supervisor.layout.master')
 @php
-    $route = 'supervisor.users';
-    $viewPath = 'supervisor.user';
+    $route = 'supervisor.all_supervisors';
+    $viewPath = 'supervisor.supervisor';
 @endphp
 
 @section('style')

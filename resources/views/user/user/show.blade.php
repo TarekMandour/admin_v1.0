@@ -1,12 +1,5 @@
-@extends('admin.layout.master')
+@extends('user.layout.master')
 
-@section('css')
-    
-@endsection
-
-@section('style')
-    
-@endsection
 
 @section('breadcrumb')
 <div class="page-title d-flex flex-column justify-content-center gap-1 me-3 pt-6">
@@ -17,7 +10,7 @@
     <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0">
         <!--begin::Item-->
         <li class="breadcrumb-item text-muted">
-            <a href="{{route('admin.users.index')}}" class="text-muted text-hover-primary">العملاء</a>
+            <a href="{{route('user.users.index')}}" class="text-muted text-hover-primary">المشتركين</a>
         </li>
         <!--end::Item-->
         <!--begin::Item-->
@@ -40,7 +33,7 @@
 
 
             <div class="card-body p-9">
-                
+
 
                 <div class="row mb-8">
                     <div class="col-xl-2">

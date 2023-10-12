@@ -20,7 +20,7 @@
 			<link href="{{asset('dash/assets/plugins/global/plugins.bundle.css')}}" rel="stylesheet" type="text/css" />
 			<link href="{{asset('dash/assets/css/style.bundle.css')}}" rel="stylesheet" type="text/css" />
 		@endif
-		
+
 	</head>
 	<!--end::Head-->
 	<!--begin::Body-->
@@ -60,7 +60,7 @@
 							<!--begin::Wrapper-->
 							<div class="d-flex flex-center flex-column-fluid pb-15 pb-lg-20">
 								<!--begin::Form-->
-								<form class="form w-100" novalidate="novalidate" id="kt_sign_in_form" method="POST" action="{{route('admin.login.submit')}}">
+								<form class="form w-100" novalidate="novalidate" id="kt_sign_in_form" method="POST" action="{{route('user.login.submit')}}">
 									@csrf
 									<!--begin::Heading-->
 									<div class="text-center mb-11">
@@ -135,26 +135,26 @@
 		<!--end::Javascript-->
 
 		<script>
-			var defaultThemeMode = "light"; 
-			var themeMode; 
-			if ( document.documentElement ) { 
-				if ( document.documentElement.hasAttribute("data-bs-theme-mode")) { 
-					themeMode = document.documentElement.getAttribute("data-bs-theme-mode"); 
-				} else { 
-					if ( localStorage.getItem("data-bs-theme") !== null ) { 
-						themeMode = localStorage.getItem("data-bs-theme"); 
-					} else { 
-						themeMode = defaultThemeMode; 
-					} 
-				} 
-				if (themeMode === "system") { 
+			var defaultThemeMode = "light";
+			var themeMode;
+			if ( document.documentElement ) {
+				if ( document.documentElement.hasAttribute("data-bs-theme-mode")) {
+					themeMode = document.documentElement.getAttribute("data-bs-theme-mode");
+				} else {
+					if ( localStorage.getItem("data-bs-theme") !== null ) {
+						themeMode = localStorage.getItem("data-bs-theme");
+					} else {
+						themeMode = defaultThemeMode;
+					}
+				}
+				if (themeMode === "system") {
 					if ( window.matchMedia("(prefers-color-scheme: dark)").matches == "dark") {
 						themeMode = "dark";
 					} else {
 						themeMode = "light";
 					}
-				} 
-				document.documentElement.setAttribute("data-bs-theme", themeMode); 
+				}
+				document.documentElement.setAttribute("data-bs-theme", themeMode);
 			}
 		</script>
 	</body>
