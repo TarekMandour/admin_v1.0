@@ -39,9 +39,9 @@
                 <div class="row mb-8">
                     <div class="col-xl-3">
                         <div class="w-100">
-                            @if ($data->getMedia('profile')->count())
-                            <img src="{{$data->getFirstMediaUrl('profile')}}" class="w-100">
-                                <a class="m-5 btn btn-success" href="{{$data->getFirstMediaUrl('profile')}}" download>تحميل الصورة</a>
+                            @if ($data->getMedia('messages')->count())
+                            <img src="{{$data->getFirstMediaUrl('messages')}}" class="w-100">
+                                <a class="m-5 btn btn-success" href="{{$data->getFirstMediaUrl('messages')}}" download>تحميل الصورة</a>
                             @else
                             <img src="{{asset('assets/media/svg/avatars/blank.svg')}}" class="w-100">
                             @endif

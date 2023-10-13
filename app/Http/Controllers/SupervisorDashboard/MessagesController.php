@@ -5,6 +5,7 @@ namespace App\Http\Controllers\SupervisorDashboard;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MessageRequest;
 use App\Models\Message;
+use App\Models\MessageResponse;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
@@ -59,6 +60,9 @@ class MessagesController extends Controller
                     $actions = '<div class="ms-2">
                                 <a href="'.route($this->route.'.show', $row->id).'" class="btn btn-sm btn-icon btn-warning btn-active-dark me-2" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
                                     <i class="bi bi-eye-fill fs-1x"></i>
+                                </a>
+                                <a href="'.route($this->route.'.response', $row->id).'" class="btn btn-sm btn-icon btn-warning btn-active-dark me-2" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+                                    <i class="bi bi-envelope-at-fill fs-1x"></i>
                                 </a>
                                 <a href="'.route($this->route.'.edit', $row->id).'" class="btn btn-sm btn-icon btn-info btn-active-dark me-2" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
                                     <i class="bi bi-pencil-square fs-1x"></i>
@@ -185,5 +189,41 @@ class MessagesController extends Controller
         }
         return response()->json(['message' => 'success']);
 
+    }
+
+    public function response($id)
+    {
+        $data = $this->objectModel::find($id);
+        return view($this->viewPath .'.response', compact('data'));
+    }
+    public function send_response(Request $request, $message_id)
+    {
+
+        $rule = [
+            'response' => 'nullable',
+            'status' => 'nullable',
+        ];
+
+        $validate = Validator::make($request->all(), $rule);
+        if ($validate->fails()) {
+            return redirect()->back()->with('message', $validate->messages()->first())->with('status', 'error');
+        }
+        $message = Message::find($request->message_id);
+        $row = MessageResponse::create([
+            'message_id'=> $message_id,
+            'response' => $request->response,
+            'status' => $request->status,
+            'receiver_type' => 'user',
+            'receiver_id' => $message->receiver_id,
+            'sender_type'=>'supervisor',
+            'sender_id'=>auth('supervisor')->user()->id,
+        ]);
+
+        if($request->hasFile('photo') && $request->file('photo')->isValid()){
+            $row->addMediaFromRequest('photo')->toMediaCollection('messages');
+        }
+
+
+        return redirect(route($this->route . '.index'))->with('message', 'تم ارسال الرد بنجاح')->with('status', 'success');
     }
 }

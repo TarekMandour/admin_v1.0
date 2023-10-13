@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('title_ar');
             $table->string('title_en');
-            $table->integer('country_id');
+            $table->unsignedBigInteger('country_id')->nullable();
+            $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();
         });
