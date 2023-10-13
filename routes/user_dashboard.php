@@ -46,6 +46,8 @@ Route::name('user.')->middleware(['auth:web'])->group(function () {
         Route::post('/store','MessagesController@store')->name('store');
         Route::get('/edit/{id}', 'MessagesController@edit')->name('edit');
         Route::post('/update', 'MessagesController@update')->name('update');
+        Route::get('/response/{id}', 'MessagesController@response')->name('response');
+        Route::post('/send_response/{id}', 'MessagesController@send_response')->name('send_response');
     });
 
 //    });

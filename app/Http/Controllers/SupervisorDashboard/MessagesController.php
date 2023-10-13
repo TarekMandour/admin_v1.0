@@ -5,7 +5,7 @@ namespace App\Http\Controllers\SupervisorDashboard;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MessageRequest;
 use App\Models\Message;
-use App\Models\MessageResponse;
+use App\Models\MessagesResponse;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
@@ -58,6 +58,7 @@ class MessagesController extends Controller
                 })
                 ->addColumn('actions', function($row){
                     $actions = '<div class="ms-2">
+
                                 <a href="'.route($this->route.'.show', $row->id).'" class="btn btn-sm btn-icon btn-warning btn-active-dark me-2" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
                                     <i class="bi bi-eye-fill fs-1x"></i>
                                 </a>
@@ -208,8 +209,8 @@ class MessagesController extends Controller
         if ($validate->fails()) {
             return redirect()->back()->with('message', $validate->messages()->first())->with('status', 'error');
         }
-        $message = Message::find($request->message_id);
-        $row = MessageResponse::create([
+        $message = Message::find($message_id);
+        $row = MessagesResponse::create([
             'message_id'=> $message_id,
             'response' => $request->response,
             'status' => $request->status,
