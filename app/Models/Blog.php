@@ -33,7 +33,7 @@ class Blog extends Model implements HasMedia
     public function getAppendTitleAttribute()
     {
         if ($locale = App::getLocale() == "ar") {
-            return $this->title;
+            return $this->title_ar;
         } else {
             return $this->title_en;
         }

@@ -1,98 +1,38 @@
-<!DOCTYPE HTML>
-<html lang="en">
-<head>
-        <!--=============== basic  ===============-->
-        <meta charset="UTF-8">
-        <title>{{$settings->append_name}}</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-        <meta name="robots" content="index, follow"/>
-        <meta name="description" content="{{$settings->append_description}}">
-         <meta name="keywords" content="{{$settings->append_keywords}}">
-        <!--=============== css  ===============-->
-        <link type="text/css" rel="stylesheet" href="{{asset('front/assets/css/reset.css')}}">
-        <link type="text/css" rel="stylesheet" href="{{asset('front/assets/css/plugins.css')}}">
-        <link type="text/css" rel="stylesheet" href="{{asset('front/assets/css/shop.css')}}">
-        <link type="text/css" rel="stylesheet" href="{{asset('front/assets/css/style.css')}}">
-        @if (App::getLocale() == 'ar')
-            <link type="text/css" rel="stylesheet" href="{{asset('front/assets/css/rtl-style.css')}}">
-        @endif
-        <link type="text/css" rel="stylesheet" href="{{asset('front/assets/css/color.css')}}">
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
-
-        @yield('style')
-        <!--=============== favicons ===============-->
-        <link rel="shortcut icon" href="{{$settings->getFirstMediaUrl('fav','favthumb')}}">
-    </head>
-    <body>
-        <!--loader-->
-        <div class="loader-wrap">
-            <div class="loader-inner">
-                <div class="loader-inner-cirle"></div>
-            </div>
+<!-- Spinner Start -->
+        <div id="spinner" class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50  d-flex align-items-center justify-content-center">
+            <div class="spinner-grow text-primary" role="status"></div>
         </div>
-        <!--loader end-->
-        <!-- main start  -->
-        <div id="main">
-            <!-- header -->
-            <header class="main-header">
-                <!-- logo-->
-                <a href="{{url('/')}}" class="logo-holder"><img src="{{$settings->getFirstMediaUrl('logoDark','logoDarkthumb')}}" alt="{{$settings->append_name}}"></a>
-                <!-- logo end-->
+        <!-- Spinner End -->
 
-
-                @if (!Auth::guard('web')->check())
-                <div class="show-reg-form modal-open avatar-img" data-srcav="{{asset('front/assets/images/avatar/3.jpg')}}"><i class="fal fa-user"></i>{{trans('lang.menu.login')}}  </div>
-                @else
-                <div class="show-reg-form avatar-img" data-srcav="{{asset('front/assets/images/avatar/3.jpg')}}"><a href="{{url('/my-account')}}" style="color: #ffffff;"><i class="fal fa-user"></i> {{trans('lang.menu.myaccount')}} </a> </div>
-                @endif
-
-                <div class="lang-wrap">
-                    <div class="show-lang"><span><i class="fal fa-globe-europe"></i></span></div>
-                    <ul class="lang-tooltip no-list-style">
-                        <li><a href="{{url('/lang-change?lang=ar')}}" @if (App::getLocale() == 'ar') class="current-lan" @endif>{{trans('lang.menu.arabic')}}</a></li>
-                        <li><a href="{{url('/lang-change?lang=en')}}" @if (App::getLocale() == 'en') class="current-lan" @endif>{{trans('lang.menu.english')}}</a></li>
-                    </ul>
-                </div>
-                <!-- nav-button-wrap-->
-                <div class="nav-button-wrap color-bg">
-                    <div class="nav-button">
-                        <span></span><span></span><span></span>
+        <!-- Topbar start -->
+        <div class="container-fluid fixed-top">
+            <div class="container topbar d-none d-lg-block">
+                <div class="topbar-inner">
+                    <div class="row gx-0">
+                        <div class="col-lg-7 text-end">
+                            <div class="h-100 d-inline-flex align-items-center me-4">
+                                <a href="tel:0233467777" class="text-dark"><span>02 3346 7777</span></a>
+                                <span class="fa fa-phone-alt me-2 text-dark"></span>
+                            </div>
+                            <div class="h-100 d-inline-flex align-items-center">
+                                <a href="https://t.me/+201004879589" class="text-dark"><span>+201004879589</span></a>
+                                <span class="fab fa-telegram-plane me-2 text-dark"></span>
+                            </div>
+                            <div class="h-100 d-inline-flex align-items-center">
+                                <a href="mailto:info@aacid.org" class="text-dark"><span>info@aacid.org</span></a>
+                                <span class="far fa-envelope me-2 text-dark"></span>
+                            </div>
+                        </div>
+                        <div class="col-lg-5 text-start">
+                            <div class="h-100 d-inline-flex align-items-center">
+                                <span class="text-dark">{{__('admin.Web.follow')}}</span>
+                                <a class="text-dark px-2" href=""><i class="fab fa-facebook-f"></i></a>
+                                <a class="text-dark px-2" href=""><i class="fab fa-twitter"></i></a>
+                                <a class="text-dark px-2" href=""><i class="fab fa-linkedin-in"></i></a>
+                                <a class="text-dark px-2" href=""><i class="fab fa-instagram"></i></a>
+                                <a class="text-dark pe-2" href="{{route('change_lang')}}"><i class="ps-1 fas fa-globe-europe"></i>{{(app()->getLocale() == 'ar')? 'اللغة' : 'language'}}</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <!-- nav-button-wrap end-->
-                <!--  navigation -->
-                <div class="nav-holder main-menu">
-                    <nav>
-                        <ul class="no-list-style">
-                            <li>
-                                <a href="{{url('/')}}" class="act-link">{{trans('lang.menu.home')}} </a>
-                            </li>
-                            <li>
-                                <a href="{{url('/about')}}" class="act-link">{{trans('lang.menu.about')}} </a>
-                            </li>
-                            <li>
-                                <a href="{{url('/services')}}" class="act-link">{{trans('lang.menu.service')}} </a>
-                            </li>
-                            <li>
-                                <a href="{{url('/blogs')}}" class="act-link">{{trans('lang.menu.blog')}} </a>
-                            </li>
-                            <li>
-                                <a href="{{url('/partners')}}" class="act-link">{{trans('lang.menu.partners')}} </a>
-                            </li>
-                            <li>
-                                <a href="javascript:;">  {{trans('lang.menu.project')}} <i class="fa fa-caret-down"></i></a>
-                                <ul>
-{{--                                    @foreach (\App\Models\Project::all() as $project_item)--}}
-{{--                                        <li><a href="{{$project_item->link}}">{{$project_item->append_title}}</a></li>  --}}
-{{--                                    @endforeach                                 --}}
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="{{url('/contact-us')}}" class="act-link">{{trans('lang.menu.contact')}} </a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-                <!-- navigation  end -->
-            </header>
-            <!-- header end-->
+            </div>

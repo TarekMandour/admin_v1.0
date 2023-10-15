@@ -1,100 +1,54 @@
 @extends('front.layout.master')
-
-@section('css')
-@endsection
-
-@section('style')
-@endsection
-
-@section('breadcrumb')
-<section class="parallax-section single-par" data-scrollax-parent="true">
-   <div class="bg par-elem "  data-bg="{{$settings->getFirstMediaUrl('breadcrumb','breadcrumbthumb')}}" data-scrollax="properties: { translateY: '30%' }"></div>
-   <div class="overlay op7" style="background: #252525;"></div>
-   <div class="container">
-       <div class="section-title center-align big-title">
-            <h2><span>{{trans('lang.menu.contact')}}</span></h2>
-           <span class="section-separator"></span>
-       </div>
-   </div>
-   <div class="header-sec-link">
-       <a href="#sec1" class="custom-scroll-link"><i class="fal fa-angle-double-down"></i></a> 
-   </div>
-</section>
-@endsection
-
 @section('content')
+        <!-- Hero Start -->
+        <div class="container-fluid hero-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-7">
+                        <div class="hero-header-inner animated zoomIn">
+                            <h1 class="text-dark">{{__('admin.Web.contact_us')}}</h1>
+                            <ol class="breadcrumb mb-0">
+                                <li class="breadcrumb-item"><a href="index.html">{{__('admin.Web.home')}}</a></li>
+                                <li class="text-dark" aria-current="page"> / {{__('admin.Web.contact_us')}}</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Hero End -->
 
-<section   id="sec1" data-scrollax-parent="true">
-   <div class="container">
-       <!--about-wrap -->
-       <div class="about-wrap">
-           <div class="row">
-               <div class="col-md-3">
-                                                           
-               </div>
-               <div class="col-md-6">
-                   <div class="ab_text">
-                       <div class="ab_text-title fl-wrap">
-                           <h3>{{trans('lang.contaact_welcome')}}</h3>
-                           <span class="section-separator fl-sec-sep"></span>
-                       </div>
-                       <div id="contact-form">
-                           
-                           @if (session()->has("message"))
-                           
-                              @if (session()->get("status") == 'error')
-                              <div id="message" class="alert alert-danger">
-                                 <div  role="alert">
-                                    {{session()->get("message")}}
-                                 </div>
-                              </div>
-                              @else
-                              <div id="message" class="alert alert-success">
-                                 <div role="alert">
-                                    {{session()->get("message")}}
-                                 </div>
-                              </div>
-                              @endif
-                           
-                           @endif
-                        
-                           <form  class="custom-form" action="{{route('contactsubmit')}}" method="POST" name="contactform">
-                              @csrf 
-                              <fieldset>
-                                   <label><i class="fal fa-user"></i></label>
-                                   <input type="text" name="name" id="name" placeholder="{{trans('lang.c_name')}}" value=""/>
-                                   <div class="clearfix"></div>
-                                   <label><i class="fal fa-phone"></i>  </label>
-                                   <input type="text"  name="phone" id="phone" placeholder="{{trans('lang.c_phone')}}" value=""/>
-                                   <div class="clearfix"></div>
-                                   <label><i class="fal fa-envelope"></i>  </label>
-                                   <input type="text"  name="email" id="email" placeholder="{{trans('lang.c_email')}}" value=""/>
-                                   <textarea name="content"  id="content" cols="40" rows="3" placeholder="{{trans('lang.c_msg')}}"></textarea>
-                               </fieldset>
-                               <button class="btn float-btn color2-bg" type="submit"> {{trans('lang.c_send')}}<i class="fal fa-paper-plane"></i></button>
-                           </form>
-                       </div>
-                       <!-- contact form  end--> 
-                   </div>
-               </div>
-               <div class="col-md-3">
-                                                           
-               </div>
-           </div>
-       </div>
-       <!-- about-wrap end  --> 
-   </div>
-</section>
-<section class="no-padding-section">
-   <div class="map-container">
-       <div id="singleMap" data-latitude="{{$settings->lat}}" data-longitude="{{$settings->lng}}" data-mapTitle="{{trans('lang.location')}}"></div>
-   </div>
-</section>
 
-@endsection
+        <!-- Contact Start -->
+        <div class="container-fluid contact py-5">
+            <form action="{{route('contactsubmit')}}" method="POST">
+                @csrf
+            <div class="container py-5">
+                <div class="text-center mx-auto mb-5 wow fadeIn" data-wow-delay="0.1s" style="max-width: 700px;">
+                    <p class="fs-5 text-uppercase text-primary">{{(app()->getLocale() == 'ar')? 'ابق على تواصل' : 'Get In Touch'}}</p>
+                    <h3 class="">{{(app()->getLocale() == 'ar')? 'اتصل بنا' : 'Contact Us'}}</h3>
+                    </div>
+                <div class="row g-4 wow fadeIn" data-wow-delay="0.3s">
+                    <div class="col-sm-6">
+                        <input type="text" name="name" class="form-control bg-transparent p-3" placeholder="{{(app()->getLocale() == 'ar')? 'اسمك' : 'Your name'}}">
+                    </div>
+                    <div class="col-sm-6">
+                        <input type="email" name="email" class="form-control bg-transparent p-3" placeholder="{{(app()->getLocale() == 'ar')? 'لبريد الالكتروني' : 'email'}}">
+                    </div>
+                    <div class="col-12">
+                        <input type="text" name="content" class="form-control bg-transparent p-3" placeholder="{{(app()->getLocale() == 'ar')? 'لموضوع' : 'subject'}}">
+                    </div>
+                    <div class="col-12">
+                        <textarea class="w-100 form-control bg-transparent p-3" rows="6" cols="10" placeholder="{{(app()->getLocale() == 'ar')? 'الرسالة' : 'message'}}"></textarea>
+                    </div>
+                    <div class="col-12 text-center">
+                        <button class="btn btn-primary border-0 py-3 px-5" type="submit">{{(app()->getLocale() == 'ar')? 'ارسال رسالة' : 'send message'}}</button>
+                    </div>
+                </div>
+            </div>
+            </form>
+        </div>
+        <!-- Contact Start -->
 
-@section('script')
-<script>
-    
-</script>
+
 @endsection

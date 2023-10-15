@@ -1,0 +1,144 @@
+@font-face {
+    font-family: 'Uthman Naskh';
+    src: local('KFGQPC Uthman Taha Naskh'),
+    url(https://cdn.rawgit.com/mustafa0x/qpc-fonts/f93bf5f3/various-woff2/UthmanTN1%20Ver10.woff2) format('woff2'),
+    url(https://cdn.rawgit.com/mustafa0x/qpc-fonts/f93bf5f3/various-woff/UthmanTN1%20Ver10.woff) format('woff');
+}
+
+*, h1, h2, h3, h4, h5, h6 {
+    font-family: "Uthman Naskh";
+    font-weight: bold;
+}
+/*p, a, span, li{*/
+/*    font-size: 1.25rem !important;*/
+/*}*/
+/*h1, h1 span{*/
+/*    font-size: 4rem !important;*/
+/*}*/
+/*h2{*/
+/*    font-size: 3.5rem !important;*/
+/*}*/
+/*h3{*/
+/*    font-size: 3rem !important;*/
+/*}*/
+/*h4{*/
+/*    font-size: 2.5rem !important;*/
+/*}*/
+/*h5{*/
+/*    font-size: 2rem !important;*/
+/*}*/
+/*h6{*/
+/*    font-size: 1.5rem !important;*/
+/*}*/
+/*small{*/
+/*    font-size: 1rem !important;*/
+/*}*/
+
+.hero-header .show_more{
+    display: flex;
+    justify-content: center;
+}
+.hero-span{
+    color: #6b000a;
+}
+.text-yellow,
+.m-link{
+    color: var(--bs-primary) !important;
+}
+.m-link:hover,
+.m-link:active{
+    text-decoration: var(--bs-primary) !important;
+}
+.m-link:hover:after,
+.m-link:active:after{
+    border-bottom: 1px solid var(--bs-primary) !important;
+}
+.m-checkbox.m-checkbox--focus>span:after {
+    border: solid var(--bs-primary) !important;
+}
+.m-checkbox.m-checkbox--focus>input:checked ~ span {
+    border: 1px solid var(--bs-primary) !important;
+}
+.m-login.m-login--1 .m-login__content{
+    background-size: auto !important;
+    background-repeat: no-repeat;
+}
+.btn-focus{
+    background-color: var(--bs-primary) !important;
+    border-color: var(--bs-primary) !important;
+}
+#m_login_signin_submit {
+    -webkit-box-shadow: 0px 5px 10px 2px #fff6e2 !important;
+    box-shadow: 0px 5px 10px 2px #fff6e2 !important;
+}
+.btn.btn-outline-focus{
+    color: var(--bs-primary) !important;
+}
+.btn-outline-focus.focus, .btn-outline-focus:focus, .btn-outline-focus:hover {
+    border-color: var(--bs-primary) !important;
+    background: var(--bs-primary) !important;
+    color: #fff;
+}
+.btn-outline-focus{
+    border-color: var(--bs-primary) !important;
+}
+body{
+    line-height: 2;
+}
+.border-radius-32{
+    border-radius: 32px;
+}
+.images{
+    background-image: url("../img/islamic_bg.jpg");
+}
+.team .team-img{
+    display: flex !important;
+    height: auto !important;
+    justify-content: center !important;
+    border-radius: 32px;
+}
+.team .team-img img,
+.team .team-img iframe{
+    /*width: 200px !important;*/
+    /*height: 200px !important;*/
+    border-radius: 28px;
+}
+.text-black{
+    color: black !important;
+}
+.form-control{
+    /*font-size: 1.25rem !important;*/
+}
+.m-login.m-login--1 .m-login__wrapper{
+    padding: 10% 0px 0px 0px !important;
+}
+input.form-control::placeholder ,
+.form-control{
+    color: #9699a2 !important;
+}
+#m_login_signup{
+    font-weight: bold;
+    font-size: 1.5rem;
+    text-decoration: underline;
+}
+nav.navbar.navbar-light.navbar-expand-lg.py-3{
+    background: #ffffffab;
+}
+.gift_img{
+    width: 200px;
+}
+.show_video{
+    position: absolute;
+    background: var(--bs-primary);
+    left: 40px;
+    top: 40px;
+    border-radius: 10px;
+    color: white;
+}
+.show_video:hover,
+.show_video:active{
+    color: white;
+}
+.navbar{
+    justify-content: space-evenly;
+}

@@ -45,8 +45,8 @@
         <div class="row mb-6">
             <label class="col-lg-3 col-form-label required fw-semibold fs-6">الرؤية عربي </label>
             <div class="col-lg-9 fv-row">
-                <textarea name="vision" id="kt_docs_tinymce_basic2">
-                    {{old('vision',$data->vision ?? '')}}
+                <textarea name="vision_ar" id="kt_docs_tinymce_basic2">
+                    {{old('vision_ar',$data->vision_ar ?? '')}}
                 </textarea>
             </div>
         </div>
@@ -54,8 +54,8 @@
         <div class="row mb-6">
             <label class="col-lg-3 col-form-label required fw-semibold fs-6">الرسالة عربي</label>
             <div class="col-lg-9 fv-row">
-                <textarea name="massage" id="kt_docs_tinymce_basic3">
-                    {{old('massage',$data->massage ?? '')}}
+                <textarea name="massage_ar" id="kt_docs_tinymce_basic3">
+                    {{old('massage_ar',$data->massage_ar ?? '')}}
                 </textarea>
             </div>
         </div>
@@ -63,8 +63,8 @@
         <div class="row mb-6">
             <label class="col-lg-3 col-form-label required fw-semibold fs-6">الهدف عربي</label>
             <div class="col-lg-9 fv-row">
-                <textarea name="mission" id="kt_docs_tinymce_basic4">
-                    {{old('mission',$data->mission ?? '')}}
+                <textarea name="mission_ar" id="kt_docs_tinymce_basic4">
+                    {{old('mission_ar',$data->mission_ar ?? '')}}
                 </textarea>
             </div>
         </div>
@@ -119,8 +119,8 @@
             <div class="row mb-6">
                 <label class="col-lg-3 col-form-label required fw-semibold fs-6">الرؤية انجليزي </label>
                 <div class="col-lg-9 fv-row">
-                <textarea name="vision" id="kt_docs_tinymce_basic2">
-                    {{old('vision',$data->vision ?? '')}}
+                <textarea name="vision_en" id="kt_docs_tinymce_basic2">
+                    {{old('vision_en',$data->vision_en ?? '')}}
                 </textarea>
                 </div>
             </div>
@@ -128,8 +128,8 @@
             <div class="row mb-6">
                 <label class="col-lg-3 col-form-label required fw-semibold fs-6">الرسالة انجليزي</label>
                 <div class="col-lg-9 fv-row">
-                <textarea name="massage" id="kt_docs_tinymce_basic3">
-                    {{old('massage',$data->massage ?? '')}}
+                <textarea name="massage_en" id="kt_docs_tinymce_basic3">
+                    {{old('massage_en',$data->massage_en ?? '')}}
                 </textarea>
                 </div>
             </div>
@@ -137,8 +137,8 @@
             <div class="row mb-6">
                 <label class="col-lg-3 col-form-label required fw-semibold fs-6">الهدف انجليزي</label>
                 <div class="col-lg-9 fv-row">
-                <textarea name="mission" id="kt_docs_tinymce_basic4">
-                    {{old('mission',$data->mission ?? '')}}
+                <textarea name="mission_en" id="kt_docs_tinymce_basic4">
+                    {{old('mission_en',$data->mission_en ?? '')}}
                 </textarea>
                 </div>
             </div>
