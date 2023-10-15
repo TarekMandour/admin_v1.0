@@ -84,7 +84,6 @@
                                     </div>
                                 </th>
                                 <th class="min-w-125px text-start">الاسم</th>
-                                <th class="min-w-125px text-start">رقم الجوال</th>
                                 <th class="min-w-125px text-start">البريد الالكتروني</th>
                                 <th class="min-w-125px text-start">الحالة</th>
                                 <th class="min-w-125px text-start">الاجراء</th>
@@ -199,7 +198,6 @@
             columns: [
                 {data: 'checkbox', name: 'checkbox'},
                 {data: 'name', name: 'name'},
-                {data: 'phone', name: 'phone'},
                 {data: 'email', name: 'email'},
                 {data: 'status', name: 'status'},
                 {data: 'actions', name: 'actions'},

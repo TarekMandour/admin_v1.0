@@ -21,6 +21,23 @@
 
         <!-- Contact Start -->
         <div class="container-fluid contact py-5">
+            @if (session()->has("message"))
+                           
+                              @if (session()->get("status") == 'error')
+                              <div id="message" class="alert alert-danger">
+                                 <div  role="alert">
+                                    {{session()->get("message")}}
+                                 </div>
+                              </div>
+                              @else
+                              <div id="message" class="alert alert-success">
+                                 <div role="alert">
+                                    {{session()->get("message")}}
+                                 </div>
+                              </div>
+                              @endif
+                           
+                           @endif
             <form action="{{route('contactsubmit')}}" method="POST">
                 @csrf
             <div class="container py-5">

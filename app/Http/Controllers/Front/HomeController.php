@@ -66,7 +66,6 @@ class HomeController extends Controller
 
         $rule = [
             'name' => 'required|string|max:255',
-            'phone' => 'required',
             'email' => 'nullable',
             'content' => 'required'
         ];
@@ -79,7 +78,6 @@ class HomeController extends Controller
         $row = Contact::create([
             'name' => $request->name,
             'email' => $request->email,
-            'phone' => $request->phone,
             'content' => $request->content,
             'status' => 'unread',
         ]);

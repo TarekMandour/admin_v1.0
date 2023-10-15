@@ -35,6 +35,14 @@ class ContactsController extends Controller
                                 </div>';
                     return $checkbox;
                 })
+                ->addColumn('name', function($row){
+                    $name = '<div class="d-flex flex-column"><a href="javascript:;" class="text-gray-800 text-hover-primary mb-1">'.$row->name.'</a></div>';
+                    return $name;
+                })
+                ->addColumn('email', function($row){
+                    $email = '<div class="d-flex flex-column"><a href="javascript:;" class="text-gray-800 text-hover-primary mb-1">'.$row->email.'</a></div>';
+                    return $email;
+                })
                 ->addColumn('status', function($row){
                     if($row->status == 'read') {
                         $status = '<div class="badge badge-light-success fw-bold">تم المشاهدة</div>';
@@ -64,7 +72,7 @@ class ContactsController extends Controller
                         });
                     }
                 })
-                ->rawColumns(['name','status','checkbox','actions'])
+                ->rawColumns(['name','email','status','checkbox','actions'])
                 ->make(true);
         }
         return view($this->viewPath .'.index');
