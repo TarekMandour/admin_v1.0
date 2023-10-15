@@ -152,7 +152,7 @@
                             <i class="fa fa-mosque fa-4x text-dark"></i>
                                 <div class="ms-4">
                                     <h5>{{__('admin.Web.first_branch')}}</h5>
-                                    <p class="mb-4 text-secondary">كتابة القرآن الكريم كاملاً (ثلاثون جزءا) من سورة البقرة حتى سورة الناس</p>
+                                    <p class="mb-4 text-secondary">{{__('admin.Web.first_branch_details')}}</p>
                                 </div>
                         </div>
                     </div>
@@ -161,7 +161,7 @@
                             <i class="fa fa-mosque fa-4x text-dark"></i>
                             <div class="ms-4">
                                 <h5>{{__('admin.Web.second_branch')}}</h5>
-                                <p class="mb-4 text-secondary">{{__('admin.Web.first_branch_details')}}</p>
+                                <p class="mb-4 text-secondary">{{__('admin.Web.second_branch_details')}}</p>
                             </div>
                         </div>
                     </div>
@@ -170,7 +170,7 @@
                             <i class="fa fa-mosque fa-4x text-dark"></i>
                             <div class="ms-4">
                                 <h5>{{__('admin.Web.third_branch')}}</h5>
-                                <p class="mb-4 text-secondary"></p>
+                                <p class="mb-4 text-secondary">{{__('admin.Web.third_branch_details')}}</p>
                             </div>
                         </div>
                     </div>
@@ -179,7 +179,7 @@
                             <i class="fa fa-mosque fa-4x text-dark"></i>
                             <div class="ms-4">
                                 <h5>{{__('admin.Web.fourth_branch')}}</h5>
-                                <p class="mb-4 text-secondary">كتابة جزء واحد من القرآن (جزء عم) كامل</p>
+                                <p class="mb-4 text-secondary">{{__('admin.Web.fourth_branch_details')}}</p>
                             </div>
                         </div>
                     </div>

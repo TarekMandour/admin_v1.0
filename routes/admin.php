@@ -110,6 +110,13 @@ Route::name('admin.')->middleware(['auth:admin'])->group(function () {
             Route::get('/edit/{id}', 'BranchesController@edit')->name('edit');
             Route::post('/update', 'BranchesController@update')->name('update');
         });
+        Route::name('branchGift.')->prefix('branchGift')->group(function(){
+            Route::get('/','BranchesGiftsController@index')->name('index');
+            Route::post('/delete', 'BranchesGiftsController@destroy')->name('delete');
+            Route::post('/store','BranchesGiftsController@store')->name('store');
+            Route::get('/edit/{id}', 'BranchesGiftsController@edit')->name('edit');
+            Route::post('/update', 'BranchesGiftsController@update')->name('update');
+        });
 
         Route::name('blogs.')->prefix('blogs')->group(function(){
             Route::get('/','BlogsController@index')->name('index');
