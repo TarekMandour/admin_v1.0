@@ -30,6 +30,7 @@ return [
         'privacy' => 'Privacy Policy',
         'call_to_action'=>'قم بالتسجيل والاشتراك في مسابقة كتابة القرآن الكريم العالمية بخط اليد',
         'subscribe_now' => 'Subscribe Now',
+        'subscribe' => 'Subscribe',
         'gift_title' =>'Branch Gifts',
         'gifts' => 'Gifts',
         'branch'=>'Branch',
@@ -43,5 +44,12 @@ return [
         'third_branch_details'=>'Writing a quarter of Yasin (seven parts) from Surat Yasin to Surat An-Nas',
         'fourth_branch_details'=>'Writing one complete part of the Qur’an (Juz Amma).',
         'follow'=>'Follow us',
+        'subscribe_news'=>'Subscribe to news',
+        'subscribe_news_caption'=>'Get the latest news and advice',
+        'title'=>'Handwriting competition of the Holy Quran',
+        'title_caption'=>'It is a competition for writing the Holy Qur’an by hand and is titled “In my handwriting I wrote its letters, and in my chest I preserved the outline of its words.”',
+        'permalinks'=>'Permalinks',
+        'copyrights'=>'all rights are save',
+        'copyrights_owner'=>'Arab-African Council for Integration and Development Competition'
     ],
 ];

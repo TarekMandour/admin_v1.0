@@ -8,7 +8,7 @@
                         <div class="hero-header-inner animated zoomIn">
                             <h1 class="text-dark">سياسة الخصوصية</h1>
                             <ol class="breadcrumb mb-0">
-                                <li class="breadcrumb-item"><a href="{{route('home')}}">الرئيسية</a></li>
+                                <li class="breadcrumb-item"><a href="{{route('index')}}">الرئيسية</a></li>
                                 <li class=" text-dark" aria-current="page"> / سياسة الخصوصية</li>
                             </ol>
                         </div>

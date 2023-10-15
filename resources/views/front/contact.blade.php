@@ -8,7 +8,7 @@
                         <div class="hero-header-inner animated zoomIn">
                             <h1 class="text-dark">{{__('admin.Web.contact_us')}}</h1>
                             <ol class="breadcrumb mb-0">
-                                <li class="breadcrumb-item"><a href="index.html">{{__('admin.Web.home')}}</a></li>
+                                <li class="breadcrumb-item"><a href="{{route('index')}}">{{__('admin.Web.home')}}</a></li>
                                 <li class="text-dark" aria-current="page"> / {{__('admin.Web.contact_us')}}</li>
                             </ol>
                         </div>

@@ -6,10 +6,10 @@
                 <div class="row">
                     <div class="col-lg-7">
                         <div class="hero-header-inner animated zoomIn">
-                            <h1 class="text-dark">{{('admin.Web.education')}}</h1>
+                            <h1 class="text-dark">{{__('admin.Web.education')}}</h1>
                             <ol class="breadcrumb mb-0">
-                                <li class="breadcrumb-item"><a href="{{route('home')}}">{{('admin.Web.home')}}</a></li>
-                                <li class=" text-dark" aria-current="page"> / {{('admin.Web.education')}}</li>
+                                <li class="breadcrumb-item"><a href="{{route('index')}}">{{__('admin.Web.home')}}</a></li>
+                                <li class=" text-dark" aria-current="page"> / {{__('admin.Web.education')}}</li>
                             </ol>
                         </div>
                     </div>
@@ -23,19 +23,19 @@
         <div class="container-fluid team ">
             <div class="container py-5">
                 <div class="text-center mx-auto mb-5 wow fadeIn" data-wow-delay="0.1s" style="max-width: 700px;">
-                    <h3 class="">{{('admin.Web.education')}}</h3>
+                    <h3 class="">{{__('admin.Web.education')}}</h3>
                 </div>
                 <div class="row g-5">
                     <div class="col-12">
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link active" id="books-tab" data-bs-toggle="tab" data-bs-target="#books" type="button" role="tab" aria-controls="home" aria-selected="true">{{('admin.Web.books')}}</button>
+                                <button class="nav-link active" id="books-tab" data-bs-toggle="tab" data-bs-target="#books" type="button" role="tab" aria-controls="home" aria-selected="true">{{__('admin.Web.books')}}</button>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="videos-tab" data-bs-toggle="tab" data-bs-target="#videos" type="button" role="tab" aria-controls="profile" aria-selected="false">{{('admin.Web.videos')}}</button>
+                                <button class="nav-link" id="videos-tab" data-bs-toggle="tab" data-bs-target="#videos" type="button" role="tab" aria-controls="profile" aria-selected="false">{{__('admin.Web.videos')}}</button>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#pictures" type="button" role="tab" aria-controls="contact" aria-selected="false">{{('admin.Web.photos')}}</button>
+                                <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#pictures" type="button" role="tab" aria-controls="contact" aria-selected="false">{{__('admin.Web.photos')}}</button>
                             </li>
                         </ul>
                     </div>

@@ -47,7 +47,7 @@ class HomeController extends Controller
 
     public function about() {
 
-        $about = Info::where('parent_id', NULL)->orWhere('parent_id', 0)->with('parent')->get();
+        $about = Page::where('name_en', 'about')->first();
 
         return view('front/about', compact('about'));
     }
@@ -111,7 +111,7 @@ class HomeController extends Controller
         $images = Blog::where('status', 'active')->where('category_id', 2)->where('type','image')->paginate(9);
         $videos = Blog::where('status', 'active')->where('category_id', 2)->where('type','video')->paginate(9);
 
-        return view('front/blogs', compact('books','images','videos'));
+        return view('front/education', compact('books','images','videos'));
     }
 
     public function gifts($id) {

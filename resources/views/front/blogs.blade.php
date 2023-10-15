@@ -8,7 +8,7 @@
                         <div class="hero-header-inner animated zoomIn">
                             <h1 class="text-dark">{{__('admin.Web.news')}}</h1>
                             <ol class="breadcrumb mb-0">
-                                <li class="breadcrumb-item"><a href="{{route('home')}}">{{__('admin.Web.home')}}</a></li>
+                                <li class="breadcrumb-item"><a href="{{route('index')}}">{{__('admin.Web.home')}}</a></li>
                                 <li class=" text-dark" aria-current="page"> / {{__('admin.Web.news')}}</li>
                             </ol>
                         </div>
@@ -29,7 +29,7 @@
                     <div class="col-12">
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link active" id="news-tab" data-bs-toggle="tab" data-bs-target="#news" type="button" role="tab" aria-controls="home" aria-selected="true">ا{{__('admin.Web.news')}}</button>
+                                <button class="nav-link active" id="news-tab" data-bs-toggle="tab" data-bs-target="#news" type="button" role="tab" aria-controls="home" aria-selected="true">{{__('admin.Web.news')}}</button>
                             </li>
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#pictures" type="button" role="tab" aria-controls="contact" aria-selected="false">{{__('admin.Web.photos')}}</button>
