@@ -132,6 +132,8 @@ class MessagesController extends Controller
             $row->addMediaFromRequest('photo')->toMediaCollection('messages');
         }
 
+        $user = User::find('receiver_id');
+        Functions::SendNotification(2,$user, 'Message Response', $row->description, 'الرد على الرسالة' , $row->description, $row->id, 1 , 1, true);
 
         return redirect(route($this->route . '.index'))->with('message', 'تم الاضافة بنجاح')->with('status', 'success');
     }
@@ -223,6 +225,8 @@ class MessagesController extends Controller
             $row->addMediaFromRequest('photo')->toMediaCollection('messages');
         }
 
+        $user = User::find('receiver_id');
+        Functions::SendNotification(2,$user, 'Message Response', $row->description, 'الرد على الرسالة' , $row->description, $row->id, 1 , 1, true);
 
         return redirect(route($this->route . '.index'))->with('message', 'تم ارسال الرد بنجاح')->with('status', 'success');
     }

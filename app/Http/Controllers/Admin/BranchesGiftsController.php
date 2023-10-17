@@ -35,6 +35,10 @@ class BranchesGiftsController extends Controller
                                 </div>';
                     return $checkbox;
                 })
+                ->addColumn('branch_id', function($row){
+                    $branch_id = '<div class="d-flex flex-column"><a href="javascript:;" class="text-gray-800 text-hover-primary mb-1">'.$row->branch->title_ar.'</a></div>';
+                    return $branch_id;
+                })
                 ->addColumn('title_ar', function($row){
                     $title_ar = '<div class="d-flex flex-column"><a href="javascript:;" class="text-gray-800 text-hover-primary mb-1">'.$row->title_ar.'</a></div>';
                     return $title_ar;
@@ -60,7 +64,7 @@ class BranchesGiftsController extends Controller
                         });
                     }
                 })
-                ->rawColumns(['title_ar', 'title_en', 'country_id','checkbox','actions'])
+                ->rawColumns(['branch_id','title_ar', 'title_en', 'country_id','checkbox','actions'])
                 ->make(true);
         }
         return view($this->viewPath .'.index');

@@ -79,6 +79,7 @@
                                         <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_datatable_table .form-check-input" value="1" />
                                     </div>
                                 </th>
+                                <th class="min-w-125px text-start">الفرع</th>
                                 <th class="min-w-125px text-start">العنوان عربي</th>
                                 <th class="min-w-125px text-start">العنوان انجليزي</th>
                                 <th class="min-w-125px text-start">الاجراء</th>
@@ -192,6 +193,7 @@
             },
             columns: [
                 {data: 'checkbox', name: 'checkbox'},
+                {data: 'branch_id', name: 'branch_id'},
                 {data: 'title_ar', name: 'title_ar'},
                 {data: 'title_en', name: 'title_en'},
                 {data: 'actions', name: 'actions'},

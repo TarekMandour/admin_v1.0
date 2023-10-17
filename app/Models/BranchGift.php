@@ -21,5 +21,9 @@ class BranchGift extends Model
         ->keepOriginalImageFormat()
         ->crop('crop-center', 600, 400);
     }
+    public function branch()
+    {
+        return $this->belongsTo(Branch::class, 'branch_id');
+    }
 
 }

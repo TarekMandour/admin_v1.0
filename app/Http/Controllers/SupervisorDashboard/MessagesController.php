@@ -132,6 +132,9 @@ class MessagesController extends Controller
         if($request->hasFile('photo') && $request->file('photo')->isValid()){
             $row->addMediaFromRequest('photo')->toMediaCollection('messages');
         }
+        $supervisor = Supervisor::find('receiver_id');
+
+        Functions::SendNotification(1,$supervisor, 'New Message', $row->description, 'لديك رسالة جديدة' , $row->description, $ro->id, 2 , 1, true);
 
 
         return redirect(route($this->route . '.index'))->with('message', 'تم الاضافة بنجاح')->with('status', 'success');
@@ -224,7 +227,69 @@ class MessagesController extends Controller
             $row->addMediaFromRequest('photo')->toMediaCollection('messages');
         }
 
-
+        $supervisor = Supervisor::find('receiver_id');
+        Functions::SendNotification(1,$supervisor, 'Message Response', $row->description, 'الرد على الرسالة' , $row->description, $ro->id, 2 , 1, true);
         return redirect(route($this->route . '.index'))->with('message', 'تم ارسال الرد بنجاح')->with('status', 'success');
+    }
+
+    public static function SendNotification($user_type, $user, $title, $msg, $title_ar, $msg_ar, $ref_id = null, $ref_type = 1, $type = 0, $store = true, $replace = [])
+    {
+        if ($store) {
+            $notify = new Notification();
+            $notify->destination_type = $user_type;
+            $notify->destination_id = $user->id;
+            $notify->title = $title;
+            $notify->message = $msg;
+            $notify->title_ar = $title_ar;
+            $notify->message_ar = $msg_ar;
+            $notify->ref_id = @$ref_id;
+            $notify->ref_type = @$ref_type;
+            $notify->type = $type;
+            $notify->save();
+        }
+        $fcmUrl = 'https://fcm.googleapis.com/fcm/send';
+        if (isset($user->device_token) && $user->device_token != null) {
+            $registrationIds = [$user->device_token];
+            $serverKey = 'AAAATwzMMRE:APA91bG6u9BWCsR8ARwnoQajZMBiyFGcDom7dmyNu0CRDIfPvVnXRNKhOyudMrw-4nvIn_76EeStVhgNB3CD6Pu1tlaFJ1f8U_zXIFMaG4KoumpU4ZVYiAZJaca0T4F-KSba9DsFYtKS';
+            if ($user_type == 3) {
+                $message = array
+                (
+                    'body' => (app()->getLocale() == 'en') ? $msg : $msg_ar,
+                    'title' => (app()->getLocale() == 'en') ? $title : $title_ar,
+                    'sound' => true,
+                );
+            } else {
+                $message = array
+                (
+                    'body' => ($user->getAppLocale() == 'en') ? $msg : $msg_ar,
+                    'title' => ($user->getAppLocale() == 'en') ? $title : $title_ar,
+                    'sound' => true,
+                );
+            }
+            $extraNotificationData = ["ref_id" => $ref_id, "ref_type" => $ref_type, "type" => $type];
+            $fields = [
+                'registration_ids' => $registrationIds,
+                'notification' => $message,
+                'data' => $extraNotificationData
+            ];
+            $headers = [
+                'Authorization:key=' . $serverKey,
+                'Content-Type: application/json',
+            ];
+            if ($user->is_notifiable == true) {
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL, $fcmUrl);
+                curl_setopt($ch, CURLOPT_POST, true);
+                curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
+                $result = curl_exec($ch);
+                curl_close($ch);
+            }
+            return true;
+        } else {
+            return false;
+        }
     }
 }

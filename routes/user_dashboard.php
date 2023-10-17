@@ -6,6 +6,9 @@ use App\Http\Controllers\User\HomeController;
 
 Auth::routes();
 
+Route::post('/store-token', 'WebNotificationController@storeToken')->name('store.token');
+Route::post('read/{id}', 'WebNotificationController@read')->name('read_notification');
+
 Route::get('/lang-change', [HomeController::class ,'changLang'])->name('user.lang.change');
 Route::get('/login', [UserLoginController::class ,'showUserLoginForm'])->name('user.login');
 Route::post('/login', [UserLoginController::class ,'userLogin'])->name('user.login.submit');

@@ -100,7 +100,7 @@ class BranchesController extends Controller
 
         $data = $request->validated();
 
-        $result = $this->objectModel::whereId($request->id)->first();
+        $result = $this->objectModel::whereId($request->branch_id)->first();
         $result->update($data);
 
         if($request->hasFile('photo') && $request->file('photo')->isValid()){

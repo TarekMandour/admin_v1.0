@@ -94,3 +94,68 @@ $error_message = session()->get("error_message");
         toastr.error("{{$errors->first()}}", "عفوا !");
     </script>
 @endif
+<script src="https://www.gstatic.com/firebasejs/8.3.2/firebase.js"></script>
+
+<script>
+    const firebaseConfig = {
+        apiKey: "AIzaSyAmTMLDiMCY-nSouic2UcvPZp2txLYmR8c",
+        authDomain: "fitnas-b6221.firebaseapp.com",
+        projectId: "fitnas-b6221",
+        storageBucket: "fitnas-b6221.appspot.com",
+        messagingSenderId: "339517124881",
+        appId: "1:339517124881:web:cfe27c32fa21fd51ca9cb0",
+        measurementId: "G-VM2T1WSZKY"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const messaging = firebase.messaging();
+
+    function startFCM() {
+        messaging
+            .requestPermission()
+            .then(function () {
+                return messaging.getToken()
+            })
+            .then(function (response) {
+                console.log(response);
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    url: '{{ route("store.token") }}',
+                    type: 'POST',
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        token: response
+                    },
+                    dataType: 'JSON',
+                    success: function (response) {
+                        console.log('Token stored.');
+                        {{--document.getElementById('notify_icon').append('<i class="material-icons text-primary" data-toggle="tooltip" data-placement="bottom" title="{{__('dashboard.sidebar.notifications')}}" style="font-size: 10px; color: #b23b3b !important; position: absolute; top: 0; left: 0">circle</i>');--}}
+                        {{--$('#notify').children().remove();--}}
+                        {{--var html = `{{ view('user.layouts.notifications', ['notifications'=>$notifications->limit(15)->get()])->render()}}`;--}}
+                        {{--document.getElementById('notify').append(html);--}}
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    },
+                });
+
+            }).catch(function (error) {
+            console.log(error);
+        });
+    }
+
+    messaging.onMessage(function (payload) {
+        console.log('hhh')
+        const title = payload.notification.title;
+        const options = {
+            body: payload.notification.body,
+            icon: payload.notification.icon,
+        };
+        new Notification(title, options);
+    });
+    startFCM();
+</script>

@@ -6,6 +6,9 @@ use App\Http\Controllers\SupervisorDashboard\HomeController;
 
 Auth::routes();
 
+Route::post('/store-token', 'WebNotificationController@storeToken')->name('store.token');
+Route::post('read/{id}', 'WebNotificationController@read')->name('read_notification');
+
 Route::get('/lang-change', [HomeController::class ,'changLang'])->name('supervisor.lang.change');
 Route::get('/login', [SupervisorLoginController::class ,'showSupervisorLoginForm'])->name('supervisor.login');
 Route::post('/login', [SupervisorLoginController::class ,'supervisorLogin'])->name('supervisor.login.submit');

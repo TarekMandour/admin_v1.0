@@ -36,6 +36,10 @@ class BlogsController extends Controller
                             </div>';
                     return $checkbox;
                 })
+                ->addColumn('category_id', function($row){
+                    $category_id = '<div class="d-flex flex-column"><a href="javascript:;" class="text-gray-800 text-hover-primary mb-1">'.$row->category->name_ar.'</a></div>';
+                    return $category_id;
+                })
                 ->addColumn('title_ar', function($row){
                     $title_ar = '<div class="d-flex flex-column"><a href="javascript:;" class="text-gray-800 text-hover-primary mb-1">'.$row->title_ar.'</a></div>';
                     return $title_ar;
@@ -55,10 +59,6 @@ class BlogsController extends Controller
 
                     }
                     return $type;
-                })
-                ->addColumn('category_id', function($row){
-                    $category_id = '<div class="d-flex flex-column"><a href="javascript:;" class="text-gray-800 text-hover-primary mb-1">'.$row->category->name_ar.'</a></div>';
-                    return $category_id;
                 })
                 ->addColumn('actions', function($row){
                     $actions = '<div class="ms-2">

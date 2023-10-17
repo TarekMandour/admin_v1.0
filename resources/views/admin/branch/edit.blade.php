@@ -47,7 +47,7 @@
                 <!--begin::Form-->
                 <form action="{{route($route. '.update')}}" method="POST" enctype="multipart/form-data" id="kt_account_profile_details_form" class="form">
                     @csrf
-                    <input type="hidden" name="id" value="{{$data->id}}" />
+                    <input type="hidden" name="branch_id" value="{{$data->id}}" />
                     <!--begin::Card body-->
                     <div class="card-body border-top p-9">
 
