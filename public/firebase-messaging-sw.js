@@ -8,13 +8,13 @@ importScripts('https://www.gstatic.com/firebasejs/8.3.2/firebase-messaging.js');
 Initialize the Firebase app in the service worker by passing in the messagingSenderId.
 */
 firebase.initializeApp({
-    apiKey: "AIzaSyAmTMLDiMCY-nSouic2UcvPZp2txLYmR8c",
-    authDomain: "fitnas-b6221.firebaseapp.com",
-    projectId: "fitnas-b6221",
-    storageBucket: "fitnas-b6221.appspot.com",
-    messagingSenderId: "339517124881",
-    appId: "1:339517124881:web:cfe27c32fa21fd51ca9cb0",
-    measurementId: "G-VM2T1WSZKY"
+    apiKey: "AIzaSyBHpuV77-c80x7wUxR2yFHnB5keTItkOSk",
+    authDomain: "quran-competitive.firebaseapp.com",
+    projectId: "quran-competitive",
+    storageBucket: "quran-competitive.appspot.com",
+    messagingSenderId: "250962773822",
+    appId: "1:250962773822:web:6638aa1f2f67d3f8e98e6f",
+    measurementId: "G-N38P7WWXPE"
 });
 
 
