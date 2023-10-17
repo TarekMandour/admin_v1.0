@@ -63,7 +63,7 @@
 
                      @else
 
-                    {!! view('supervisor.layouts.notifications', ['notifications'=>$notifications->limit(10)->get()])->render() !!}
+                    {!! view('supervisor.layout.notifictions', ['notifications'=>$notifications->limit(10)->get()])->render() !!}
 
                      @endif
                     <div class="separator my-2"></div>

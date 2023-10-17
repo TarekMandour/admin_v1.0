@@ -41,6 +41,13 @@
         <!--begin::Navbar-->
         <div class="app-navbar flex-grow-1 justify-content-end" id="kt_app_header_navbar">
             <!--begin::Notification menu-->
+            <div class="app-navbar-item ms-2 ms-lg-6" id="kt_header_user_menu_toggle">
+                <!--begin::Menu wrapper-->
+                <div class="cursor-pointer symbol symbol-circle symbol-30px symbol-lg-45px" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-start">
+                    <i class="fonticon-alarm fs-2"></i>
+                                    <span class="position-absolute start-100 translate-middle badge badge-circle badge-danger w-15px h-15px ms-n4 mt-3" style="top: -10px !important">{{App\Models\Notification::where('destination_type', 2)->where('destination_id', auth('web')->user()->id)->whereNull('read_at')->count()}}</span>
+                </div>
+                <!--begin::Notification menu-->
                 <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-color fw-semibold py-4 fs-6 w-275px" data-kt-menu="true">
                     <!--begin::Menu item-->
 
@@ -55,7 +62,7 @@
 
                      @else
 
-                    {!! view('user.layouts.notifications', ['notifications'=>$notifications->limit(10)->get()])->render() !!}
+                    {!! view('user.layout.notifications', ['notifications'=>$notifications->limit(10)->get()])->render() !!}
 
                      @endif
                     <div class="separator my-2"></div>
@@ -66,6 +73,9 @@
                     <!--end::Menu item-->
                 </div>
                 <!--end::Notification menu-->
+                <!--end::Menu wrapper-->
+            </div>
+            <!--end::Notification menu-->
             <!--begin::User menu-->
             <div class="app-navbar-item ms-2 ms-lg-6" id="kt_header_user_menu_toggle">
                 <!--begin::Menu wrapper-->

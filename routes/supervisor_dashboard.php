@@ -3,11 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\SupervisorLoginController;
 use App\Http\Controllers\SupervisorDashboard\HomeController;
+use App\Http\Controllers\SupervisorDashboard\WebNotificationController;
 
 Auth::routes();
-
-Route::post('/store-token', 'WebNotificationController@storeToken')->name('store.token');
-Route::post('read/{id}', 'WebNotificationController@read')->name('read_notification');
 
 Route::get('/lang-change', [HomeController::class ,'changLang'])->name('supervisor.lang.change');
 Route::get('/login', [SupervisorLoginController::class ,'showSupervisorLoginForm'])->name('supervisor.login');
@@ -17,6 +15,9 @@ Route::get('/logout', [SupervisorLoginController::class ,'logout'])->name('super
 Route::name('supervisor.')->middleware(['auth:supervisor'])->group(function () {
 
     Route::middleware(['supervisor-access:supervisor'])->group(function () {
+
+        Route::post('/store-token', 'WebNotificationController@storeToken')->name('store.token');
+        Route::post('read/{id}', 'WebNotificationController@read')->name('read_notification');
 
         Route::get('/','HomeController@index')->name('index');
 

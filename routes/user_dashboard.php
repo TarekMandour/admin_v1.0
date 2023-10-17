@@ -3,18 +3,19 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\UserLoginController;
 use App\Http\Controllers\User\HomeController;
+use App\Http\Controllers\User\WebNotificationController;
 
 Auth::routes();
-
-Route::post('/store-token', 'WebNotificationController@storeToken')->name('store.token');
-Route::post('read/{id}', 'WebNotificationController@read')->name('read_notification');
-
 Route::get('/lang-change', [HomeController::class ,'changLang'])->name('user.lang.change');
 Route::get('/login', [UserLoginController::class ,'showUserLoginForm'])->name('user.login');
 Route::post('/login', [UserLoginController::class ,'userLogin'])->name('user.login.submit');
 Route::get('/logout', [UserLoginController::class ,'logout'])->name('user.logout');
 
 Route::name('user.')->middleware(['auth:web'])->group(function () {
+
+    Route::post('/store-token', [WebNotificationController::class,'storeToken'])->name('store.token');
+    Route::post('read/{id}', [WebNotificationController::class,'read'])->name('read_notification');
+
 
 //    Route::middleware(['emp-access:dash'])->group(function () {
 

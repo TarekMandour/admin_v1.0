@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Http\Controllers\Controller;
 use App\Helpers\Constant;
 use App\Http\Requests\Website\Notification\ReadRequest;
 use App\Models\Notification;
@@ -11,10 +12,10 @@ use App\Models\User;
 class WebNotificationController extends Controller
 {
 
-    public function __construct()
-    {
-        $this->middleware('web');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('web');
+    // }
 
     public function index()
     {
@@ -77,7 +78,7 @@ class WebNotificationController extends Controller
     }
     public function read(Request $request, $id)
     {
-        $Notification = Notification::where('destination_type',2)->where('id',$id)->first();
+        $Notification = Notification::find($id);
         if($Notification){
             $Notification->update(array('read_at'=>now()));
                 return redirect()->route('user.messages.show', $Notification->ref_id)->with([__('messages.updated_successful')]);

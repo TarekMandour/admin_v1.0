@@ -7,6 +7,8 @@ use App\Http\Requests\MessageRequest;
 use App\Models\Message;
 use App\Models\MessagesResponse;
 use App\Models\User;
+use App\Models\Supervisor;
+use App\Models\Notification;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Http\Requests\ContactRequest;
@@ -132,9 +134,9 @@ class MessagesController extends Controller
         if($request->hasFile('photo') && $request->file('photo')->isValid()){
             $row->addMediaFromRequest('photo')->toMediaCollection('messages');
         }
-        $supervisor = Supervisor::find('receiver_id');
+        $user = User::find($row->receiver_id);
 
-        Functions::SendNotification(1,$supervisor, 'New Message', $row->description, 'لديك رسالة جديدة' , $row->description, $ro->id, 2 , 1, true);
+        $this->SendNotification(2,$user, 'New Message', $row->description, 'لديك رسالة جديدة' , $row->description, $row->id, 2 , 1, true);
 
 
         return redirect(route($this->route . '.index'))->with('message', 'تم الاضافة بنجاح')->with('status', 'success');
@@ -227,12 +229,12 @@ class MessagesController extends Controller
             $row->addMediaFromRequest('photo')->toMediaCollection('messages');
         }
 
-        $supervisor = Supervisor::find('receiver_id');
-        Functions::SendNotification(1,$supervisor, 'Message Response', $row->description, 'الرد على الرسالة' , $row->description, $ro->id, 2 , 1, true);
+        $user = User::find($row->receiver_id);
+        $this->SendNotification(2,$user, 'New Message', $row->description, 'الرد على الرسالة' , $row->description, $message_id, 2 , 1, true);
         return redirect(route($this->route . '.index'))->with('message', 'تم ارسال الرد بنجاح')->with('status', 'success');
     }
 
-    public static function SendNotification($user_type, $user, $title, $msg, $title_ar, $msg_ar, $ref_id = null, $ref_type = 1, $type = 0, $store = true, $replace = [])
+    public function SendNotification($user_type, $user, $title, $msg, $title_ar, $msg_ar, $ref_id = null, $ref_type = 1, $type = 0, $store = true, $replace = [])
     {
         if ($store) {
             $notify = new Notification();
